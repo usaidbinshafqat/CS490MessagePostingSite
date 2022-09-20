@@ -1,29 +1,54 @@
-import { Home } from "@mui/icons-material";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { Home, MoreVert } from "@mui/icons-material";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import "./index.css";
 
 export const TopAppBar = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="sticky" color="primary">
         <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          >
+            <Home />
+          </IconButton>
+
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
+              display: "flex",
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              flexGrow: 1,
             }}
           >
-            LOGO
+            NAME
           </Typography>
-          <Home />
+          <Button color="inherit">Login</Button>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          >
+            <MoreVert />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
