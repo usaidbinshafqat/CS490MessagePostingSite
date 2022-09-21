@@ -1,7 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import React from "react";
 import "./App.css";
-import { HomePage } from "./homePage/HomePage";
+import { AppView } from "./AppView";
 
 function App() {
   const theme = createTheme({
@@ -17,7 +16,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <HomePage />
+        <AppView />
       </div>
     </ThemeProvider>
   );
