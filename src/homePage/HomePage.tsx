@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Paper } from "@mui/material";
-import { BottomBar } from "./BottomBar";
 import { CardUI } from "../cards/CardUI";
 import { NewPostFab } from "./NewPostFab";
 import "./index.css";
