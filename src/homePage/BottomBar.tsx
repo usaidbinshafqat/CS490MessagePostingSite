@@ -6,7 +6,7 @@ import { actions } from "../store/slice";
 
 export const BottomBar = () => {
   const homePageState = useAppSelector((state) => state.counter.homePageActive);
-  const [currentTab, setCurrentTab] = React.useState(0);
+  const [currentTab, setCurrentTab] = React.useState(homePageState);
 
   const dispatch = useAppDispatch();
   console.log(homePageState);
@@ -15,7 +15,7 @@ export const BottomBar = () => {
       showLabels
       onChange={(event, newValue) => {
         setCurrentTab(newValue);
-        dispatch(actions.changeTab());
+        dispatch(actions.changeTab(newValue));
       }}
       value={currentTab}
     >
