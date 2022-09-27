@@ -3,23 +3,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 const initialState = { 
-    homePageActive: 0
+    homePageActive: 0, 
+    modalOpen: false,
 }
 
-export const name = 'counter'
+export const name = 'reducers'
 
 const slice = createSlice({
     name, 
     initialState, 
     reducers: {
         changeTab: (state, action: PayloadAction<number>) => { 
-            // if (state.homePageActive === "Home") {
-            //     state.homePageActive = "Trends"
-            // } else {
-            //     state.homePageActive = "Home"
-            // }
             state.homePageActive = action.payload
-            console.log("Testing home page state",state.homePageActive)
+        },
+        toggleModal: (state) => { 
+            state.modalOpen = !state.modalOpen
+            console.log("Testing modal open state", state.modalOpen)
         }
     }
 })
