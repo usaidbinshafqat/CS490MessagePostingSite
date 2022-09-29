@@ -38,7 +38,7 @@ export const TopAppBar = () => {
               flexGrow: 1,
             }}
           >
-            NAME
+            msg.pstr
           </Typography>
           <Button color="inherit">Login</Button>
           <IconButton
