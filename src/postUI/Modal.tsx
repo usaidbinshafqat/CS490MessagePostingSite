@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
-import { TextField } from "./TextField";
+import { InputTextField } from "./TextField";
 
 const style = {
   position: "absolute" as "absolute",
@@ -43,7 +43,7 @@ export const ModalUI = () => {
             New Post
           </Typography>
 
-          <TextField />
+          <InputTextField />
           <Container style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button variant="outlined">Post</Button>
             <Button onClick={() => dispatch(actions.toggleModal())}>
