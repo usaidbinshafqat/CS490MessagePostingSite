@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import "./index.css";
+import { HeaderLogo } from "./header_logo_svg";
 
 export const TopAppBar = () => {
   return (
@@ -20,7 +21,7 @@ export const TopAppBar = () => {
             color="inherit"
             aria-label="menu"
           >
-            <Home />
+            <HeaderLogo />
           </IconButton>
 
           <Typography
