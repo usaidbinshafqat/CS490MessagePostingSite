@@ -1,0 +1,13 @@
+.LoginPage {
+	text-align: center;
+}
+
+.paper { 
+	height: "100%";
+	width: "100%";
+	color: salmon;
+}
+
+.message { 
+	align-items: center;
+}
