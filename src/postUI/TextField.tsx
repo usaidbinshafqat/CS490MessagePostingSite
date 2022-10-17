@@ -1,35 +1,50 @@
-import { TextField } from "@mui/material";
-import { useState, useCallback } from "react";
-import { MentionsInput, Mention } from "react-mentions";
+import { useState } from "react";
+import { Mention, MentionsInput } from "react-mentions";
+import mentionsStyles from "./mentionsStyles";
+import mentionsInputStyles from "./mentionsInputStyles";
+import merge from "lodash/merge";
 
 export const InputTextField = () => {
-  const data = [
+  const [value, setValue] = useState("");
+
+  let customStyle = merge({}, mentionsInputStyles, {
+    input: {
+      height: 80,
+      overflow: "auto",
+    },
+    highlighter: {
+      height: 80,
+      overflow: "hidden",
+      boxSizing: "border-box",
+    },
+  });
+
+  const users = [
     {
-      id: "1",
-      display: "John Doe",
+      id: "isaac",
+      display: "Isaac Newton",
     },
     {
-      id: "2",
-      display: "Jane Doe",
+      id: "sam",
+      display: "Sam Victor",
     },
     {
-      id: "3",
-      display: "Jack Doe",
+      id: "emma",
+      display: "Emmanuel",
     },
   ];
 
-  const [value, setValue] = useState("");
-
   return (
-    // <MentionsInput
-    //   value={value}
-    //   placeholder={"Mention people using '@'"}
-    //   a11ySuggestionsListLabel={"Suggested mentions"}
-    //   defaultValue="Hello @johndoe"
-    // >
-    //   <Mention data={data} trigger="@" />
-    // </MentionsInput>
-
-    <TextField />
+    <div className="App">
+      <MentionsInput
+        style={customStyle}
+        value={value}
+        placeholder={"Mention people using '@'"}
+        a11ySuggestionsListLabel={"Suggested mentions"}
+        onChange={(e) => setValue(e.target.value)}
+      >
+        <Mention style={mentionsStyles} data={users} trigger={"@"} />
+      </MentionsInput>
+    </div>
   );
 };
