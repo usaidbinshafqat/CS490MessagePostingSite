@@ -8,7 +8,7 @@ export default {
   },
   '&multiLine': {
     control: {
-      minHeight: 63
+      minHeight: 90
     },
     highlighter: {
       padding: 9,
@@ -16,7 +16,7 @@ export default {
     },
     input: {
       padding: 9,
-      border: '1px solid silver'
+      border: 'hidden'
     }
   },
   '&singleLine': {
