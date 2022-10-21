@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import "./App.css";
 import { AppView } from "./AppView";
 
@@ -13,6 +13,9 @@ function App() {
       },
     },
   });
+
+  responsiveFontSizes(theme);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
