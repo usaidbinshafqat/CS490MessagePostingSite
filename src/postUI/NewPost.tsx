@@ -46,7 +46,7 @@ export const NewPost = () => {
             >
               <Close />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography sx={{ ml: 3, flex: 1 }} variant="h6" component="div">
               New Post
             </Typography>
           </Toolbar>
