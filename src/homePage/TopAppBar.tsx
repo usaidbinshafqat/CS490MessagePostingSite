@@ -1,4 +1,4 @@
-import { Home, MoreVert } from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
   Box,
@@ -7,23 +7,17 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useAppDispatch } from "../store/hooks";
+import { actions } from "../store/slice";
 import "./index.css";
-import { HeaderLogo } from "./header_logo_svg";
 
 export const TopAppBar = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky" color="primary">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <HeaderLogo />
-          </IconButton>
-
           <Typography
             variant="h6"
             noWrap
@@ -47,8 +41,9 @@ export const TopAppBar = () => {
             edge="start"
             color="inherit"
             aria-label="menu"
+            onClick={() => dispatch(actions.toggleDrawer())}
           >
-            <MoreVert />
+            <AccountCircle />
           </IconButton>
         </Toolbar>
       </AppBar>

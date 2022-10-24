@@ -6,25 +6,24 @@ import { actions } from "../store/slice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const BottomBar = () => {
-	const homePageState = useAppSelector(
-		(state) => state.reducers.homePageActive
-	);
-	const [currentTab, setCurrentTab] = React.useState(homePageState);
+  const homePageState = useAppSelector(
+    (state) => state.reducers.homePageActive
+  );
+  const [currentTab, setCurrentTab] = React.useState(homePageState);
 
-	const dispatch = useAppDispatch();
-	console.log(homePageState);
-	return (
-		<BottomNavigation
-			showLabels
-			onChange={(event, newValue) => {
-				setCurrentTab(newValue);
-				dispatch(actions.changeTab(newValue));
-			}}
-			value={currentTab}
-		>
-			<BottomNavigationAction label="Home" icon={<Home />} />
-			<BottomNavigationAction label="Trends" icon={<Tag />} />
-			<BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
-		</BottomNavigation>
-	);
+  const dispatch = useAppDispatch();
+  console.log(homePageState);
+  return (
+    <BottomNavigation
+      showLabels
+      onChange={(event, newValue) => {
+        setCurrentTab(newValue);
+        dispatch(actions.changeTab(newValue));
+      }}
+      value={currentTab}
+    >
+      <BottomNavigationAction label="Home" icon={<Home />} />
+      <BottomNavigationAction label="Trends" icon={<Tag />} />
+    </BottomNavigation>
+  );
 };

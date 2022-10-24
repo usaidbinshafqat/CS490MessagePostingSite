@@ -48,3 +48,5 @@ export const InputTextField = () => {
     </div>
   );
 };
+
+//how to get data out of this: https://stackblitz.com/edit/react-mentions?file=index.js
