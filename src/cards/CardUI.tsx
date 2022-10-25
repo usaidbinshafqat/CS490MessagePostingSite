@@ -36,8 +36,8 @@ const card = (
             U
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="User"
+        subheader="Time/Date Posted"
         action={
           <IconButton>
             <MoreVertIcon/>
