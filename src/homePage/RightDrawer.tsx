@@ -12,24 +12,28 @@ import { actions } from "../store/slice";
 export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);
   const dispatch = useAppDispatch();
-  const data = [
-    {
-      name: "Profile",
-      icon: <AccountCircle />,
-    },
-    { name: "Logout", icon: <ExitToApp /> },
-    { name: "Settings", icon: <SettingsRounded /> },
-  ];
 
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>
-        {data.map((item, index) => (
-          <ListItem button key={index}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItem>
-        ))}
+        <ListItem button onClick={() => console.log("Logging Profile")}>
+          <ListItemIcon>
+            <AccountCircle />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
+        </ListItem>
+        <ListItem button onClick={() => console.log("Logging Logout")}>
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+        <ListItem button onClick={() => console.log("Logging Settings")}>
+          <ListItemIcon>
+            <SettingsRounded />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItem>
       </Box>
     );
   };
