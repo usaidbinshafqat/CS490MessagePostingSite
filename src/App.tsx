@@ -11,6 +11,12 @@ function App() {
       secondary: {
         main: "#474448",
       },
+      warning: {
+        main: "#C197D2",
+      },
+      error: {
+        main: "#D3D3D3",
+      },
     },
   });
   return (
