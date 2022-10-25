@@ -45,11 +45,11 @@ const card = (
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
     </CardContent>
-    <CardActions disableSpacing>
-        <LikeButton> </LikeButton> 
-    </CardActions>
-      
-      
+    <div className="card__actions">
+      <CardActions disableSpacing>
+          <LikeButton> </LikeButton> 
+      </CardActions>
+    </div>
   </React.Fragment>
 );
 
