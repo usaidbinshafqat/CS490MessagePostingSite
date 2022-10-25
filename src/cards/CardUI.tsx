@@ -1,6 +1,12 @@
-import { Box, Card, IconButton, CardContent, Typography, Color } from "@mui/material";
+import { Box, Card, IconButton, CardContent, CardActions, CardHeader, 
+  Typography, Avatar, Color } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ButtonBase } from '@mui/material';
+import { purple } from '@mui/material/colors';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 class LikeButton extends React.Component<{}, {liked: boolean}> {
   constructor(props: any) {
@@ -24,11 +30,29 @@ class LikeButton extends React.Component<{}, {liked: boolean}> {
 
 const card = (
   <React.Fragment>
+    <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: purple[400] }} aria-label="profile pic">
+            U
+          </Avatar>
+        }
+        title="Shrimp and Chorizo Paella"
+        subheader="September 14, 2016"
+        action={
+          <IconButton>
+            <MoreVertIcon/>
+          </IconButton>
+        }
+      />
     <CardContent>
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
-      <LikeButton> </LikeButton>
     </CardContent>
+    <CardActions disableSpacing>
+        <LikeButton> </LikeButton> 
+    </CardActions>
+      
+      
   </React.Fragment>
 );
 
