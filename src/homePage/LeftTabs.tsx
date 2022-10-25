@@ -31,16 +31,16 @@ export const LeftTabs = () => {
           <Tab label="Home" />
           <Tab label="Trends" />
         </Tabs>
-        <Box sx={{ margin: 2 }}>
+        <Box sx={{ width: 1 }}>
           {homePageState === 0 && (
-            <Box>
+            <div style={{ margin: "50px" }}>
               <HomePage />
-            </Box>
+            </div>
           )}
           {homePageState === 1 && (
-            <Box>
+            <div style={{ margin: "50px" }}>
               <Trends />
-            </Box>
+            </div>
           )}
         </Box>
       </Box>
