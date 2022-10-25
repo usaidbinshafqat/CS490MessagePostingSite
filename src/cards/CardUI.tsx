@@ -32,10 +32,11 @@ const card = (
   <React.Fragment>
     <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: purple[400] }} aria-label="profile pic">
+          <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
             U
           </Avatar>
         }
+        titleTypographyProps={{variant: "h6" }}
         title="User"
         subheader="Time/Date Posted"
         action={
