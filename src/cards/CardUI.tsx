@@ -36,14 +36,10 @@ const card = (
             U
           </Avatar>
         }
-        titleTypographyProps={{variant: "h6" }}
+        titleTypographyProps={{align: "left" as const}}
         title="User"
+        subheaderTypographyProps={{align: "left" as const}}
         subheader="Time/Date Posted"
-        action={
-          <IconButton>
-            <MoreVertIcon/>
-          </IconButton>
-        }
       />
     <CardContent>
       <Typography>CS Final Project</Typography>
