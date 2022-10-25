@@ -1,10 +1,9 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import { Trends } from "../trends/Trends";
 import { HomePage } from "./HomePage";
-import { RightDrawer } from "./RightDrawer";
 
 export const LeftTabs = () => {
   const homePageState = useAppSelector(
