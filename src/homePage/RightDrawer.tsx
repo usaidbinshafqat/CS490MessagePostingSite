@@ -1,10 +1,12 @@
 import { ExitToApp, SettingsRounded, AccountCircle } from "@mui/icons-material";
 import {
   Box,
+  Divider,
   Drawer,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Toolbar,
 } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
@@ -38,15 +40,38 @@ export const RightDrawer = () => {
     );
   };
 
+  if (window.screen.width > 600) {
+  }
+
   return (
     <div>
-      <Drawer
-        open={open}
-        onClose={() => dispatch(actions.toggleDrawer())}
-        anchor="right"
-      >
-        {getList()}
-      </Drawer>
+      {window.screen.width > 600 ? (
+        <Drawer
+          sx={{
+            width: 250,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: 250,
+              boxSizing: "border-box",
+            },
+          }}
+          open={true}
+          anchor="right"
+          variant="persistent"
+        >
+          <Toolbar />
+          <Divider />
+          {getList()}
+        </Drawer>
+      ) : (
+        <Drawer
+          open={open}
+          onClose={() => dispatch(actions.toggleDrawer())}
+          anchor="right"
+        >
+          {getList()}
+        </Drawer>
+      )}
     </div>
   );
 };
