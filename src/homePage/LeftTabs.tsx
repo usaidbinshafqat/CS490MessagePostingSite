@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import { Trends } from "../trends/Trends";
 import { HomePage } from "./HomePage";
+import { RightDrawer } from "./RightDrawer";
 
 export const LeftTabs = () => {
   const homePageState = useAppSelector(
@@ -31,14 +32,14 @@ export const LeftTabs = () => {
           <Tab label="Home" />
           <Tab label="Trends" />
         </Tabs>
-        <Box sx={{ width: 1 }}>
+        <Box sx={{ width: 0.7 }}>
           {homePageState === 0 && (
             <div style={{ margin: "50px" }}>
               <HomePage />
             </div>
           )}
           {homePageState === 1 && (
-            <div style={{ margin: "50px" }}>
+            <div style={{ margin: "20px" }}>
               <Trends />
             </div>
           )}

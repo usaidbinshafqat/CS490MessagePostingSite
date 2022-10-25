@@ -16,7 +16,11 @@ export const TopAppBar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky" color="primary">
+      <AppBar
+        position="sticky"
+        color="primary"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
         <Toolbar>
           <Typography
             variant="h6"
@@ -36,15 +40,19 @@ export const TopAppBar = () => {
             msg.pstr
           </Typography>
           <Button color="inherit">Login</Button>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={() => dispatch(actions.toggleDrawer())}
-          >
-            <AccountCircle />
-          </IconButton>
+          {window.screen.width > 600 ? (
+            <></>
+          ) : (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => dispatch(actions.toggleDrawer())}
+            >
+              <AccountCircle />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
