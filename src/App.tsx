@@ -1,6 +1,6 @@
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import "./App.css";
-import { AppView } from "./AppView";
+import { AppView } from "./views/AppView";
 
 function App() {
   const theme = createTheme({

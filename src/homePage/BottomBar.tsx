@@ -3,7 +3,6 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { Home, Tag } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const BottomBar = () => {
   const homePageState = useAppSelector(
