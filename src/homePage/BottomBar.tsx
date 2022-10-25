@@ -5,7 +5,9 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 
 export const BottomBar = () => {
-  const homePageState = useAppSelector((state) => state.counter.homePageActive);
+  const homePageState = useAppSelector(
+    (state) => state.reducers.homePageActive
+  );
   const [currentTab, setCurrentTab] = React.useState(homePageState);
 
   const dispatch = useAppDispatch();

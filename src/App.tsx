@@ -1,15 +1,15 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import "./App.css";
-import { AppView } from "./AppView";
+import { AppView } from "./views/AppView";
 
 function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#2D232E",
+        main: "#453750",
       },
       secondary: {
-        main: "#474448",
+        main: "#fcde9c",
       },
       warning: {
         main: "#C197D2",
@@ -19,10 +19,14 @@ function App() {
       },
     },
   });
+
+  responsiveFontSizes(theme);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <AppView />
+        {/* <Profile /> */}
       </div>
     </ThemeProvider>
   );
