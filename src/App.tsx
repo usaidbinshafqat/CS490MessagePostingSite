@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { LandingPage } from "./landingPage/LandingPage";
 import { LoginPage } from "./loginPage/LoginPage";
+import { SignUp } from "./signupPage/SignUp";
 import { AppView } from "./views/AppView";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/Home" element={<AppView />} />
             <Route path="/Login" element={<LoginPage />} />
-            <Route path="/SignUp" element={<LoginPage />} />
+            <Route path="/SignUp" element={<SignUp />} />
           </Routes>
         </BrowserRouter>
       </div>
