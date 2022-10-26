@@ -1,5 +1,5 @@
 import { Box, Card, IconButton, CardContent, CardActions, CardHeader, 
-  Typography, Avatar, Color } from "@mui/material";
+  Typography, Avatar, Color, Paper } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ButtonBase } from '@mui/material';
@@ -7,6 +7,9 @@ import { purple } from '@mui/material/colors';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Container } from "@mui/system";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
 
 class LikeButton extends React.Component<{}, {liked: boolean}> {
   constructor(props: any) {
@@ -19,7 +22,6 @@ class LikeButton extends React.Component<{}, {liked: boolean}> {
   render() {
     return (
       <IconButton 
-      className = "likeButton" 
       color = {this.state.liked ? "warning" : "error"}
       onClick={() => this.setState({liked: !this.state.liked})}>
          <FavoriteIcon/> 
@@ -37,19 +39,20 @@ const card = (
           </Avatar>
         }
         titleTypographyProps={{align: "left" as const}}
-        title="User"
+        title="User" 
         subheaderTypographyProps={{align: "left" as const}}
         subheader="Time/Date Posted"
       />
     <CardContent>
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
-    </CardContent>
-    <div className="card__actions">
+    </CardContent>  
       <CardActions disableSpacing>
-          <LikeButton> </LikeButton> 
+          <Box></Box>
+          <LikeButton> </LikeButton>
+          <Typography> 200 </Typography>
       </CardActions>
-    </div>
+
   </React.Fragment>
 );
 
