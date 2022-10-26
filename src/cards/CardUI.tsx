@@ -1,12 +1,58 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, IconButton, CardContent, CardActions, CardHeader, 
+  Typography, Avatar, Color, Paper } from "@mui/material";
 import * as React from "react";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ButtonBase } from '@mui/material';
+import { purple } from '@mui/material/colors';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Container } from "@mui/system";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
+
+class LikeButton extends React.Component<{}, {liked: boolean}> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      liked: false,
+    };
+  }
+
+  render() {
+    return (
+      <IconButton 
+      color = {this.state.liked ? "warning" : "error"}
+      onClick={() => this.setState({liked: !this.state.liked})}>
+         <FavoriteIcon/> 
+      </IconButton>
+    )
+  }
+}
 
 const card = (
   <React.Fragment>
+    <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
+            U
+          </Avatar>
+        }
+        titleTypographyProps={{align: "left" as const}}
+        title="User" 
+        subheaderTypographyProps={{align: "left" as const}}
+        subheader="Time/Date Posted"
+      />
     <CardContent>
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
-    </CardContent>
+    </CardContent>  
+      <CardActions disableSpacing>
+          <Box></Box>
+          <LikeButton> </LikeButton>
+          <Typography> 200 </Typography>
+      </CardActions>
+
   </React.Fragment>
 );
 

@@ -1,7 +1,5 @@
-import { Paper, IconButton, InputBase, Divider } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Paper, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 
 export const SearchBar = () => {
   return (
