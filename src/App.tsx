@@ -19,6 +19,12 @@ function App() {
       secondary: {
         main: "#fcde9c",
       },
+      warning: {
+        main: "#C197D2",
+      },
+      error: {
+        main: "#D3D3D3",
+      },
     },
   });
 
