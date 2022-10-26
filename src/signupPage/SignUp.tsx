@@ -154,6 +154,7 @@ export const SignUp = () => {
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
             href="/Home"
+            onClick={register}
           >
             Sign Up
           </Button>
