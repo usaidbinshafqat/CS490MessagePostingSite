@@ -35,9 +35,4 @@ body {
   max-height: 100vh;
 }
 
-.card__actions {
-  display: flex;
-  align-items: right;
-  justify-content: space-between;
-  margin-top: 16px;
-}
+
