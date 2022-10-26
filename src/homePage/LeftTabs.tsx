@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Container, Tab, Tabs } from "@mui/material";
 import React from "react";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
@@ -33,14 +33,14 @@ export const LeftTabs = () => {
         </Tabs>
         <Box sx={{ width: 0.7 }}>
           {homePageState === 0 && (
-            <div style={{ margin: "50px" }}>
+            <Container maxWidth="sm">
               <HomePage />
-            </div>
+            </Container>
           )}
           {homePageState === 1 && (
-            <div style={{ margin: "20px" }}>
+            <Container maxWidth="sm">
               <Trends />
-            </div>
+            </Container>
           )}
         </Box>
       </Box>

@@ -1,41 +1,14 @@
-import { Button, Toolbar } from "@mui/material";
+import { Button, Container, Toolbar } from "@mui/material";
+import { Stack } from "@mui/system";
 import React from "react";
 import Logo from "./logo_transparent.png";
 
 export const LandingPageButtons = () => {
-  const windowSize = window.screen.width;
-
   return (
     <React.Fragment>
-      <Toolbar />
-      <div>
-        {windowSize > 600 ? (
-          <img
-            src={Logo}
-            alt="logo"
-            className="desktopLogo"
-            style={{
-              margin: "auto",
-              maxWidth: "60%",
-              height: "auto",
-              width: "auto",
-            }}
-          />
-        ) : (
-          <img
-            src={Logo}
-            alt="logo"
-            style={{
-              margin: "auto",
-              maxWidth: "25%",
-              height: "auto",
-              width: "auto",
-            }}
-          />
-        )}
-      </div>
-      <div>
-        <div>
+      <Container maxWidth="sm">
+        <Stack spacing={2}>
+          <img src={Logo} alt="logo" />
           <Button
             variant="contained"
             style={{ borderRadius: 20 }}
@@ -43,8 +16,6 @@ export const LandingPageButtons = () => {
           >
             Log In
           </Button>
-        </div>
-        <div>
           <Button
             variant="outlined"
             style={{ borderRadius: 20 }}
@@ -52,13 +23,11 @@ export const LandingPageButtons = () => {
           >
             Sign Up
           </Button>
-        </div>
-        <div>
           <Button variant="text" style={{ borderRadius: 20 }} href="/Home">
             Continue as Guest
           </Button>
-        </div>
-      </div>
+        </Stack>
+      </Container>
     </React.Fragment>
   );
 };

@@ -14,12 +14,24 @@ import "./index.css";
 export const TopAppBar = () => {
   const dispatch = useAppDispatch();
 
+  const windowSize = window.screen.width;
+
+  function zIndexBasedOnScreenSize() {
+    if (windowSize < 600) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="sticky"
         color="primary"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + zIndexBasedOnScreenSize(),
+        }}
       >
         <Toolbar>
           <Typography
