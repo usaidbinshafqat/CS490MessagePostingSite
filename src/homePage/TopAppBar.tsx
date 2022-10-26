@@ -39,7 +39,9 @@ export const TopAppBar = () => {
           >
             msg.pstr
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href="/">
+            Login
+          </Button>
           {window.screen.width > 600 ? (
             <></>
           ) : (
