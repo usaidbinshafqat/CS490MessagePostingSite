@@ -1,4 +1,4 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
 import { useState } from "react";
 import Logo from "../loginPage/logo_transparent.png";
@@ -150,6 +150,13 @@ export const SignUp = () => {
               setPassword(e.target.value);
             }}
           />
+          <Button
+            variant="outlined"
+            style={{ borderRadius: 20, marginBottom: "20px" }}
+            href="/Home"
+          >
+            Sign Up
+          </Button>
         </Stack>
       </Container>
     </div>
