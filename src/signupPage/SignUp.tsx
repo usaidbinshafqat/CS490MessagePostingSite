@@ -1,4 +1,4 @@
-import { Container, Stack } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import Logo from "../loginPage/logo_transparent.png";
 import { CustomTextField } from "./CustomTextField";
 
@@ -8,7 +8,13 @@ export const SignUp = () => {
       <Container maxWidth="sm">
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
-          <Stack direction="row" spacing={1} justifyContent="space-evenly">
+          <Typography variant="h4">Sign Up</Typography>
+          <Stack
+            direction="row"
+            spacing={1}
+            justifyContent="space-evenly"
+            style={{ marginTop: 20 }}
+          >
             <CustomTextField
               label="First Name"
               variant={"filled"}
