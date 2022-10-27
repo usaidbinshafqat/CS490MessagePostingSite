@@ -31,7 +31,7 @@ export const RightDrawer = () => {
           <ListItemText primary="Profile" />
         </ListItem>
         </Link>
-        <Link to="/SignIn">
+        <Link to="/SignUp">
         <ListItem button onClick={() => console.log("Logging Logout")}>
           <ListItemIcon>
             <ExitToApp />
