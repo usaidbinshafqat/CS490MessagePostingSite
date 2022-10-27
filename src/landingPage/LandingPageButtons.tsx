@@ -1,14 +1,12 @@
 import { Button, Container, Toolbar } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
-import Logo from "./logo_transparent.png";
 
 export const LandingPageButtons = () => {
   return (
     <React.Fragment>
       <Container maxWidth="sm">
         <Stack spacing={2}>
-          <img src={Logo} alt="logo" />
           <Button
             variant="contained"
             style={{ borderRadius: 20 }}
