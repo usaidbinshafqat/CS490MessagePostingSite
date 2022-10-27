@@ -20,11 +20,13 @@ export const RightDrawer = () => {
     return (
       <Box sx={{ width: 250 }}>
         <ListItem button onClick={() => console.log("Logging Profile")}>
+        <Link to="/Profile">
           <ListItemIcon>
-            <Link to="/SignUp">
+            
             <AccountCircle />
-            </Link>
+            
           </ListItemIcon>
+          </Link>
           <ListItemText primary="Profile" />
         </ListItem>
         <ListItem button onClick={() => console.log("Logging Logout")}>
