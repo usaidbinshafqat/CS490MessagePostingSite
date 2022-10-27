@@ -9,7 +9,7 @@ export const HomePage = () => {
   return (
     <React.Fragment>
       <div>
-        <DesktopPostCard />
+        {window.screen.width < 600 ? <></> : <DesktopPostCard />}
         <CardUI />
         <CardUI />
         <CardUI />

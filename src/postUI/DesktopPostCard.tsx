@@ -19,7 +19,7 @@ const card = (
         </Avatar>
       }
       titleTypographyProps={{ align: "left" as const, variant: "h6" }}
-      title="What's Poppin'?"
+      title="Create a new post"
     />
     <CardContent>
       <InputTextField />
@@ -28,6 +28,7 @@ const card = (
       <Button
         size="small"
         variant="contained"
+        fullWidth
         style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
       >
         Post

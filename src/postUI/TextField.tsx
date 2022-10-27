@@ -7,6 +7,37 @@ import merge from "lodash/merge";
 export const InputTextField = () => {
   const [value, setValue] = useState("");
 
+  function randomPlaceholderGenerator() {
+    const placeholders = [
+      "What's on your mind?",
+      "What's happening?",
+      "What's new?",
+      "What's up?",
+      "What's happening?",
+      "What's new?",
+      "What's up?",
+      "What's good?",
+      "What's happening?",
+      "What's new?",
+      "What's up?",
+      "What's good?",
+      "What's happening?",
+      "What's new?",
+      "What's up?",
+      "What's good?",
+      "What's happening?",
+      "What's new?",
+      "What's up?",
+      "What's good?",
+      "What's poppin'?",
+      "Tell us something",
+      "What's the tea?",
+      "What's new?",
+      "What's going on?",
+    ];
+    return placeholders[Math.floor(Math.random() * placeholders.length)];
+  }
+
   let customStyle = merge({}, mentionsInputStyles, {
     input: {
       height: 80,
@@ -39,7 +70,7 @@ export const InputTextField = () => {
       <MentionsInput
         style={customStyle}
         value={value}
-        placeholder={"Mention people using '@'"}
+        placeholder={randomPlaceholderGenerator()}
         a11ySuggestionsListLabel={"Suggested mentions"}
         onChange={(e) => setValue(e.target.value)}
       >
