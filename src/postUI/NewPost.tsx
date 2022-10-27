@@ -1,5 +1,4 @@
 import {
-  Typography,
   IconButton,
   AppBar,
   Dialog,
@@ -7,6 +6,10 @@ import {
   Slide,
   Avatar,
   Button,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Card,
 } from "@mui/material";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -28,6 +31,33 @@ export const NewPost = () => {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
+  const card = (
+    <React.Fragment>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
+            U
+          </Avatar>
+        }
+        titleTypographyProps={{ align: "left" as const, variant: "h6" }}
+        title="Create a new post"
+      />
+      <CardContent>
+        <InputTextField />
+      </CardContent>
+      <CardActions>
+        <Button
+          size="small"
+          variant="contained"
+          style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
+          fullWidth
+        >
+          Post
+        </Button>
+      </CardActions>
+    </React.Fragment>
+  );
+
   return (
     <div>
       <Dialog
@@ -46,19 +76,11 @@ export const NewPost = () => {
             >
               <Close />
             </IconButton>
-            <Typography sx={{ ml: 3, flex: 1 }} variant="h6" component="div">
-              New Post
-            </Typography>
           </Toolbar>
         </AppBar>
-        <Avatar style={{ marginLeft: "20px", marginTop: "20px" }}>HA</Avatar>
-        <div style={{ margin: "20px" }}>
-          <InputTextField />
-        </div>
-
-        <Button variant="outlined" style={{ margin: "20px" }}>
-          Post
-        </Button>
+        <Card raised={false} elevation={0}>
+          {card}
+        </Card>
       </Dialog>
     </div>
   );
