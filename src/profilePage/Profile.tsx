@@ -6,14 +6,14 @@ import { CardUI } from "../cards/CardUI";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
+import "./Profile.css";
 // ? does it need to take in any parameters?
 export const Profile = () => {
 	return (
 		<div>
 			{/* user profile picture */}
-			<Grid  spacing={-30} container>
-				<Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-				<Box sx={{ "& > :not(style)": { m: 1 } }}>
+				<Avatar className="avatar" sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+				<Box className="follow" sx={{ "& > :not(style)": { m: 1 } }}>
 					<Fab
 						variant="extended"
 						size="medium"
@@ -23,9 +23,8 @@ export const Profile = () => {
 						Follow
 					</Fab>
 				</Box>
-			</Grid>
 
-			<h4>Username</h4>
+			<h4 className="username">Username</h4>
 
 			{/* posts */}
 			<CardUI />

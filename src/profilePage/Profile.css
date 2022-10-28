@@ -1,0 +1,12 @@
+.username{
+    color:purple;
+    text-align: left;
+}
+.avatar{
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.follow{
+    justify-content: left;
+}
