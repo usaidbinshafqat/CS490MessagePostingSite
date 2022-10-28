@@ -5,6 +5,7 @@ import { LandingPage } from "./landingPage/LandingPage";
 import { LoginPage } from "./loginPage/LoginPage";
 import { SignUp } from "./signupPage/SignUp";
 import { AppView } from "./views/AppView";
+import { Profile } from "./profilePage/Profile";
 
 function App() {
   const theme = createTheme({
@@ -40,6 +41,7 @@ function App() {
             <Route path="/Home" element={<AppView />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/Profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </div>
