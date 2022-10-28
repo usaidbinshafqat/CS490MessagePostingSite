@@ -19,26 +19,19 @@ export const RightDrawer = () => {
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>
-        <Link to="/Profile">
-        <ListItem button onClick={() => console.log("Logging Profile")}>
-        
+        <ListItem button component={Link} to="/Profile">
           <ListItemIcon>
-            
             <AccountCircle />
-            
           </ListItemIcon>
-          
+
           <ListItemText primary="Profile" />
         </ListItem>
-        </Link>
-        <Link to="/Login">
-        <ListItem button onClick={() => console.log("Logging Logout")}>
+        <ListItem button component={Link} to="/Login">
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>
-        </Link>
         <ListItem button onClick={() => console.log("Logging Settings")}>
           <ListItemIcon>
             <SettingsRounded />
