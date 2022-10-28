@@ -1,33 +1,16 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Container, Grid, Stack } from "@mui/material";
 import { LandingPageButtons } from "./LandingPageButtons";
+import Logo from "./logo_transparent.png";
 
 export const LandingPage = () => {
   return (
     //big screen
-    <div
-      style={{
-        height: "70vh",
-        margin: 0,
-        padding: 0,
-      }}
-    >
-      <Box
-        display="flex"
-        flex="1"
-        justifyContent="space-around"
-        style={{ height: "70vh" }}
-      >
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <LandingPageButtons />
-          </Grid>
-        </Grid>
-      </Box>
-    </div>
+    <Container maxWidth="sm">
+      <Stack spacing={2}>
+        <img src={Logo} alt="logo" />
+
+        <LandingPageButtons />
+      </Stack>
+    </Container>
   );
 };
