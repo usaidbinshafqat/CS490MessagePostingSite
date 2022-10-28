@@ -6,10 +6,13 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  Popover,
 } from "@mui/material";
 import { useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import "./index.css";
+import * as React from "react";
+import SearchIcon from '@mui/icons-material/Search';
 
 export const TopAppBar = () => {
   const dispatch = useAppDispatch();
@@ -51,6 +54,7 @@ export const TopAppBar = () => {
           >
             msg.pstr
           </Typography>
+
           <Button color="inherit" href="/">
             Login
           </Button>
