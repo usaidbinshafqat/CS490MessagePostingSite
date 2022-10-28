@@ -1,5 +1,4 @@
 .username{
-    color:purple;
     text-align: left;
 }
 .avatar{
@@ -8,5 +7,5 @@
     margin-top: 10px;
 }
 .follow{
-    justify-content: left;
+    margin-right: 100%;
 }

@@ -24,7 +24,7 @@ export const Profile = () => {
 					</Fab>
 				</Box>
 
-			<h4 className="username">Username</h4>
+			<h5 className="username">Username</h5>
 
 			{/* posts */}
 			<CardUI />
