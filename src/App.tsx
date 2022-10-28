@@ -1,9 +1,18 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AppView } from "./AppView";
+import { LandingPage } from "./landingPage/LandingPage";
+import { LoginPage } from "./loginPage/LoginPage";
+import { SignUp } from "./signupPage/SignUp";
+import { AppView } from "./views/AppView";
 
 function App() {
   const theme = createTheme({
+    typography: {
+      button: {
+        textTransform: "none",
+      },
+    },
     palette: {
       primary: {
         main: "#453750",
@@ -11,13 +20,28 @@ function App() {
       secondary: {
         main: "#fcde9c",
       },
+      warning: {
+        main: "#C197D2",
+      },
+      error: {
+        main: "#D3D3D3",
+      },
     },
   });
+
+  responsiveFontSizes(theme);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <AppView />
-        {/* <Profile /> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/Home" element={<AppView />} />
+            <Route path="/Login" element={<LoginPage />} />
+            <Route path="/SignUp" element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </ThemeProvider>
   );

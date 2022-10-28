@@ -1,4 +1,4 @@
-import { Home, MoreVert } from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
   Box,
@@ -7,23 +7,33 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useAppDispatch } from "../store/hooks";
+import { actions } from "../store/slice";
 import "./index.css";
-import { HeaderLogo } from "./header_logo_svg";
 
 export const TopAppBar = () => {
+  const dispatch = useAppDispatch();
+
+  const windowSize = window.screen.width;
+
+  function zIndexBasedOnScreenSize() {
+    if (windowSize < 600) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky" color="primary">
+      <AppBar
+        position="sticky"
+        color="primary"
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + zIndexBasedOnScreenSize(),
+        }}
+      >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <HeaderLogo />
-          </IconButton>
-
           <Typography
             variant="h6"
             noWrap
@@ -41,15 +51,22 @@ export const TopAppBar = () => {
           >
             msg.pstr
           </Typography>
-          <Button color="inherit">Login</Button>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <MoreVert />
-          </IconButton>
+          <Button color="inherit" href="/">
+            Login
+          </Button>
+          {window.screen.width > 600 ? (
+            <></>
+          ) : (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => dispatch(actions.toggleDrawer())}
+            >
+              <AccountCircle />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

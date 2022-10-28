@@ -1,12 +1,81 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, IconButton, CardContent, CardActions, CardHeader, 
+  Typography, Avatar, Color, Paper } from "@mui/material";
 import * as React from "react";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ButtonBase } from '@mui/material';
+import { purple } from '@mui/material/colors';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Container } from "@mui/system";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Button } from "@mui/material";
+
+
+
+class LikeButton extends React.Component<{}, {liked: boolean}> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      liked: false,
+    };
+  }
+
+  render() {
+    return (
+      <IconButton 
+      color = {this.state.liked ? "warning" : "error"}
+      onClick={() => this.setState({liked: !this.state.liked})}>
+         <FavoriteIcon/> 
+      </IconButton>
+    )
+  }
+}
+
+class FollowButton extends React.Component<{}, {followed: boolean}> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      followed: false,
+    };
+  }
+
+  render() {
+    return (
+      <Button variant="contained" style={{ borderRadius: 20 }} size="small"
+      onClick={() => this.setState({followed: !this.state.followed})}
+      endIcon={ <PersonAddIcon color = {this.state.followed ? "warning" : "error"}/> }>
+        {this.state.followed ? "Unfollow" : "Follow"}
+      </Button>
+    )
+  }
+}
+
 
 const card = (
   <React.Fragment>
+    <CardHeader 
+        avatar={
+          <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
+            U
+          </Avatar>      
+        }
+        titleTypographyProps={{align: "left" as const}}
+        title="User"
+        subheaderTypographyProps={{align: "left" as const}}
+        subheader="Time/Date Posted"
+        action={<FollowButton></FollowButton>}
+      />        
     <CardContent>
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
-    </CardContent>
+    </CardContent>  
+      <CardActions disableSpacing>
+          <Box></Box>
+          <LikeButton> </LikeButton>
+          <Typography> 200 </Typography>
+      </CardActions>
+
   </React.Fragment>
 );
 
