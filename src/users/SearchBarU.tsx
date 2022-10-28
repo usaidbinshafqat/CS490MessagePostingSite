@@ -1,7 +1,7 @@
 import { Paper, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-export const SearchBar = () => {
+export const SearchBarU = () => {
   return (
     <div style={{ alignContent: "center" }}>
       <Paper
@@ -15,7 +15,7 @@ export const SearchBar = () => {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Search trends or users"
+          placeholder="Search users"
           inputProps={{ "aria-label": "search google maps" }}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
@@ -24,4 +24,5 @@ export const SearchBar = () => {
       </Paper>
     </div>
   );
+
 };

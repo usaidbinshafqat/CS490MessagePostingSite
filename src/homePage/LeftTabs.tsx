@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import { Trends } from "../trends/Trends";
 import { HomePage } from "./HomePage";
+import { Users } from "../users/Users";
 
 export const LeftTabs = () => {
   const homePageState = useAppSelector(
@@ -29,6 +30,7 @@ export const LeftTabs = () => {
           orientation="vertical"
         >
           <Tab label="Home" />
+          <Tab label="Users" />
           <Tab label="Trends" />
         </Tabs>
         <Box sx={{ width: 0.7 }}>
@@ -38,6 +40,11 @@ export const LeftTabs = () => {
             </Container>
           )}
           {homePageState === 1 && (
+            <Container maxWidth="sm">
+              <Users />
+            </Container>
+          )}
+          {homePageState === 2 && (
             <Container maxWidth="sm">
               <Trends />
             </Container>

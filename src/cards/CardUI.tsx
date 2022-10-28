@@ -9,6 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Container } from "@mui/system";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Button } from "@mui/material";
+
 
 
 class LikeButton extends React.Component<{}, {liked: boolean}> {
@@ -30,19 +32,40 @@ class LikeButton extends React.Component<{}, {liked: boolean}> {
   }
 }
 
+class FollowButton extends React.Component<{}, {followed: boolean}> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      followed: false,
+    };
+  }
+
+  render() {
+    return (
+      <Button variant="contained" style={{ borderRadius: 20 }} size="small"
+      onClick={() => this.setState({followed: !this.state.followed})}
+      endIcon={ <PersonAddIcon color = {this.state.followed ? "warning" : "error"}/> }>
+        {this.state.followed ? "Unfollow" : "Follow"}
+      </Button>
+    )
+  }
+}
+
+
 const card = (
   <React.Fragment>
-    <CardHeader
+    <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
             U
-          </Avatar>
+          </Avatar>      
         }
         titleTypographyProps={{align: "left" as const}}
-        title="User" 
+        title="User"
         subheaderTypographyProps={{align: "left" as const}}
         subheader="Time/Date Posted"
-      />
+        action={<FollowButton></FollowButton>}
+      />        
     <CardContent>
       <Typography>CS Final Project</Typography>
       <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
