@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
+import { Link } from "react-router-dom";
 
 export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);
@@ -18,18 +19,26 @@ export const RightDrawer = () => {
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>
+        <Link to="/Profile">
         <ListItem button onClick={() => console.log("Logging Profile")}>
+        
           <ListItemIcon>
+            
             <AccountCircle />
+            
           </ListItemIcon>
+          
           <ListItemText primary="Profile" />
         </ListItem>
+        </Link>
+        <Link to="/Login">
         <ListItem button onClick={() => console.log("Logging Logout")}>
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>
+        </Link>
         <ListItem button onClick={() => console.log("Logging Settings")}>
           <ListItemIcon>
             <SettingsRounded />
