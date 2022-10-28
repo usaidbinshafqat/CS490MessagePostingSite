@@ -12,7 +12,7 @@ export const Profile = () => {
 	return (
 		<div>
 			{/* user profile picture */}
-				<Avatar className="avatar" sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+				<Avatar className="avatar" sx={{ bgcolor: deepPurple[500], width: 56, height: 56 }}>OP</Avatar>
 				<Box className="follow" sx={{ "& > :not(style)": { m: 1 } }}>
 					<Fab
 						variant="extended"
