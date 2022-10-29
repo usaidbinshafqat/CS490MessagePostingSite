@@ -29,7 +29,6 @@ export const TopAppBar = () => {
     const handleClick = (onClick: any) => {
       setAnchor(onClick.currentTarget)
       setOpen(true);
-      console.log("open");
     };
 
     const handleClose = (onClick: any) => {
