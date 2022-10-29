@@ -21,7 +21,7 @@ import { useState } from "react";
 
 export const TopAppBar = () => {
 
-  function SearchPopover() {
+  function SearchPopoverDesktop() {
     const [anchor, setAnchor] = useState(null);
     const [open, setOpen] = useState(false);
       
@@ -38,13 +38,14 @@ export const TopAppBar = () => {
 
     return(
       <React.Fragment>
+        
         <Button
         color="inherit"
         onClick={handleClick}
         endIcon={<SearchIcon> </SearchIcon>}
         >
           Search users
-        </Button>   
+        </Button>     
         <Popover
         open={open}
         anchorEl={anchor}
@@ -62,6 +63,44 @@ export const TopAppBar = () => {
     )
   }
   
+  function SearchPopover() {
+    const [anchor, setAnchor] = useState(null);
+    const [open, setOpen] = useState(false);
+      
+
+    const handleClick = (onClick: any) => {
+      setAnchor(onClick.currentTarget)
+      setOpen(true);
+    };
+
+    const handleClose = (onClick: any) => {
+      setAnchor(null);
+      setOpen(false);
+    }
+
+    return(
+      <React.Fragment>
+        <IconButton
+        color="inherit"
+        onClick={handleClick}>
+          <SearchIcon/>
+        </IconButton>     
+        <Popover
+        open={open}
+        anchorEl={anchor}
+        onClose={handleClose}>
+          <div>
+        <div>
+          <SearchBarU />
+        </div>
+        <div>
+          <UsersList />
+        </div>
+      </div>
+        </Popover>
+      </React.Fragment>
+    )
+  }
 
   const dispatch = useAppDispatch();
 
@@ -102,8 +141,8 @@ export const TopAppBar = () => {
           >
             msg.pstr
           </Typography>
-          
-          {SearchPopover()}
+
+          {window.screen.width < 600 ? (SearchPopover()) : (SearchPopoverDesktop())}
           
           <Button color="inherit" href="/">
             Login
