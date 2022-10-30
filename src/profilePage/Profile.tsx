@@ -16,24 +16,28 @@ export const Profile = () => {
 			<Grid spacing={-30} container>
 				<Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
 				<Box sx={{ "& > :not(style)": { m: 1 } }}>
-					<Fab className="profile__info"
+					<Fab
+						className="profile__info"
 						variant="extended"
 						size="medium"
 						color="primary"
 						aria-label="add"
 					>
 						Follow
-          </Fab>
-          	<Typography className="profile__info" variant="h4" gutterBottom>
-				Kyle Baker
-			</Typography>
-			<Typography className="profile__info" variant="subtitle1" gutterBottom>
-				@kydoggbaker
-			</Typography>
+					</Fab>
+					<Typography className="profile__info" variant="h4" gutterBottom>
+						{" "}
+						Kyle Baker
+					</Typography>
+					<Typography
+						className="profile__info"
+						variant="subtitle1"
+						gutterBottom
+					>
+						@kydoggbaker
+					</Typography>
 				</Box>
 			</Grid>
-
-		
 
 			{/* posts */}
 			<CardUI />
