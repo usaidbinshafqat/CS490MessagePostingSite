@@ -1,18 +1,18 @@
 import { AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
-  Box,
   Button,
   IconButton,
   Toolbar,
   Typography,
   Popover,
+  Box,
 } from "@mui/material";
 import { useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import "./index.css";
 import * as React from "react";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import { isNullishCoalesce } from "typescript";
 import { SearchBarU } from "../users/SearchBarU";
 import { UsersList } from "../users/UsersList";
@@ -20,87 +20,75 @@ import { Container } from "@mui/system";
 import { useState } from "react";
 
 export const TopAppBar = () => {
-
-  function SearchPopoverDesktop() {
+  const SearchPopoverDesktop = () => {
     const [anchor, setAnchor] = useState(null);
     const [open, setOpen] = useState(false);
-      
 
     const handleClick = (onClick: any) => {
-      setAnchor(onClick.currentTarget)
+      setAnchor(onClick.currentTarget);
       setOpen(true);
     };
 
     const handleClose = (onClick: any) => {
       setAnchor(null);
       setOpen(false);
-    }
+    };
 
-    return(
+    return (
       <React.Fragment>
-        
         <Button
-        color="inherit"
-        onClick={handleClick}
-        endIcon={<SearchIcon> </SearchIcon>}
+          color="inherit"
+          onClick={handleClick}
+          endIcon={<SearchIcon> </SearchIcon>}
         >
           Search users
-        </Button>     
-        <Popover
-        open={open}
-        anchorEl={anchor}
-        onClose={handleClose}>
+        </Button>
+        <Popover open={open} anchorEl={anchor} onClose={handleClose}>
           <div>
-        <div>
-          <SearchBarU />
-        </div>
-        <div>
-          <UsersList />
-        </div>
-      </div>
+            <div>
+              <SearchBarU />
+            </div>
+            <div>
+              <UsersList />
+            </div>
+          </div>
         </Popover>
       </React.Fragment>
-    )
-  }
-  
-  function SearchPopover() {
+    );
+  };
+
+  const SearchPopover = () => {
     const [anchor, setAnchor] = useState(null);
     const [open, setOpen] = useState(false);
-      
 
     const handleClick = (onClick: any) => {
-      setAnchor(onClick.currentTarget)
+      setAnchor(onClick.currentTarget);
       setOpen(true);
     };
 
     const handleClose = (onClick: any) => {
       setAnchor(null);
       setOpen(false);
-    }
+    };
 
-    return(
+    return (
       <React.Fragment>
-        <IconButton
-        color="inherit"
-        onClick={handleClick}>
-          <SearchIcon/>
-        </IconButton>     
-        <Popover
-        open={open}
-        anchorEl={anchor}
-        onClose={handleClose}>
+        <IconButton color="inherit" onClick={handleClick}>
+          <SearchIcon />
+        </IconButton>
+        <Popover open={open} anchorEl={anchor} onClose={handleClose}>
           <div>
-        <div>
-          <SearchBarU />
-        </div>
-        <div>
-          <UsersList />
-        </div>
-      </div>
+            <div>
+              <SearchBarU />
+            </div>
+            <div>
+              <UsersList />
+            </div>
+          </div>
         </Popover>
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   const dispatch = useAppDispatch();
 
@@ -124,44 +112,45 @@ export const TopAppBar = () => {
         }}
       >
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              display: "flex",
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              flexGrow: 1,
-            }}
-          >
-            msg.pstr
-          </Typography>
-
-          {window.screen.width < 600 ? (SearchPopover()) : (SearchPopoverDesktop())}
-          
-          <Button color="inherit" href="/">
-            Login
-          </Button>
-          
-
-          {window.screen.width > 600 ? (
-            <></>
-          ) : (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={() => dispatch(actions.toggleDrawer())}
+          <>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                display: "flex",
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+                flexGrow: 1,
+              }}
             >
-              <AccountCircle />
-            </IconButton>
-          )}
+              msg.pstr
+            </Typography>
+
+            {window.screen.width < 600 ? SearchPopover : SearchPopoverDesktop}
+
+            <Button color="inherit" href="/">
+              Login
+            </Button>
+
+            {window.screen.width > 600 ? (
+              <></>
+            ) : (
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={() => dispatch(actions.toggleDrawer())}
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
+          </>
         </Toolbar>
       </AppBar>
     </Box>
