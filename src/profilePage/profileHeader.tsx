@@ -7,9 +7,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Container from '@mui/material/Container';
 
 export const Header = () => {
     return (
+        <Container maxWidth="sm">
         <Card sx={{ maxWidth: 550, marginTop: 1}}>
             <CardMedia
                 component="img"
@@ -39,5 +41,6 @@ export const Header = () => {
                 <Button size="medium">Follow</Button>
             </CardActions>
         </Card>
+        </Container>
     );
 }
