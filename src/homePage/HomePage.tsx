@@ -4,12 +4,14 @@ import { NewPostFab } from "./NewPostFab";
 import "./index.css";
 import { RightDrawer } from "./RightDrawer";
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
+import { Weather } from "../weather/weather";
 
 export const HomePage = () => {
   return (
     <React.Fragment>
       <div>
         {window.screen.width < 600 ? <></> : <DesktopPostCard />}
+        <Weather />
         <CardUI />
         <CardUI />
         <CardUI />
