@@ -131,7 +131,9 @@ export const TopAppBar = () => {
               msg.pstr
             </Typography>
 
-            {window.screen.width < 600 ? SearchPopover : SearchPopoverDesktop}
+            {window.screen.width < 600
+              ? SearchPopover()
+              : SearchPopoverDesktop()}
 
             <Button color="inherit" href="/">
               Login
