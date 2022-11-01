@@ -7,13 +7,21 @@ export function Hashtag(props: any) {
   var returnString = "";
   const messageSplit = message.split(" ");
 
-  messageSplit.array.forEach((word: any) => {
-    if (word.includes("#")) {
-      var addToArray = `<a href="#">$word</a>`;
-      returnArray.concat(addToArray);
-    } else {
-      returnArray.concat(word);
-    }
-  });
-  return returnArray;
+  if (message.includes("#")) {
+    messageSplit.array.forEach((word: any) => {
+      if (word.includes("#")) {
+        var addToArray = `<a href="#">$word</a>`;
+        returnArray.concat(addToArray);
+      } else {
+        returnArray.concat(word);
+      }
+    });
+    returnArray.map((word: any) => {
+      returnString = `$returnString$word`;
+    });
+    const finalString = returnString;
+    return finalString;
+  } else {
+    return message;
+  }
 }
