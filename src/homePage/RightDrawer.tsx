@@ -8,6 +8,7 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 
@@ -18,7 +19,7 @@ export const RightDrawer = () => {
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>
-        <ListItem button onClick={() => console.log("Logging Profile")}>
+        <ListItem button component={Link} to="/Profile">
           <ListItemIcon>
             <AccountCircle />
           </ListItemIcon>
