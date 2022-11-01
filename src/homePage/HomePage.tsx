@@ -11,7 +11,6 @@ export const HomePage = () => {
     <React.Fragment>
       <div>
         {window.screen.width < 600 ? <></> : <DesktopPostCard />}
-        <Weather />
         <CardUI />
         <CardUI />
         <CardUI />

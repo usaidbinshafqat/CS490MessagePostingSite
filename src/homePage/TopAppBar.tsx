@@ -18,6 +18,7 @@ import { SearchBarU } from "../users/SearchBarU";
 import { UsersList } from "../users/UsersList";
 import { Container } from "@mui/system";
 import { useState } from "react";
+import { Weather } from "../weather/weather";
 
 export const TopAppBar = () => {
   const SearchPopoverDesktop = () => {
@@ -135,9 +136,11 @@ export const TopAppBar = () => {
               ? SearchPopover()
               : SearchPopoverDesktop()}
 
-            <Button color="inherit" href="/">
+            {/* <Button color="inherit" href="/">
               Login
-            </Button>
+            </Button> */}
+
+            <Weather></Weather>
 
             {window.screen.width > 600 ? (
               <></>

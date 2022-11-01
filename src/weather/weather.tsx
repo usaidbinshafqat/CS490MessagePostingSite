@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";
+import CloudIcon from "@mui/icons-material/Cloud";
+import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 
 interface data {
+  currently: any;
   apparentTemperature: any;
   icon: any;
 }
 
 export const Weather = () => {
-  const [Data, setData] = useState<data>();
+  const [data, setData] = useState<data>();
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
 
@@ -33,13 +39,16 @@ export const Weather = () => {
     .request(options)
     .then(function (response) {
       setData(response.data);
-      console.log(Data);
+      console.log(data);
     })
     .catch(function (error) {
       console.error(error);
     });
 
-  return null;
-
-  // return <Typography>{Data!.apparentTemperature}</Typography>;
+  return (
+    <>
+      <DeviceThermostatIcon></DeviceThermostatIcon>
+      <Typography>{data?.currently?.apparentTemperature}</Typography>
+    </>
+  );
 };
