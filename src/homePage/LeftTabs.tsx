@@ -30,7 +30,6 @@ export const LeftTabs = () => {
           orientation="vertical"
         >
           <Tab label="Home" />
-          <Tab label="Users" />
           <Tab label="Trends" />
         </Tabs>
         <Box sx={{ width: 0.7 }}>
@@ -39,12 +38,12 @@ export const LeftTabs = () => {
               <HomePage />
             </Container>
           )}
-          {homePageState === 1 && (
+          {/* {homePageState === 1 && (
             <Container maxWidth="sm">
               <Users />
             </Container>
-          )}
-          {homePageState === 2 && (
+          )} */}
+          {homePageState === 1 && (
             <Container maxWidth="sm">
               <Trends />
             </Container>

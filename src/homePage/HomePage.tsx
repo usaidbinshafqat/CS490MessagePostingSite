@@ -29,9 +29,6 @@ export const HomePage = () => {
       <div className="fab">
         <NewPostFab />
       </div>
-      <div>
-        <RightDrawer />
-      </div>
     </React.Fragment>
   );
 };
