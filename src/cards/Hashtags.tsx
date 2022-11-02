@@ -1,26 +1,65 @@
 import { VaccinesRounded, VapeFree } from "@mui/icons-material";
-import * as React from "react";
+import {
+  Box,
+  Button,
+  ButtonBase,
+  Link,
+  ListItem,
+  Typography,
+} from "@mui/material";
+import "./index.css";
 
-export function Hashtag(props: any) {
+export function HashtagButton(props: any) {
   const message = props.message;
-  var returnArray: Array<any> = [];
-  var returnString = "";
   const messageSplit = message.split(" ");
 
   if (message.includes("#")) {
-    messageSplit.array.forEach((word: any) => {
+    return messageSplit.map((word: string) => {
       if (word.includes("#")) {
-        var addToArray = `<a href="#">$word</a>`;
-        returnArray.concat(addToArray);
+        {
+          // push data to back end here (if hashtag is new)
+          return (
+            <ButtonBase
+              href="/Login"
+              className="hash-button"
+              sx={{ color: "#C197D2" }}
+            >
+              {word}&nbsp;
+            </ButtonBase>
+          );
+        }
       } else {
-        returnArray.concat(word);
+        {
+          return <>{`${word} `}</>;
+        }
       }
     });
-    returnArray.map((word: any) => {
-      returnString = `$returnString$word`;
+  } else {
+    return message;
+  }
+}
+
+export function HashtagLink(props: any) {
+  const message = props.message;
+  const messageSplit = message.split(" ");
+
+  if (message.includes("#")) {
+    return messageSplit.map((word: string) => {
+      if (word.includes("#")) {
+        {
+          // push data to back end here (if hashtag is new)
+          return (
+            <a href="/Login" className="hash">
+              {word}&nbsp;
+            </a>
+          );
+        }
+      } else {
+        {
+          return <>{`${word} `}</>;
+        }
+      }
     });
-    const finalString = returnString;
-    return finalString;
   } else {
     return message;
   }

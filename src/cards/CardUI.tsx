@@ -20,7 +20,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/system";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Button } from "@mui/material";
-import { Hashtag } from "./Hashtags";
+import { HashtagButton, HashtagLink } from "./Hashtags";
 
 class LikeButton extends React.Component<{}, { liked: boolean }> {
   constructor(props: any) {
@@ -83,7 +83,10 @@ const card = (
     />
     <CardContent>
       <Typography>CS Final Project</Typography>
-      <Typography>Phumz, Mallory, Usaid, Kyle, Jackson</Typography>
+      <Typography>
+        {" "}
+        <HashtagButton message="Phumz, Mallory, Usaid, Kyle, Jackson #hashtag #csproject"></HashtagButton>{" "}
+      </Typography>
     </CardContent>
     <CardActions disableSpacing>
       <Box></Box>

@@ -140,7 +140,7 @@ export const TopAppBar = () => {
               Login
             </Button> */}
 
-            <Weather></Weather>
+            {window.screen.width < 600 ? <> </> : <Weather></Weather>}
 
             {window.screen.width > 600 ? (
               <></>
