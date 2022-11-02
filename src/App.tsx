@@ -9,6 +9,15 @@ import { AppView } from "./views/AppView";
 
 function App() {
   const theme = createTheme({
+    components: {
+      MuiButtonBase: {
+        defaultProps: {
+          disableRipple: true,
+          // text: "#C197D2",
+        },
+      },
+    },
+
     typography: {
       button: {
         textTransform: "none",
