@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { InputTextField } from "./TextField";
+import CardToggleButton from "./ToggleButton";
 
 const card = (
   <React.Fragment>
@@ -33,6 +34,7 @@ const card = (
       >
         Post
       </Button>
+      <CardToggleButton />
     </CardActions>
   </React.Fragment>
 );

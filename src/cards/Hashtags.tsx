@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import { VaccinesRounded, VapeFree } from "@mui/icons-material";
 import {
   Box,

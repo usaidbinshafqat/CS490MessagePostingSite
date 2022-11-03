@@ -10,13 +10,15 @@ import {
   CardContent,
   CardHeader,
   Card,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 import { InputTextField } from "./TextField";
-import { Close } from "@mui/icons-material";
+import { Close, InfoOutlined } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions";
+import CardToggleButton from "./ToggleButton";
 
 export const NewPost = () => {
   const open = useAppSelector((state) => state.reducers.modalOpen);
@@ -54,7 +56,22 @@ export const NewPost = () => {
         >
           Post
         </Button>
+
+        <CardToggleButton />
       </CardActions>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          marginLeft: "20px",
+        }}
+      >
+        <InfoOutlined />
+        <Typography variant="caption" style={{ margin: "5px" }}>
+          Toggle button to make post public or private
+        </Typography>
+      </div>
     </React.Fragment>
   );
 

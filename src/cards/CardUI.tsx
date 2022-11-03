@@ -7,20 +7,12 @@ import {
   CardHeader,
   Typography,
   Avatar,
-  Color,
-  Paper,
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { ButtonBase } from "@mui/material";
-import { purple } from "@mui/material/colors";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Container } from "@mui/system";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Button } from "@mui/material";
-import { HashtagButton, HashtagLink } from "./Hashtags";
+import { HashtagButton } from "./Hashtags";
 
 class LikeButton extends React.Component<{}, { liked: boolean }> {
   constructor(props: any) {
