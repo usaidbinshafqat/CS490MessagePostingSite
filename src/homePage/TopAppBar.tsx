@@ -129,16 +129,11 @@ export const TopAppBar = () => {
             >
               msg.pstr
             </Typography>
+            <Weather />
 
             {window.screen.width < 600
               ? SearchPopover()
               : SearchPopoverDesktop()}
-
-            {/* <Button color="inherit" href="/">
-              Login
-            </Button> */}
-
-            {window.screen.width < 600 ? <> </> : <Weather></Weather>}
 
             {window.screen.width > 600 ? (
               <></>
