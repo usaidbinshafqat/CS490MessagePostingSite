@@ -1,46 +1,74 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import Toolbar from "@mui/material/Toolbar";
-import { CardHeader, Avatar, Color, Paper } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Container from '@mui/material/Container';
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import { FollowButton } from "../cards/FollowButton";
 
 export const Header = () => {
-    return (
-        <Container maxWidth="sm">
-        <Card sx={{ maxWidth: 550, marginTop: 1}}>
-            <CardMedia
-                component="img"
-                alt="green iguana"
-                height="150"
-                image="https://climatecommunication.yale.edu/wp-content/uploads/2017/04/001-stone-circle-jpeg-768x350.jpg"
-            />
-            <CardContent
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "2px"
-                }}
+  return (
+    <Card style={{ margin: "10px" }}>
+      <CardHeader
+        avatar={
+          <Avatar
+            src={"https://i.pravatar.cc/300"}
+            style={{ width: 60, height: 60 }}
+          />
+        }
+        action={<FollowButton />}
+      />
+      <CardContent>
+        <Typography variant="h5" component="div" align="left">
+          Username
+        </Typography>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            <Typography variant="body2" color="text.secondary" align="left">
+              City
+            </Typography>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Typography
+              variant="body2"
+              fontWeight="fontWeightBold"
+              color="text.secondary"
+              align="left"
             >
-                <Typography gutterBottom variant="h6" component="div" fontWeight="bolder">
-                    @Phumz
-                </Typography>
-                <Button size="medium">Edit Profile</Button>
-            </CardContent>
-            <CardContent style={{ display: "flex", justifyContent: "right", padding: "2px" }}>
-                <Typography gutterBottom component="div" color="grey" fontSize="small" marginRight="5px">
-                    Joined 10/2022
-                </Typography>
-            </CardContent>
-            <CardActions style={{ display: "flex", justifyContent: "space-between" }}>
-                <Button size="medium">0 Following</Button>
-                <Button size="medium">Follow</Button>
-            </CardActions>
-        </Card>
-        </Container>
-    );
-}
+              Joined
+            </Typography>
+            <Typography color="inherit" noWrap>
+              &nbsp;
+            </Typography>
+            <Typography variant="body2" color="text.secondary" align="left">
+              Sep '22
+            </Typography>
+          </div>
+        </div>
+      </CardContent>
+
+      <Divider light />
+      <Box display={"flex"}>
+        <Box p={2} flex={"auto"}>
+          <Typography variant="h6" component="div">
+            Followers
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            420
+          </Typography>
+        </Box>
+        <Box p={2} flex={"auto"}>
+          <Typography variant="h6" component="div">
+            Following
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            69
+          </Typography>
+        </Box>
+      </Box>
+    </Card>
+  );
+};

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { LandingPage } from "./landingPage/LandingPage";
 import { LoginPage } from "./loginPage/LoginPage";
-import Profile from "./profilePage/Profile";
 import { SignUp } from "./signupPage/SignUp";
 import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";

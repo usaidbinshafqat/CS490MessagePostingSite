@@ -13,10 +13,8 @@ import { actions } from "../store/slice";
 import "./index.css";
 import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { isNullishCoalesce } from "typescript";
 import { SearchBarU } from "../users/SearchBarU";
 import { UsersList } from "../users/UsersList";
-import { Container } from "@mui/system";
 import { useState } from "react";
 import { Weather } from "../weather/weather";
 

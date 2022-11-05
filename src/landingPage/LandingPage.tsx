@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import { LandingPageButtons } from "./LandingPageButtons";
 import Logo from "./logo_transparent.png";
 
