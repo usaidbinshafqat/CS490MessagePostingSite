@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const mysql = require('mysql2');
 
 const db = mysql.createPool({
@@ -13,7 +15,7 @@ const db = mysql.createPool({
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.get('/api/get', (req, res) => {
 //     const sqlSelect =
@@ -35,33 +37,44 @@ app.post('/api/register', (req, res) => {
     const picturePath = req.body.picturePath;
     const dateOfReg = req.body.dateOfReg;
 
-
-    const sqlInsert = "INSERT INTO User (Username, Password, Email, DateOfRegistration, FirstName, LastName, PicturePath, Country, City) VALUES (?,?,?,?,?,?,?,?,?);"
-    db.query(sqlInsert, [userName, password, email, dateOfReg, firstName, lastName, picturePath, country, city], (err, result) => {
-        console.log(err);
-    });
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        if (err) {
+            console.log(err)
+        }
+        const sqlInsert = "INSERT INTO User (Username, Password, Email, DateOfRegistration, FirstName, LastName, PicturePath, Country, City) VALUES (?,?,?,?,?,?,?,?,?);"
+        db.query(sqlInsert, [userName, hash, email, dateOfReg, firstName, lastName, picturePath, country, city], (err, result) => {
+            console.log(err);
+        });
+    })
 });
 
 app.post('/api/login', (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+    // const firstName = req.body.firstName;
+    // const lastName = req.body.lastName;
     const userName = req.body.userName
-    const email = req.body.email;
+    // const email = req.body.email;
     const password = req.body.password;
-    const city = req.body.city;
-    const country = req.body.country;
-    const picturePath = req.body.picturePath;
-    const dateOfReg = req.body.dateOfReg;
+    // const city = req.body.city;
+    // const country = req.body.country;
+    // const picturePath = req.body.picturePath;
+    // const dateOfReg = req.body.dateOfReg;
 
-    const sqlSelect = "SELECT * FROM User WHERE userName = ? AND password = ?"
-    db.query(sqlSelect, [userName, password, email, dateOfReg, firstName, lastName, picturePath, country, city], (err, result) => {
-        if (err) {res.send({err: err})
+    const sqlSelect = "SELECT * FROM User WHERE userName = ?"
+    db.query(sqlSelect, [userName], (err, result) => {
+        if (err) {
+            res.send({ err: err })
         }
 
         if (result.length > 0) {
-            res.send(result);
+            bcrypt.compare(password, result[0].password, (error, response) => {
+                if (response) {
+                    res.send(result)
+                } else {
+                    res.send({ message: "Wrong username/password!" });
+                }
+            })
         } else {
-            res.send({message: "Wrong username/password!"});
+            res.send({ message: "User doesn't exist" });
         }
     });
 })
@@ -82,6 +95,22 @@ app.post('/api/login', (req, res) => {
 //     });
 // })
 
+// to post
+app.post('/api/post', (req, res) => {
+    const newPost = req.body.newPost;
+    const userID = req.body.userID;
+    const messageType = req.body.messageType
+    const path = req.body.path;
+    const postDate = req.body.postDate;
+    const likes = req.body.likes;
+    const privacy = req.body.privacy;
+
+
+    const sqlInsert = "INSERT INTO Message (UID, TypeOfMessage, Message, Path, Date, Likes, Privacy) VALUES (?,?,?,?,?,?,?);"
+    db.query(sqlInsert, [userID, messageType, newPost, path, postDate, likes, privacy], (err, result) => {
+        console.log(err);
+    });
+});
 app.listen(3000, () => {
     console.log("running on port 3000");
 });
