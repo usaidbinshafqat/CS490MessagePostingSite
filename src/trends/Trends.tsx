@@ -1,11 +1,11 @@
-import { SearchBar } from "./SearchBar";
+import { SearchBarT } from "./SearchBarT";
 import { TrendsList } from "./TrendsList";
 
 export const Trends = () => {
   return (
     <div>
       <div>
-        <SearchBar />
+        <SearchBarT />
       </div>
       <div>
         <TrendsList />

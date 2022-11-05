@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
+import { Link } from "react-router-dom";
 
 export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);
@@ -23,9 +24,10 @@ export const RightDrawer = () => {
           <ListItemIcon>
             <AccountCircle />
           </ListItemIcon>
+
           <ListItemText primary="Profile" />
         </ListItem>
-        <ListItem button onClick={() => console.log("Logging Logout")}>
+        <ListItem button component={Link} to="/Login">
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>
