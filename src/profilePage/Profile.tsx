@@ -1,14 +1,24 @@
-import React from 'react'
-import MediaCard from './MediaCard'
+import { Container } from "@mui/system";
+import * as React from "react";
+import { TopAppBar } from "../homePage/TopAppBar";
+import { ProfileCards } from "./ProfileCards";
+import { Header } from "./ProfileHeader";
 
-// does it need to take in any parameters?
-export default function  Profile() {
-  
+export const ProfilePage = () => {
   return (
-    <div>
-      <h1>Hello, world</h1>
-      <MediaCard />
-    </div>
-  )
-}
-
+    <React.Fragment>
+      <TopAppBar />
+      <Container maxWidth="sm">
+        <Header />
+        <div>
+          <ProfileCards />
+          <ProfileCards />
+          <ProfileCards />
+          <ProfileCards />
+          <ProfileCards />
+          <ProfileCards />
+        </div>
+      </Container>
+    </React.Fragment>
+  );
+};

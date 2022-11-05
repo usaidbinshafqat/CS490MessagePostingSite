@@ -4,7 +4,6 @@ import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
 import { Trends } from "../trends/Trends";
 import { HomePage } from "./HomePage";
-import { Users } from "../users/Users";
 
 export const LeftTabs = () => {
   const homePageState = useAppSelector(
