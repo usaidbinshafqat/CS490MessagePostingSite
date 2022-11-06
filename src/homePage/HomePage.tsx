@@ -25,9 +25,13 @@ export const HomePage = () => {
         <CardUI />
         <CardUI />
       </div>
-      <div className="fab">
-        <NewPostFab />
-      </div>
+      {window.screen.width > 600 ? (
+        <></>
+      ) : (
+        <div className="fab">
+          <NewPostFab />
+        </div>
+      )}
     </React.Fragment>
   );
 };

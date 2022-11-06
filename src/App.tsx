@@ -6,6 +6,7 @@ import { LoginPage } from "./loginPage/LoginPage";
 import { SignUp } from "./signupPage/SignUp";
 import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";
+import { TopAppBar } from "./homePage/TopAppBar";
 
 function App() {
   const theme = createTheme({
@@ -44,6 +45,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <div style={{ marginBottom: "70px" }}>
+          <TopAppBar />
+        </div>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />

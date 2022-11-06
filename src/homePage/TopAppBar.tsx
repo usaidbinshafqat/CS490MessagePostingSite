@@ -104,7 +104,6 @@ export const TopAppBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="sticky"
         color="primary"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + zIndexBasedOnScreenSize(),

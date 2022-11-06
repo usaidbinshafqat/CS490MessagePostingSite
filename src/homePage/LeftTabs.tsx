@@ -1,54 +1,57 @@
-import { Box, Container, Tab, Tabs } from "@mui/material";
-import React from "react";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { actions } from "../store/slice";
-import { Trends } from "../trends/Trends";
-import { HomePage } from "./HomePage";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
 
-export const LeftTabs = () => {
-  const homePageState = useAppSelector(
-    (state) => state.reducers.homePageActive
-  );
-  const [currentTab, setCurrentTab] = React.useState(homePageState);
-  const dispatch = useAppDispatch();
+import {
+  PersonRounded,
+  HomeRounded,
+  SettingsRounded,
+} from "@mui/icons-material";
+
+export default function LeftTabs() {
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
-    <Box>
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-        }}
-      >
-        <Tabs
-          value={currentTab}
-          onChange={(event, newValue) => {
-            setCurrentTab(newValue);
-            dispatch(actions.changeTab(newValue));
-          }}
-          orientation="vertical"
+    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItemButton
+          href="/Home"
+          selected={selectedIndex === 0}
+          onClick={() => setSelectedIndex(0)}
         >
-          <Tab label="Home" />
-          <Tab label="Trends" />
-        </Tabs>
-        <Box sx={{ width: 0.7 }}>
-          {homePageState === 0 && (
-            <Container maxWidth="sm">
-              <HomePage />
-            </Container>
-          )}
-          {/* {homePageState === 1 && (
-            <Container maxWidth="sm">
-              <Users />
-            </Container>
-          )} */}
-          {homePageState === 1 && (
-            <Container maxWidth="sm">
-              <Trends />
-            </Container>
-          )}
-        </Box>
-      </Box>
+          <ListItemIcon>
+            <HomeRounded />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItemButton>
+        <ListItemButton
+          href="/Profile"
+          selected={selectedIndex === 1}
+          onClick={() => setSelectedIndex(1)}
+        >
+          <ListItemIcon>
+            <PersonRounded />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
+        </ListItemButton>
+      </List>
+      <Divider />
+      <List component="nav" aria-label="secondary mailbox folder">
+        <ListItemButton
+          href="/Settings"
+          selected={selectedIndex === 2}
+          onClick={() => setSelectedIndex(2)}
+        >
+          <ListItemIcon>
+            <SettingsRounded />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItemButton>
+      </List>
     </Box>
   );
-};
+}

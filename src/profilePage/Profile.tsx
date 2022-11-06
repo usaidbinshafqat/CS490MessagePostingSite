@@ -1,24 +1,47 @@
-import { Container } from "@mui/system";
-import * as React from "react";
-import { TopAppBar } from "../homePage/TopAppBar";
+import { Grid } from "@mui/material";
+import LeftTabs from "../homePage/LeftTabs";
+import { Trends } from "../trends/Trends";
 import { ProfileCards } from "./ProfileCards";
 import { Header } from "./ProfileHeader";
 
 export const ProfilePage = () => {
   return (
-    <React.Fragment>
-      <TopAppBar />
-      <Container maxWidth="sm">
-        <Header />
-        <div>
+    <div
+      style={{
+        alignContent: "center",
+        marginLeft: "100px",
+        marginRight: "auto",
+      }}
+    >
+      <Grid
+        container
+        sx={{
+          "--Grid-borderWidth": "1px",
+          borderLeft: "var(--Grid-borderWidth) solid",
+          borderColor: "divider",
+          "& > div": {
+            borderRight: "var(--Grid-borderWidth) solid",
+            borderBottom: "var(--Grid-borderWidth) solid",
+            borderColor: "divider",
+          },
+        }}
+      >
+        <Grid xs={2}>
+          <LeftTabs />
+        </Grid>
+        <Grid xs={6}>
+          <Header />
           <ProfileCards />
           <ProfileCards />
           <ProfileCards />
           <ProfileCards />
           <ProfileCards />
           <ProfileCards />
-        </div>
-      </Container>
-    </React.Fragment>
+        </Grid>
+        <Grid xs>
+          <Trends />
+        </Grid>
+      </Grid>
+    </div>
   );
 };
