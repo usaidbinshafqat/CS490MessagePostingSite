@@ -5,12 +5,16 @@ import Logo from "./logo_transparent.png";
 import { useState } from "react";
 import { default as Axios } from "axios";
 import { CustomTextField } from "../signupPage/CustomTextField";
+import { useNavigate } from "react-router-dom";
+
 
 export const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
+  const navigate = useNavigate();
+
+  const [loginStatus, setLoginStatus] = useState(0);
 
   const login = () => {
     Axios.post("http://localhost:3000/api/login", {
@@ -19,8 +23,12 @@ export const LoginPage = () => {
     }).then((response) => {
       if (response.data.message) {
         setLoginStatus(response.data.message);
+        // navigate("/Login")
+        setLoginStatus(0)
       } else {
-        setLoginStatus(response.data[0].Username);
+        // setLoginStatus(response.data[0].Username);
+        // navigate("/Home")
+        setLoginStatus(1)
       }
     });
   };

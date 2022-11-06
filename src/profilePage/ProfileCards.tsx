@@ -1,17 +1,16 @@
 import {
+  IconButton,
+  CardHeader,
+  Avatar,
+  CardContent,
+  Typography,
+  CardActions,
   Box,
   Card,
-  IconButton,
-  CardContent,
-  CardActions,
-  CardHeader,
-  Typography,
-  Avatar,
 } from "@mui/material";
-import * as React from "react";
+import React from "react";
+import { HashtagButton } from "../cards/Hashtags";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { HashtagButton } from "./Hashtags";
-import { FollowButton } from "./FollowButton";
 
 class LikeButton extends React.Component<{}, { liked: boolean }> {
   constructor(props: any) {
@@ -32,7 +31,6 @@ class LikeButton extends React.Component<{}, { liked: boolean }> {
     );
   }
 }
-
 const card = (
   <React.Fragment>
     <CardHeader
@@ -45,7 +43,6 @@ const card = (
       title="User"
       subheaderTypographyProps={{ align: "left" as const }}
       subheader="Time/Date Posted"
-      action={<FollowButton></FollowButton>}
     />
     <CardContent>
       <Typography>CS Final Project</Typography>
@@ -62,7 +59,7 @@ const card = (
   </React.Fragment>
 );
 
-export const CardUI = () => {
+export const ProfileCards = () => {
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
       <Card variant="outlined">{card}</Card>

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Typography } from "@mui/material";
-import CloudIcon from "@mui/icons-material/Cloud";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
+import { NightlightRound } from "@mui/icons-material";
+import AirIcon from "@mui/icons-material/Air";
 
 interface data {
   currently: any;
@@ -44,10 +45,29 @@ export const Weather = () => {
       console.error(error);
     });
 
+  const getIcon = () => {
+    if (data?.currently.icon === "clear-day") {
+      return <WbSunnyIcon />;
+    } else if (data?.currently.icon === "clear-night") {
+      return <NightlightRound />;
+    } else if (data?.currently.icon === "rain") {
+      return <ThunderstormIcon />;
+    } else if (data?.currently.icon === "snow") {
+      return <AcUnitIcon />;
+    } else if (data?.currently.icon === "wind") {
+      return <AirIcon />;
+    } else {
+      return <DeviceThermostatIcon />;
+    }
+  };
+
   return (
     <>
-      <DeviceThermostatIcon></DeviceThermostatIcon>
-      <Typography>{data?.currently?.apparentTemperature}</Typography>
+      {getIcon()}
+      <Typography>&nbsp;</Typography>
+      <Typography>
+        {Math.round(data?.currently?.apparentTemperature)}°F
+      </Typography>
     </>
   );
 };

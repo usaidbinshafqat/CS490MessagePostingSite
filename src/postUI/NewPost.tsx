@@ -11,12 +11,13 @@ import {
   CardHeader,
   Card,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 import { InputTextField } from "./TextField";
 import { Close } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions";
+import { default as Axios } from "axios";
 
 export const NewPost = () => {
   const open = useAppSelector((state) => state.reducers.modalOpen);
@@ -45,7 +46,7 @@ export const NewPost = () => {
       <CardContent>
         <InputTextField />
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button
           size="small"
           variant="contained"
@@ -54,7 +55,7 @@ export const NewPost = () => {
         >
           Post
         </Button>
-      </CardActions>
+      </CardActions> */}
     </React.Fragment>
   );
 
