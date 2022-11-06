@@ -1,6 +1,6 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../loginPage/logo_transparent.png";
 import { CustomTextField } from "./CustomTextField";
 
@@ -19,6 +19,7 @@ export const SignUp = () => {
     `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
 
+  // Axios.defaults.withCredentials = true;
   const register = () => {
     Axios.post("http://localhost:3000/api/register", {
       firstName: firstName,

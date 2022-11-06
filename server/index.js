@@ -5,6 +5,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const mysql = require('mysql2');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -13,9 +15,25 @@ const db = mysql.createPool({
     password: 'WebCS490MP',
 });
 
-app.use(cors());
 app.use(express.json());
+app.use(
+    cors({
+    origin: ["http://localhost:3001"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    key: "userId",
+    secret: "register",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60*60*24,
+    }
+}))
 
 // app.get('/api/get', (req, res) => {
 //     const sqlSelect =
@@ -48,6 +66,14 @@ app.post('/api/register', (req, res) => {
     })
 });
 
+app.get('/api/login', (req, res) => {
+    if (req.session.user) {
+        res.send({loggedIn: true, user: req.session.user})
+    } else {
+        res.send({loggedIn: false});
+    }
+})
+
 app.post('/api/login', (req, res) => {
     // const firstName = req.body.firstName;
     // const lastName = req.body.lastName;
@@ -60,17 +86,21 @@ app.post('/api/login', (req, res) => {
     // const dateOfReg = req.body.dateOfReg;
 
     const sqlSelect = "SELECT * FROM User WHERE userName = ?"
-    db.query(sqlSelect, [userName], (err, result) => {
+    db.query(sqlSelect, userName, (err, result) => {
         if (err) {
             res.send({ err: err })
         }
 
         if (result.length > 0) {
-            bcrypt.compare(password, result[0].password, (error, response) => {
+            bcrypt.compare(password, result[0].Password, (error, response) => {
                 if (response) {
+                    req.session.user = result;
+                    console.log(req.session.user);
                     res.send(result)
+
                 } else {
                     res.send({ message: "Wrong username/password!" });
+                    console.log({message: "Wrong username/password!"})
                 }
             })
         } else {
