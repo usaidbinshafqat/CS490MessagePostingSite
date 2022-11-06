@@ -1,7 +1,9 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { convertCompilerOptionsFromJson } from "typescript";
 import Logo from "../loginPage/logo_transparent.png";
+import { CountryList } from "./CountryList";
 import { CustomTextField } from "./CustomTextField";
 
 export const SignUp = () => {
@@ -12,12 +14,33 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const [formValid, setFormValid] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [picturePath, setPicturePath] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
   );
   const [dateOfReg, setDateOfReg] = useState(
     `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
+
+  useEffect(() => {
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      userName == "" ||
+      email == "" ||
+      password == "" ||
+      city == "" ||
+      country == "" ||
+      !email.includes("@")
+    ) {
+      setFormValid(true);
+      // console.log("invalid!");
+    } else {
+      setFormValid(false);
+      // console.log("valid!");
+    }
+  }, [firstName, lastName, userName, email, password, city, country]);
 
   const register = () => {
     Axios.post("http://localhost:3000/api/register", {
@@ -101,16 +124,12 @@ export const SignUp = () => {
                 setCity(e.target.value);
               }}
             />
-            <CustomTextField
-              label="Country"
-              required
-              name="countryName"
+
+            <CountryList
               id="countryName"
-              fullWidth
-              style={{ marginTop: 5, marginBottom: 5 }}
-              variant={"filled"}
-              onChange={(e) => {
-                setCountry(e.target.value);
+              onInputChange={(e: any, value: string) => {
+                console.log(value);
+                setCountry(value);
               }}
             />
           </Stack>
@@ -150,7 +169,9 @@ export const SignUp = () => {
               setPassword(e.target.value);
             }}
           />
+
           <Button
+            disabled={formValid}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
             href="/Home"
