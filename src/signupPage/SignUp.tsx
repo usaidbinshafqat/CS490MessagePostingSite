@@ -14,8 +14,9 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const [formValid, setFormValid] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [picturePath, setPicturePath] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
   );
@@ -31,13 +32,20 @@ export const SignUp = () => {
       email == "" ||
       password == "" ||
       city == "" ||
-      country == "" ||
-      !email.includes("@")
+      country == ""
     ) {
-      setFormValid(true);
+      setDisable(true);
+      setDisplayError(true);
+      setErrorMsg("All fields must be filled in!");
+      // console.log("invalid!");
+    } else if (!email.includes("@")) {
+      setDisable(true);
+      setDisplayError(true);
+      setErrorMsg("Must enter a valid email address!");
       // console.log("invalid!");
     } else {
-      setFormValid(false);
+      setDisable(false);
+      setDisplayError(false);
       // console.log("valid!");
     }
   }, [firstName, lastName, userName, email, password, city, country]);
@@ -78,6 +86,7 @@ export const SignUp = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Sign Up</Typography>
+          <>{displayError ? <Typography> {errorMsg} </Typography> : <></>}</>
           <Stack
             direction="row"
             spacing={1}
@@ -171,7 +180,7 @@ export const SignUp = () => {
           />
 
           <Button
-            disabled={formValid}
+            disabled={disable}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
             href="/Home"
