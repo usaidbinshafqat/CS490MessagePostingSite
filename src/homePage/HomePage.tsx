@@ -5,7 +5,7 @@ import "./index.css";
 import { default as Axios } from "axios";
 import { RightDrawer } from "./RightDrawer";
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
-import { useEffect, useState } from "react";
+import { Weather } from "../weather/weather";
 
 export const HomePage = () => {
 
