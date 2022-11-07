@@ -8,9 +8,9 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 import { actions } from "../store/slice";
-import { Link } from "react-router-dom";
 
 export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);

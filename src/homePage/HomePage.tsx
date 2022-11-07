@@ -4,8 +4,8 @@ import { NewPostFab } from "./NewPostFab";
 import "./index.css";
 import { default as Axios } from "axios";
 import { RightDrawer } from "./RightDrawer";
+
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
-import { Weather } from "../weather/weather";
 
 export const HomePage = () => {
 
@@ -39,9 +39,13 @@ export const HomePage = () => {
         <CardUI />
         <CardUI />
       </div>
-      <div className="fab">
-        <NewPostFab />
-      </div>
+      {window.screen.width > 600 ? (
+        <></>
+      ) : (
+        <div className="fab">
+          <NewPostFab />
+        </div>
+      )}
     </React.Fragment>
   );
 };
