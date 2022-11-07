@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
+import { TopAppBar } from "../homePage/TopAppBar";
 import { Trends } from "../trends/Trends";
 import { ProfileCards } from "./ProfileCards";
 import { Header } from "./ProfileHeader";
@@ -13,6 +14,9 @@ export const ProfilePage = () => {
         marginRight: "auto",
       }}
     >
+      <div style={{ marginBottom: "70px" }}>
+        <TopAppBar />
+      </div>
       <Grid
         container
         sx={{
