@@ -4,14 +4,16 @@ import Stack from "@mui/material/Stack";
 import Logo from "./logo_transparent.png";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import { CustomTextField } from "../signupPage/CustomTextField";
 import { useNavigate } from "react-router-dom";
-
 
 export const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,6 +21,17 @@ export const LoginPage = () => {
   const [successful, setSuccessful] = useState(true);
 
   Axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    if (userName == "" || password == "") {
+      setErrorMsg("All fields must be filled in!");
+      setDisplayError(true);
+      setDisable(true);
+    } else {
+      setDisplayError(false);
+      setDisable(false);
+    }
+  }, [userName, password]);
 
   const login = () => {
     Axios.post("http://localhost:3000/api/login", {
@@ -32,7 +45,7 @@ export const LoginPage = () => {
       } else {
         setLoginStatus(response.data[0].Username);
         setSuccessful(true);
-        navigate("/Home")
+        navigate("/Home");
       }
     });
   };
@@ -52,6 +65,13 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
+          <>
+            {displayError ? (
+              <Alert severity="warning">{errorMsg}</Alert>
+            ) : (
+              <></>
+            )}
+          </>
           {!successful && <Alert severity="info">{loginStatus}</Alert>}
           <CustomTextField
             label="Username"
@@ -70,6 +90,7 @@ export const LoginPage = () => {
             }}
           />
           <Button
+            disabled={disable}
             onClick={login}
             variant="outlined"
             style={{ borderRadius: 20 }}
