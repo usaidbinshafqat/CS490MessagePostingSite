@@ -1,14 +1,32 @@
-import React from "react";
-import { LeftTabs } from "../homePage/LeftTabs";
-import { TopAppBar } from "../homePage/TopAppBar";
+import { Grid } from "@mui/material";
+import { HomePage } from "../homePage/HomePage";
+import LeftTabs from "../homePage/LeftTabs";
+import { Trends } from "../trends/Trends";
 
 export const DeskopAppView = () => {
   return (
-    <>
-      <React.Fragment>
-        <TopAppBar />
+    <Grid
+      container
+      sx={{
+        "--Grid-borderWidth": "1px",
+        borderLeft: "var(--Grid-borderWidth) solid",
+        borderColor: "divider",
+        "& > div": {
+          borderRight: "var(--Grid-borderWidth) solid",
+          borderBottom: "var(--Grid-borderWidth) solid",
+          borderColor: "divider",
+        },
+      }}
+    >
+      <Grid xs={2}>
         <LeftTabs />
-      </React.Fragment>
-    </>
+      </Grid>
+      <Grid xs={6}>
+        <HomePage />
+      </Grid>
+      <Grid xs>
+        <Trends />
+      </Grid>
+    </Grid>
   );
 };

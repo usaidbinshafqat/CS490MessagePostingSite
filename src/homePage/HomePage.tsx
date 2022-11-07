@@ -2,11 +2,21 @@ import * as React from "react";
 import { CardUI } from "../cards/CardUI";
 import { NewPostFab } from "./NewPostFab";
 import "./index.css";
-import { RightDrawer } from "./RightDrawer";
+import { default as Axios } from "axios";
+
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
-import { Weather } from "../weather/weather";
 
 export const HomePage = () => {
+  // const [loginStatus, setLoginStatus] = useState("");
+
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
+  //     if (response.data.loggedIn === true) {
+  //     setLoginStatus(response.data.user[0].UID)
+  //     }
+  //   })
+  // }, [])
+
   return (
     <React.Fragment>
       <div>
@@ -27,9 +37,13 @@ export const HomePage = () => {
         <CardUI />
         <CardUI />
       </div>
-      <div className="fab">
-        <NewPostFab />
-      </div>
+      {window.screen.width > 600 ? (
+        <></>
+      ) : (
+        <div className="fab">
+          <NewPostFab />
+        </div>
+      )}
     </React.Fragment>
   );
 };

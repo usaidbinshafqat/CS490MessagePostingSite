@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { LandingPage } from "./landingPage/LandingPage";
 import { LoginPage } from "./loginPage/LoginPage";
-import Profile from "./profilePage/Profile";
 import { SignUp } from "./signupPage/SignUp";
+import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
             <Route path="/Home" element={<AppView />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/Profile" element={<Profile />} />
+            <Route path="/Profile" element={<ProfilePage />} />
           </Routes>
         </BrowserRouter>
       </div>

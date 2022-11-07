@@ -25,7 +25,7 @@ const card = (
     <CardContent>
       <InputTextField />
     </CardContent>
-    <CardActions>
+    {/* <CardActions>
       <Button
         size="small"
         variant="contained"
@@ -34,8 +34,7 @@ const card = (
       >
         Post
       </Button>
-      <CardToggleButton />
-    </CardActions>
+    </CardActions> */}
   </React.Fragment>
 );
 

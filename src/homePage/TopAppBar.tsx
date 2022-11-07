@@ -13,10 +13,8 @@ import { actions } from "../store/slice";
 import "./index.css";
 import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { isNullishCoalesce } from "typescript";
 import { SearchBarU } from "../users/SearchBarU";
 import { UsersList } from "../users/UsersList";
-import { Container } from "@mui/system";
 import { useState } from "react";
 import { Weather } from "../weather/weather";
 
@@ -106,7 +104,6 @@ export const TopAppBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="sticky"
         color="primary"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + zIndexBasedOnScreenSize(),
@@ -131,16 +128,11 @@ export const TopAppBar = () => {
             >
               msg.pstr
             </Typography>
+            <Weather />
 
             {window.screen.width < 600
               ? SearchPopover()
               : SearchPopoverDesktop()}
-
-            {/* <Button color="inherit" href="/">
-              Login
-            </Button> */}
-
-            {window.screen.width < 600 ? <> </> : <Weather></Weather>}
 
             {window.screen.width > 600 ? (
               <></>

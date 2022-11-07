@@ -1,13 +1,5 @@
 /* eslint-disable no-lone-blocks */
-import { VaccinesRounded, VapeFree } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  ButtonBase,
-  Link,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { ButtonBase } from "@mui/material";
 import "./index.css";
 
 export function HashtagButton(props: any) {

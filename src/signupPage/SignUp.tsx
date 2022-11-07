@@ -1,7 +1,9 @@
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Alert, Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { convertCompilerOptionsFromJson } from "typescript";
 import Logo from "../loginPage/logo_transparent.png";
+import { CountryList } from "./CountryList";
 import { CustomTextField } from "./CustomTextField";
 
 export const SignUp = () => {
@@ -12,6 +14,9 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [picturePath, setPicturePath] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
   );
@@ -19,6 +24,33 @@ export const SignUp = () => {
     `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
 
+  useEffect(() => {
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      userName == "" ||
+      email == "" ||
+      password == "" ||
+      city == "" ||
+      country == ""
+    ) {
+      setDisable(true);
+      setDisplayError(true);
+      setErrorMsg("All fields must be filled in!");
+      // console.log("invalid!");
+    } else if (!email.includes("@")) {
+      setDisable(true);
+      setDisplayError(true);
+      setErrorMsg("Must enter a valid email address!");
+      // console.log("invalid!");
+    } else {
+      setDisable(false);
+      setDisplayError(false);
+      // console.log("valid!");
+    }
+  }, [firstName, lastName, userName, email, password, city, country]);
+
+  // Axios.defaults.withCredentials = true;
   const register = () => {
     Axios.post("http://localhost:3000/api/register", {
       firstName: firstName,
@@ -55,6 +87,13 @@ export const SignUp = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Sign Up</Typography>
+          <>
+            {displayError ? (
+              <Alert severity="warning"> {errorMsg} </Alert>
+            ) : (
+              <></>
+            )}
+          </>
           <Stack
             direction="row"
             spacing={1}
@@ -101,16 +140,12 @@ export const SignUp = () => {
                 setCity(e.target.value);
               }}
             />
-            <CustomTextField
-              label="Country"
-              required
-              name="countryName"
+
+            <CountryList
               id="countryName"
-              fullWidth
-              style={{ marginTop: 5, marginBottom: 5 }}
-              variant={"filled"}
-              onChange={(e) => {
-                setCountry(e.target.value);
+              onInputChange={(e: any, value: string) => {
+                console.log(value);
+                setCountry(value);
               }}
             />
           </Stack>
@@ -150,7 +185,9 @@ export const SignUp = () => {
               setPassword(e.target.value);
             }}
           />
+
           <Button
+            disabled={disable}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
             href="/Home"
