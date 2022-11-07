@@ -2,7 +2,6 @@ import { Paper } from "@mui/material";
 import React from "react";
 import { BottomBar } from "../homePage/BottomBar";
 import { HomePage } from "../homePage/HomePage";
-import { TopAppBar } from "../homePage/TopAppBar";
 import { NewPost } from "../postUI/NewPost";
 import { useAppSelector } from "../store/hooks";
 import { Trends } from "../trends/Trends";
@@ -16,7 +15,6 @@ export const MobileAppView = () => {
   return (
     <>
       <React.Fragment>
-        <TopAppBar />
         {homePageState === 0 ? <HomePage /> : <Trends />}
         {dialogState === true ? <NewPost /> : <></>}
 
