@@ -2,8 +2,9 @@ import * as React from "react";
 import { Button, Container, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Logo from "./logo_transparent.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
+import Alert from '@mui/material/Alert';
 import { CustomTextField } from "../signupPage/CustomTextField";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,10 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const [loginStatus, setLoginStatus] = useState(0);
+  const [loginStatus, setLoginStatus] = useState("");
+  const [successful, setSuccessful] = useState(true);
+
+  Axios.defaults.withCredentials = true;
 
   const login = () => {
     Axios.post("http://localhost:3000/api/login", {
@@ -23,15 +27,24 @@ export const LoginPage = () => {
     }).then((response) => {
       if (response.data.message) {
         setLoginStatus(response.data.message);
-        // navigate("/Login")
-        setLoginStatus(0)
+        setSuccessful(false);
+        navigate("/Login");
       } else {
-        // setLoginStatus(response.data[0].Username);
-        // navigate("/Home")
-        setLoginStatus(1)
+        setLoginStatus(response.data[0].Username);
+        setSuccessful(true);
+        navigate("/Home")
       }
     });
   };
+
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
+  //     if (response.data.loggedIn === true) {
+  //     setLoginStatus(response.data.user[0].UID)
+  //     }
+  //     console.log(response);
+  //   })
+  // }, [])
 
   return (
     <div>
@@ -39,7 +52,7 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
-
+          {!successful && <Alert severity="info">{loginStatus}</Alert>}
           <CustomTextField
             label="Username"
             variant={"filled"}
@@ -60,7 +73,6 @@ export const LoginPage = () => {
             onClick={login}
             variant="outlined"
             style={{ borderRadius: 20 }}
-            href="/Home"
           >
             Login
           </Button>
