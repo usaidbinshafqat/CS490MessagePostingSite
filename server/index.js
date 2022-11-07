@@ -8,6 +8,11 @@ const mysql = require('mysql2');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+// so that we can create a different token that is related to the user id
+// whenever a user logs in.
+// we will use this token to make api requests
+const jwt = require('jsonwebtoken')
+
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -66,6 +71,27 @@ app.post('/api/register', (req, res) => {
     })
 });
 
+const verifyJWT = (req, res, next) => {
+    const token = req.headers["x-access-token"]
+
+    if (!token) {
+        res.send('No token found')
+    } else {
+        jwt.verify(token, "jwtSecret", (err, decoded) => {
+            if (err) {
+                res.json({auth: false, message: "Authentication failed"})
+            } else {
+                req.userId = decoded.id;
+                next();
+            }
+        })
+    }
+}
+
+app.use('/isUserAuth',verifyJWT, (req, res) => {
+    res.send('Authentication successful!')
+})
+
 app.get('/api/login', (req, res) => {
     if (req.session.user) {
         res.send({loggedIn: true, user: req.session.user})
@@ -94,17 +120,24 @@ app.post('/api/login', (req, res) => {
         if (result.length > 0) {
             bcrypt.compare(password, result[0].Password, (error, response) => {
                 if (response) {
+                    // console.log(req.session.user);
+                    const id = result[0].UID
+                    // create a .env file to store this secret
+                    const token = jwt.sign({id}, "jwtSecret", {
+                        expiresIn: 300,
+                    })
                     req.session.user = result;
-                    console.log(req.session.user);
-                    res.send(result)
+
+                    //find a way to block passing of password to the frontend
+                    res.json({auth: true, token: token, result: result})
 
                 } else {
-                    res.send({ message: "Wrong username/password!" });
-                    console.log({message: "Wrong username/password!"})
+                    res.json({auth: false, message: "Wrong username/password!"})
+                    // console.log({message: "Wrong username/password!"})
                 }
             })
         } else {
-            res.send({ message: "User doesn't exist" });
+                    res.json({auth: false, message: "User doesn't exist"})
         }
     });
 })

@@ -15,8 +15,8 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const [loginStatus, setLoginStatus] = useState("");
-  const [successful, setSuccessful] = useState(true);
+  const [loginStatus, setLoginStatus] = useState(false); //initialize to true or false?
+  const [responseMessage, setResponseMessage] = useState("");
 
   Axios.defaults.withCredentials = true;
 
@@ -25,17 +25,28 @@ export const LoginPage = () => {
       userName: userName,
       password: password,
     }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-        setSuccessful(false);
+      if (!response.data.auth) {
+        setLoginStatus(false);
+        setResponseMessage(response.data.message);
         navigate("/Login");
       } else {
-        setLoginStatus(response.data[0].Username);
-        setSuccessful(true);
+        console.log(response.data)
+        localStorage.setItem("token", response.data.token);
+        setLoginStatus(true);
         navigate("/Home")
       }
     });
   };
+
+  const userAuthentication = () => {
+    Axios.get("http://localhost:3000/api/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      }
+    }).then((response) => {
+      console.log(response)
+    })
+  }
 
   // useEffect(() => {
   //   Axios.get("http://localhost:3000/api/login").then((response) =>{
@@ -52,7 +63,7 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
-          {!successful && <Alert severity="info">{loginStatus}</Alert>}
+          {!loginStatus && <Alert severity="info">{responseMessage}</Alert>}
           <CustomTextField
             label="Username"
             variant={"filled"}
