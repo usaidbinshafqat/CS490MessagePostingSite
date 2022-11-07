@@ -1,4 +1,4 @@
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Alert, Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
 import React, { useEffect, useState } from "react";
 import { convertCompilerOptionsFromJson } from "typescript";
@@ -86,7 +86,13 @@ export const SignUp = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Sign Up</Typography>
-          <>{displayError ? <Typography> {errorMsg} </Typography> : <></>}</>
+          <>
+            {displayError ? (
+              <Alert severity="warning"> {errorMsg} </Alert>
+            ) : (
+              <></>
+            )}
+          </>
           <Stack
             direction="row"
             spacing={1}
