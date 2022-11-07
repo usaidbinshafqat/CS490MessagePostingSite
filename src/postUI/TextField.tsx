@@ -5,6 +5,10 @@ import mentionsInputStyles from "./mentionsInputStyles";
 import merge from "lodash/merge";
 import { default as Axios } from "axios";
 import { Button, CardActions } from "@mui/material";
+import * as React from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
@@ -16,7 +20,7 @@ export const InputTextField = () => {
     `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
   const [likes, setLikes] = useState(0);
-  const [privacy, setPrivacy] = useState(0);
+  const [privacy, setPrivacy] = useState(false);
 
   const createPost = () => {
     Axios.post("http://localhost:3000/api/post", {
@@ -32,6 +36,33 @@ export const InputTextField = () => {
     });
   };
 
+  function CardToggleButton() {
+    const handleTooltipTitle = () => {
+      if (privacy) {
+        return "Make post private";
+      } else {
+        return "Make post public";
+      }
+    };
+
+    return (
+      <Tooltip title={handleTooltipTitle()} arrow>
+        <ToggleButton
+          value="check"
+          selected={privacy}
+          onChange={() => {
+            setPrivacy(!privacy);
+            console.log(privacy);
+          }}
+          color="primary"
+          size="small"
+          style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
+        >
+          {privacy ? <LockOpenRounded /> : <LockPersonRounded />}
+        </ToggleButton>
+      </Tooltip>
+    );
+  }
 
   function randomPlaceholderGenerator() {
     const placeholders = [
@@ -93,16 +124,16 @@ export const InputTextField = () => {
 
   return (
     <>
-    <div className="App">
-      <MentionsInput
-        style={customStyle}
-        value={newPost}
-        placeholder={randomPlaceholderGenerator()}
-        a11ySuggestionsListLabel={"Suggested mentions"}
-        onChange={(e) => setNewPost(e.target.value)}
-      >
-        <Mention style={mentionsStyles} data={users} trigger={"@"} />
-      </MentionsInput>
+      <div className="App">
+        <MentionsInput
+          style={customStyle}
+          value={newPost}
+          placeholder={randomPlaceholderGenerator()}
+          a11ySuggestionsListLabel={"Suggested mentions"}
+          onChange={(e) => setNewPost(e.target.value)}
+        >
+          <Mention style={mentionsStyles} data={users} trigger={"@"} />
+        </MentionsInput>
       </div>
       <CardActions>
         <Button
@@ -114,9 +145,8 @@ export const InputTextField = () => {
         >
           Post
         </Button>
+        <CardToggleButton />
       </CardActions>
-      </>
+    </>
   );
 };
-
-//how to get data out of this: https://stackblitz.com/edit/react-mentions?file=index.js
