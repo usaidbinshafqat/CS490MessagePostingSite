@@ -50,6 +50,7 @@ export const SignUp = () => {
     }
   }, [firstName, lastName, userName, email, password, city, country]);
 
+  // Axios.defaults.withCredentials = true;
   const register = () => {
     Axios.post("http://localhost:3000/api/register", {
       firstName: firstName,
