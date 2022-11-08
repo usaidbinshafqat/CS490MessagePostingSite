@@ -17,6 +17,7 @@ import { SearchBarU } from "../users/SearchBarU";
 import { UsersList } from "../users/UsersList";
 import { useState } from "react";
 import { Weather } from "../weather/weather";
+import { userDetails } from "../users/userData";
 
 export const TopAppBar = () => {
   const SearchPopoverDesktop = () => {
@@ -130,9 +131,11 @@ export const TopAppBar = () => {
             </Typography>
             <Weather />
 
-            {window.screen.width < 600
-              ? SearchPopover()
-              : SearchPopoverDesktop()}
+            {window.screen.width < 600 ? (
+              SearchPopover()
+            ) : (
+              <SearchBarU data={userDetails} />
+            )}
 
             {window.screen.width > 600 ? (
               <></>

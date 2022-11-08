@@ -144,7 +144,6 @@ export const SignUp = () => {
             <CountryList
               id="countryName"
               onInputChange={(e: any, value: string) => {
-                console.log(value);
                 setCountry(value);
               }}
             />
