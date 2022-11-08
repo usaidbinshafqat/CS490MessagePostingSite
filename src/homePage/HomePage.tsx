@@ -17,25 +17,34 @@ export const HomePage = () => {
   //   })
   // }, [])
 
+  const [messageData, setMessageData] = React.useState([]);
+
+  const getMessageData = () => {
+    Axios.get("http://localhost:3000/message").then((response: any) => {
+      setMessageData(response.data);
+    });
+  };
+
+  React.useEffect(() => {
+    getMessageData();
+  });
+
   return (
     <React.Fragment>
       <div>
         {window.screen.width < 600 ? <></> : <DesktopPostCard />}
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
-        <CardUI />
+        {Object.values(messageData).map((event: any) => (
+          <CardUI
+            MessageID={event.MessageID}
+            UID={event.UID}
+            TypeOfMessage={event.TypeOfMessage}
+            Message={event.Message}
+            Path={event.Path}
+            Date={event.Date}
+            Likes={event.Likes}
+            Privacy={event.Privacy}
+          />
+        ))}
       </div>
       {window.screen.width > 600 ? (
         <></>
