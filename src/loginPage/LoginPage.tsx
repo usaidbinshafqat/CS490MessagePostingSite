@@ -63,7 +63,7 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
-          {!loginStatus && <Alert severity="info">{responseMessage}</Alert>}
+          {!loginStatus && responseMessage.length > 0 && <Alert severity="warning">{responseMessage}</Alert>}
           <CustomTextField
             label="Username"
             variant={"filled"}

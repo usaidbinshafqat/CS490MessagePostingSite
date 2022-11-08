@@ -93,16 +93,16 @@ export const InputTextField = () => {
 
   return (
     <>
-    <div className="App">
-      <MentionsInput
-        style={customStyle}
-        value={newPost}
-        placeholder={randomPlaceholderGenerator()}
-        a11ySuggestionsListLabel={"Suggested mentions"}
-        onChange={(e) => setNewPost(e.target.value)}
-      >
-        <Mention style={mentionsStyles} data={users} trigger={"@"} />
-      </MentionsInput>
+      <div className="App">
+        <MentionsInput
+          style={customStyle}
+          value={newPost}
+          placeholder={randomPlaceholderGenerator()}
+          a11ySuggestionsListLabel={"Suggested mentions"}
+          onChange={(e) => setNewPost(e.target.value)}
+        >
+          <Mention style={mentionsStyles} data={users} trigger={"@"} />
+        </MentionsInput>
       </div>
       <CardActions>
         <Button
@@ -115,7 +115,7 @@ export const InputTextField = () => {
           Post
         </Button>
       </CardActions>
-      </>
+    </>
   );
 };
 
