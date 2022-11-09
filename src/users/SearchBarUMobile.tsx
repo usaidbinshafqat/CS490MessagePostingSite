@@ -2,7 +2,6 @@ import {
   Paper,
   IconButton,
   InputBase,
-  Button,
   Popover,
   Avatar,
   Divider,
@@ -15,7 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const SearchBarU = (props: any) => {
+export const SearchBarUMobile = (props: any) => {
   const data = props.data;
   const [anchor, setAnchor] = useState(null);
   const [open, setOpen] = useState(false);
@@ -58,13 +57,9 @@ export const SearchBarU = (props: any) => {
 
   return (
     <React.Fragment>
-      <Button
-        color="inherit"
-        onClick={handleClick}
-        endIcon={<SearchIcon> </SearchIcon>}
-      >
-        Search users
-      </Button>
+      <IconButton color="inherit" onClick={handleClick}>
+        <SearchIcon />
+      </IconButton>
       <Popover open={open} anchorEl={anchor} onClose={handleClose}>
         <div>
           <div>
@@ -107,9 +102,8 @@ export const SearchBarU = (props: any) => {
                 alignItems: "center",
               }}
             >
-              {filteredData
-                .slice(0, 4)
-                .map((user: { FirstName: string; LastName: string }) => {
+              {filteredData.map(
+                (user: { FirstName: string; LastName: string }) => {
                   return (
                     <>
                       <ListItem alignItems="flex-start">
@@ -122,13 +116,14 @@ export const SearchBarU = (props: any) => {
                           </Avatar>
                         </ListItemAvatar>
                         <ListItemText
-                          primary={`${user.FirstName} ${user.LastName}`}
+                          primary={`${user.FirstName} ${user.LastName} `}
                         />
                       </ListItem>
                       <Divider variant="inset" component="li" />
                     </>
                   );
-                })}
+                }
+              )}
             </List>
           </div>
         </div>

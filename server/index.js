@@ -176,3 +176,14 @@ app.get('/message', (req, res) => {
     }
   })
 })
+
+app.get('/register', (req, res) => {
+  const sqlSelect = 'SELECT FirstName, LastName, Username FROM User'
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})

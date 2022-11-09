@@ -14,84 +14,28 @@ import "./index.css";
 import * as React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { SearchBarU } from "../users/SearchBarU";
-import { UsersList } from "../users/UsersList";
-import { useState } from "react";
+import { SearchBarUMobile } from "../users/SearchBarUMobile";
+import { useState, useEffect } from "react";
 import { Weather } from "../weather/weather";
+import { default as Axios } from "axios";
 
 export const TopAppBar = () => {
-  const SearchPopoverDesktop = () => {
-    const [anchor, setAnchor] = useState(null);
-    const [open, setOpen] = useState(false);
-
-    const handleClick = (onClick: any) => {
-      setAnchor(onClick.currentTarget);
-      setOpen(true);
-    };
-
-    const handleClose = (onClick: any) => {
-      setAnchor(null);
-      setOpen(false);
-    };
-
-    return (
-      <React.Fragment>
-        <Button
-          color="inherit"
-          onClick={handleClick}
-          endIcon={<SearchIcon> </SearchIcon>}
-        >
-          Search users
-        </Button>
-        <Popover open={open} anchorEl={anchor} onClose={handleClose}>
-          <div>
-            <div>
-              <SearchBarU />
-            </div>
-            <div>
-              <UsersList />
-            </div>
-          </div>
-        </Popover>
-      </React.Fragment>
-    );
-  };
-
-  const SearchPopover = () => {
-    const [anchor, setAnchor] = useState(null);
-    const [open, setOpen] = useState(false);
-
-    const handleClick = (onClick: any) => {
-      setAnchor(onClick.currentTarget);
-      setOpen(true);
-    };
-
-    const handleClose = (onClick: any) => {
-      setAnchor(null);
-      setOpen(false);
-    };
-
-    return (
-      <React.Fragment>
-        <IconButton color="inherit" onClick={handleClick}>
-          <SearchIcon />
-        </IconButton>
-        <Popover open={open} anchorEl={anchor} onClose={handleClose}>
-          <div>
-            <div>
-              <SearchBarU />
-            </div>
-            <div>
-              <UsersList />
-            </div>
-          </div>
-        </Popover>
-      </React.Fragment>
-    );
-  };
-
   const dispatch = useAppDispatch();
 
   const windowSize = window.screen.width;
+
+  const [userData, setUserData] = React.useState([]);
+
+  const getUserData = () => {
+    Axios.get("http://localhost:3000/register").then((response: any) => {
+      setUserData(response.data);
+      console.log(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getUserData();
+  });
 
   function zIndexBasedOnScreenSize() {
     if (windowSize < 600) {
@@ -130,9 +74,11 @@ export const TopAppBar = () => {
             </Typography>
             <Weather />
 
-            {window.screen.width < 600
-              ? SearchPopover()
-              : SearchPopoverDesktop()}
+            {window.screen.width < 600 ? (
+              <SearchBarUMobile data={userData} />
+            ) : (
+              <SearchBarU data={userData} />
+            )}
 
             {window.screen.width > 600 ? (
               <></>
