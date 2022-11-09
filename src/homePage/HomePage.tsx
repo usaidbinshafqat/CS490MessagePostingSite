@@ -6,18 +6,20 @@ import { default as Axios } from "axios";
 import { RightDrawer } from "./RightDrawer";
 
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
+import { useEffect, useState } from "react";
 
 export const HomePage = () => {
 
-  // const [loginStatus, setLoginStatus] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
 
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
-  //     if (response.data.loggedIn === true) {
-  //     setLoginStatus(response.data.user[0].UID)
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    Axios.get("http://localhost:3000/api/login").then((response) =>{
+      if (response.data.loggedIn === true) {
+      setLoginStatus(response.data.user[0].UID)
+      }
+      console.log(response.data.user)
+    })
+  }, [])
 
   return (
     <React.Fragment>

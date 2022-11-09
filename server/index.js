@@ -7,11 +7,12 @@ const saltRounds = 10;
 const mysql = require('mysql2');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+require("dotenv").config();
 
 // so that we can create a different token that is related to the user id
 // whenever a user logs in.
 // we will use this token to make api requests
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const db = mysql.createPool({
     host: 'localhost',
@@ -77,7 +78,8 @@ const verifyJWT = (req, res, next) => {
     if (!token) {
         res.send('No token found')
     } else {
-        jwt.verify(token, "jwtSecret", (err, decoded) => {
+        // process.env.ACCESS_TOKEN_SECRET
+        jwt.verify(token, `${process.env.ACCESS_TOKEN_SECRET}`, (err, decoded) => {
             if (err) {
                 res.json({auth: false, message: "Authentication failed"})
             } else {
@@ -123,7 +125,8 @@ app.post('/api/login', (req, res) => {
                     // console.log(req.session.user);
                     const id = result[0].UID
                     // create a .env file to store this secret
-                    const token = jwt.sign({id}, "jwtSecret", {
+                    // process.env.ACCESS_TOKEN_SECRET
+                    const token = jwt.sign({id}, `${process.env.ACCESS_TOKEN_SECRET}`, {
                         expiresIn: 300,
                     })
                     req.session.user = result;
