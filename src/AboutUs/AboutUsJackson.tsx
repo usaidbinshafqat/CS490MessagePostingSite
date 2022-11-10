@@ -7,14 +7,24 @@ import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 export default function AboutUsJackson() {
-	return (
-		<Card>
-			<CardActionArea>
-				<CardMedia
-					component="img"
+  return (
+    
+    <Grid>
+      <Card>
+        <CardActionArea>
+          <CardMedia>
+            component="img"
 					height="140"
 					image="/images/jackson.png"
 					alt="jackson"
+          </CardMedia>
+      
+    </Grid>
+
+		{/* <Card>
+			<CardActionArea>
+				<CardMedia
+					
 				/>
 				<CardContent>
 					<Grid
@@ -36,6 +46,6 @@ export default function AboutUsJackson() {
 					</Typography>
 				</CardContent>
 			</CardActionArea>
-		</Card>
+		</Card> */}
 	);
 }
