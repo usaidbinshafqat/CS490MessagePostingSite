@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 // import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CssBaseline from "@mui/material/CssBaseline";
+// import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -13,9 +13,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { TopAppBar } from "../homePage/TopAppBar";
+import AboutUsUsaid from "./AboutUsUsaid";
+import AboutUsJackson from "./AboutUsJackson";
+import AboutUsMallory from "./AboutUsMallory";
+import AboutUsKyle from "./AboutUsKyle";
+import AboutUsPhumz from "./AboutUsPhumz";
+import "./index.css";
 // import { create } from "lodash";
-import { HeaderLogo } from "../homePage/header_logo_svg";
+// import { ReactComponent as HeaderLogo } from "../homePage/header_logo_svg";
 
 function Copyright() {
 	return (
@@ -30,123 +37,53 @@ function Copyright() {
 	);
 }
 
-const cards = [1, 2, 3, 4, 5];
-
-const theme = createTheme({
-	components: {
-		MuiButtonBase: {
-			defaultProps: {
-				disableRipple: true,
-				// text: "#C197D2",
-			},
-		},
-	},
-
-	typography: {
-		button: {
-			textTransform: "none",
-		},
-	},
-	palette: {
-		primary: {
-			main: "#453750",
-		},
-		secondary: {
-			main: "#fcde9c",
-		},
-		warning: {
-			main: "#C197D2",
-		},
-		error: {
-			main: "#D3D3D3",
-		},
-	},
-}); // create a theme, talk to usaid about this
+// const styles = (theme) => ({
+// 	Card: {
+// 		width: 300,
+// 		margin: "auto",
+// 	},
+// 	Media: {
+// 		height: 550,
+// 	},
+// });
 
 export function About(params: any) {
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<AppBar position="relative">
-				<Toolbar>
-					<HeaderLogo />
-				</Toolbar>
-			</AppBar>
-			<main>
-				{/* Hero unit */}
-				<Box
-					sx={{
-						bgcolor: "background.paper",
-						pt: 8,
-						pb: 6,
-					}}
-				>
-					<Container maxWidth="sm">
-						<Typography
-							component="h1"
-							variant="h2"
-							align="center"
-							color="text.primary"
-							gutterBottom
-						>
-							About Us
-						</Typography>
-						<Typography
-							variant="h5"
-							align="center"
-							color="text.secondary"
-							paragraph
-						>
-							Meet the msg.postr team!
-						</Typography>
-						<Stack
-							sx={{ pt: 4 }}
-							direction="row"
-							spacing={2}
-							justifyContent="center"
-						></Stack>
-					</Container>
-				</Box>
-				<Container sx={{ py: 8 }} maxWidth="md">
-					{/* End hero unit */}
-					<Grid container spacing={4}>
-						{cards.map((card) => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
-								<Card
-									sx={{
-										height: "100%",
-										display: "flex",
-										flexDirection: "column",
-									}}
-								>
-									<CardMedia
-										component="img"
-										sx={{
-											// 16:9
-											pt: "56.25%",
-										}}
-										image="images/phumz.png"
-										alt="random"
-									/>
-									<CardContent sx={{ flexGrow: 0.5 }}>
-										<Typography variant="h5" component="h2">
-											Heading
-										</Typography>
-										<Typography>Phumzille Moyo </Typography>
-										<Typography> Kalamazoo College '23</Typography>
-										<Typography>Fun Fact</Typography>
-									</CardContent>
-								</Card>
-							</Grid>
-						))}
+		<>
+			<div style={{ marginBottom: "70px" }}>
+				<TopAppBar />
+			</div>
+			<div
+				style={{
+					alignContent: "center",
+				}}
+			>
+				<br />
+				<div className="aboutCards">
+					<Grid item xs={6}>
+						<AboutUsKyle />
 					</Grid>
-				</Container>
-			</main>
-			{/* Footer */}
-			<Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-				<Copyright />
-			</Box>
-			{/* End footer */}
-		</ThemeProvider>
+					&nbsp;
+					<Grid item xs={6}>
+						<AboutUsUsaid />
+					</Grid>
+					&nbsp;
+					<Grid item xs={6}>
+						<AboutUsMallory />
+					</Grid>
+				</div>
+				<br />
+				<br />
+				<div className="aboutCards">
+					<Grid item xs={6}>
+						<AboutUsPhumz />
+					</Grid>
+					&nbsp;
+					<Grid item xs={6}>
+						<AboutUsJackson />
+					</Grid>
+				</div>
+			</div>
+		</>
 	);
 }
