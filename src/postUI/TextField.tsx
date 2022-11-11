@@ -36,6 +36,10 @@ export const InputTextField = () => {
     });
   };
 
+  const resetCard = () => {
+    setNewPost("");
+  };
+
   function CardToggleButton() {
     const handleTooltipTitle = () => {
       if (privacy) {
@@ -141,7 +145,10 @@ export const InputTextField = () => {
           variant="contained"
           style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
           fullWidth
-          onClick={createPost}
+          onClick={() => {
+            createPost();
+            resetCard();
+          }}
         >
           Post
         </Button>

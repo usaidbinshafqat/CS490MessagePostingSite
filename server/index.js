@@ -187,3 +187,15 @@ app.get('/register', (req, res) => {
     }
   })
 })
+
+app.put('/addLikes', (req, res) => {
+  const id = req.query.id
+  const sqlUpdate = 'UPDATE Message SET Likes = Likes + 1 WHERE MessageID = (?)'
+  db.query(sqlUpdate, [id], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})

@@ -29,7 +29,6 @@ export const TopAppBar = () => {
   const getUserData = () => {
     Axios.get("http://localhost:3000/register").then((response: any) => {
       setUserData(response.data);
-      console.log(response.data);
     });
   };
 
