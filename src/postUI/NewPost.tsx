@@ -10,12 +10,13 @@ import {
   CardContent,
   CardHeader,
   Card,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 import { InputTextField } from "./TextField";
-import { Close } from "@mui/icons-material";
+import { Close, InfoOutlined } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions";
 import { default as Axios } from "axios";
 

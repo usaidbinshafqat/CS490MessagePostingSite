@@ -4,36 +4,51 @@ import Stack from "@mui/material/Stack";
 import Logo from "./logo_transparent.png";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 import { CustomTextField } from "../signupPage/CustomTextField";
 import { useNavigate } from "react-router-dom";
-
 
 export const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const navigate = useNavigate();
 
   const [loginStatus, setLoginStatus] = useState(false); //initialize to true or false?
   const [responseMessage, setResponseMessage] = useState("");
 
-  Axios.defaults.withCredentials = true;
+  useEffect(() => {
+    if (userName === "" || password === "") {
+      setErrorMsg("All fields must be filled in!");
+      setDisplayError(true);
+      setDisable(true);
+    } else {
+      setDisplayError(false);
+      setDisable(false);
+    }
+  }, [userName, password]);
 
   const login = () => {
-    Axios.post("http://localhost:3000/api/login", {
-      userName: userName,
-      password: password,
+    Axios.post("http://localhost:3000/users/login", {
+      Username: userName,
+      Password: password,
     }).then((response) => {
-      if (!response.data.auth) {
+      if (response.data.message) {
+        // alert(response.data.message);
+        console.log(response.data.error);
         setLoginStatus(false);
         setResponseMessage(response.data.message);
+        console.log(response.data.message);
         navigate("/Login");
       } else {
-        console.log(response.data)
+        sessionStorage.setItem("accessToken", response.data);
+        console.log(response.data);
         localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
-        navigate("/Home")
+        navigate("/Home");
       }
     });
   };
@@ -42,11 +57,11 @@ export const LoginPage = () => {
     Axios.get("http://localhost:3000/api/isUserAuth", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
-      }
+      },
     }).then((response) => {
-      console.log(response)
-    })
-  }
+      console.log(response);
+    });
+  };
 
   // useEffect(() => {
   //   Axios.get("http://localhost:3000/api/login").then((response) =>{
@@ -63,7 +78,9 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
-          {!loginStatus && responseMessage.length > 0 && <Alert severity="warning">{responseMessage}</Alert>}
+          {!loginStatus && responseMessage.length > 0 && (
+            <Alert severity="warning">{responseMessage}</Alert>
+          )}
           <CustomTextField
             label="Username"
             variant={"filled"}
@@ -76,12 +93,15 @@ export const LoginPage = () => {
             label="Password"
             variant={"filled"}
             id="password"
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
           <Button
+            disabled={disable}
             onClick={login}
+            // href="/Home"
             variant="outlined"
             style={{ borderRadius: 20 }}
           >

@@ -5,6 +5,11 @@ import mentionsInputStyles from "./mentionsInputStyles";
 import merge from "lodash/merge";
 import { default as Axios } from "axios";
 import { Button, CardActions } from "@mui/material";
+import * as React from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
+import { HashtagButton } from "../cards/Hashtags";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
@@ -16,22 +21,67 @@ export const InputTextField = () => {
     `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
   const [likes, setLikes] = useState(0);
-  const [privacy, setPrivacy] = useState(0);
+  const [privacy, setPrivacy] = useState(false);
+  const [hashTags, setHashTags] = useState([] as any);
 
   const createPost = () => {
-    Axios.post("http://localhost:3000/api/post", {
-      newPost: newPost,
-      userID: userID,
-      messageType: messageType,
-      path: path,
-      postDate: postDate,
-      likes: likes,
-      privacy: privacy,
-    }).then((response: { data: any }) => {
+    Axios.post(
+      "http://localhost:3000/message",
+      {
+        Message: newPost,
+        UID: userID,
+        TypeOfMessage: messageType,
+        Path: path,
+        Date: postDate,
+        Likes: likes,
+        Privacy: privacy,
+      },
+      {
+        headers: {
+          accessToken: sessionStorage.getItem("accessToken"),
+        },
+      }
+    ).then((response: { data: any }) => {
       console.log(response.data);
+    });
+
+    hashTags?.forEach((hashTag: any) => {
+      Axios.post("http://localhost:3000/hashtag", {
+        HashTag: hashTag.slice(1),
+      }).then((response) => {
+        console.log(response);
+      });
+      setNewPost("");
     });
   };
 
+  function CardToggleButton() {
+    const handleTooltipTitle = () => {
+      if (privacy) {
+        return "Make post private";
+      } else {
+        return "Make post public";
+      }
+    };
+
+    return (
+      <Tooltip title={handleTooltipTitle()} arrow>
+        <ToggleButton
+          value="check"
+          selected={privacy}
+          onChange={() => {
+            setPrivacy(!privacy);
+            console.log(privacy);
+          }}
+          color="primary"
+          size="small"
+          style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
+        >
+          {privacy ? <LockOpenRounded /> : <LockPersonRounded />}
+        </ToggleButton>
+      </Tooltip>
+    );
+  }
 
   function randomPlaceholderGenerator() {
     const placeholders = [
@@ -99,7 +149,10 @@ export const InputTextField = () => {
           value={newPost}
           placeholder={randomPlaceholderGenerator()}
           a11ySuggestionsListLabel={"Suggested mentions"}
-          onChange={(e) => setNewPost(e.target.value)}
+          onChange={(e) => {
+            setNewPost(e.target.value);
+            setHashTags(newPost.match(/#[^\s#.;]*/gim));
+          }}
         >
           <Mention style={mentionsStyles} data={users} trigger={"@"} />
         </MentionsInput>
@@ -114,9 +167,8 @@ export const InputTextField = () => {
         >
           Post
         </Button>
+        <CardToggleButton />
       </CardActions>
     </>
   );
 };
-
-//how to get data out of this: https://stackblitz.com/edit/react-mentions?file=index.js

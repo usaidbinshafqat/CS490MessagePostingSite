@@ -1,10 +1,28 @@
 import { Grid } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
+import { TopAppBar } from "../homePage/TopAppBar";
 import { Trends } from "../trends/Trends";
 import { ProfileCards } from "./ProfileCards";
 import { Header } from "./ProfileHeader";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { default as Axios } from "axios";
 
 export const ProfilePage = () => {
+  let { UID } = useParams();
+
+  const [messageData, setMessageData] = useState([]);
+
+  useEffect(() => {
+    const getMessageData = () => {
+      Axios.get(`http://localhost:3000/message/byId/${UID}`).then(
+        (response) => {
+          setMessageData(response.data);
+        }
+      );
+    };
+    getMessageData();
+  }, []);
   return (
     <div
       style={{
@@ -13,6 +31,9 @@ export const ProfilePage = () => {
         marginRight: "auto",
       }}
     >
+      <div style={{ marginBottom: "70px" }}>
+        <TopAppBar />
+      </div>
       <Grid
         container
         sx={{
@@ -31,12 +52,18 @@ export const ProfilePage = () => {
         </Grid>
         <Grid xs={6}>
           <Header />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
+          {Object.values(messageData).map((event: any) => (
+            <ProfileCards
+              MessageID={event.MessageID}
+              UID={event.UID}
+              TypeOfMessage={event.TypeOfMessage}
+              Message={event.Message}
+              Path={event.Path}
+              Date={event.Date}
+              Likes={event.Likes}
+              Privacy={event.Privacy}
+            />
+          ))}
         </Grid>
         <Grid xs>
           <Trends />
