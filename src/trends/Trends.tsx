@@ -13,6 +13,8 @@ import { TrendsList } from "./TrendsList";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { ListItems } from "./listItems";
+import { ListFiltered } from "./listFiltered";
 
 export const Trends = (props: any) => {
   const data = props.data;
@@ -68,14 +70,12 @@ export const Trends = (props: any) => {
         </div>
       </div>
       <div>
-        <List
-          sx={{
-            width: "100%",
-            bgcolor: "background.paper",
-            alignItems: "center",
-          }}
-        >
-          {filteredData.slice(0, 5).map((value: { HashTag: string }) => {
+        {wordEntered.length === 0 ? (
+          <ListItems data={data}></ListItems>
+        ) : (
+          <ListFiltered data={filteredData}></ListFiltered>
+        )}
+        {/* {filteredData.slice(0, 20).map((value: { HashTag: string }) => {
             return (
               <>
                 <ListItem alignItems="flex-start">
@@ -87,8 +87,7 @@ export const Trends = (props: any) => {
                 <Divider variant="inset" component="li" />
               </>
             );
-          })}
-        </List>
+          })} */}
       </div>
     </div>
   );
