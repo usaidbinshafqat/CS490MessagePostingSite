@@ -204,8 +204,7 @@ app.put('/addLikes', (req, res) => {
 app.get('/hashtagExists', (req, res) => {
   const HashTag = req.query.HashTag
 
-  const sqlSelect =
-    'SELECT HashTag, HashTagID FROM HashTags WHERE HashTag = (?);'
+  const sqlSelect = "SELECT HashTag, HashTagID FROM HashTags WHERE HashTag = (?);"
   db.query(sqlSelect, [HashTag], (err, result) => {
     if (err) {
       console.log(err)
@@ -217,10 +216,15 @@ app.get('/hashtagExists', (req, res) => {
 
 app.post('/api/hashtag', (req, res) => {
   const HashTag = req.body.HashTag
-  const sqlInsert = 'INSERT INTO HashTags (HashTag) VALUES (?);'
-  db.query(sqlInsert, [HashTag], (err, result) => {
-    console.log(err)
-  })
+  const sqlInsert =
+    'INSERT INTO HashTags (HashTag) VALUES (?);'
+  db.query(
+    sqlInsert,
+    [HashTag],
+    (err, result) => {
+      console.log(err)
+    }
+  )
 })
 
 app.get('/trends', (req, res) => {
