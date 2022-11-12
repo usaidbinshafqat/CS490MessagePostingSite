@@ -75,19 +75,6 @@ export const Trends = (props: any) => {
         ) : (
           <ListFiltered data={filteredData}></ListFiltered>
         )}
-        {/* {filteredData.slice(0, 20).map((value: { HashTag: string }) => {
-            return (
-              <>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar alt="#" src="/static/images/avatar/1.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText primary={`#${value.HashTag}`}></ListItemText>
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </>
-            );
-          })} */}
       </div>
     </div>
   );
