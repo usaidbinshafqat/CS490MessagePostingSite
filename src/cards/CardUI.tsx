@@ -12,7 +12,7 @@ import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { HashtagButton } from "./Hashtags";
 import { FollowButton } from "./FollowButton";
-import moment from "moment";
+import moment from "moment-timezone";
 import { default as Axios } from "axios";
 import { useState } from "react";
 
@@ -51,7 +51,10 @@ export const CardUI = (props: MessageDataProps) => {
           titleTypographyProps={{ align: "left" as const }}
           title="User"
           subheaderTypographyProps={{ align: "left" as const }}
-          subheader={moment(testing).format("MMM Do YYYY, h:mm a")}
+          // subheader={moment
+          //   .tz(testing, "US/Eastern")
+          //   .format("MMM Do YYYY, h:mm a")}
+          subheader={testing}
           action={<FollowButton></FollowButton>}
         />
         <CardContent>

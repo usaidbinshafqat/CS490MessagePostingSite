@@ -16,8 +16,24 @@ export const InputTextField = () => {
   const [userID, setUserID] = useState(3);
   const [messageType, setMessageType] = useState("");
   const [path, setPath] = useState("");
+  const [date, setDate] = useState(
+    `${new Date().toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    })}`
+  );
   const [postDate, setPostDate] = useState(
-    `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
+    `${new Date().toLocaleString("en-US", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    })}`
+    // `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
   );
   const [likes, setLikes] = useState(0);
   const [privacy, setPrivacy] = useState(false);
