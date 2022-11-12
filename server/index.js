@@ -162,6 +162,7 @@ app.post('/api/post', (req, res) => {
     }
   )
 })
+
 app.listen(3000, () => {
   console.log('running on port 3000')
 })
@@ -179,6 +180,43 @@ app.get('/message', (req, res) => {
 
 app.get('/register', (req, res) => {
   const sqlSelect = 'SELECT FirstName, LastName, Username FROM User'
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.get('/hashtagExists', (req, res) => { 
+ const HashTag = req.query.HashTag
+
+  const sqlSelect = "SELECT HashTag, HashTagID FROM HashTags WHERE HashTag = (?);"
+  db.query(sqlSelect, [HashTag], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.post('/api/hashtag', (req, res) => {
+  const HashTag = req.body.HashTag
+  const sqlInsert =
+    'INSERT INTO HashTags (HashTag) VALUES (?);'
+  db.query(
+    sqlInsert,
+    [HashTag],
+    (err, result) => {
+      console.log(err)
+    }
+  )
+})
+
+app.get('/trends', (req, res) => {
+  const sqlSelect = 'SELECT * FROM HashTags'
   db.query(sqlSelect, (err, result) => {
     if (err) {
       console.log(err)

@@ -108,7 +108,7 @@ export const SearchBarU = (props: any) => {
               }}
             >
               {filteredData
-                .slice(0, 4)
+                .slice(0, 5)
                 .map((user: { FirstName: string; LastName: string }) => {
                   return (
                     <>
