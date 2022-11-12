@@ -225,3 +225,16 @@ app.get('/trends', (req, res) => {
     }
   })
 })
+
+app.get('/profileInfo', (req, res) => {
+  const UID = req.query.UID
+
+  const sqlSelect = 'SELECT * FROM User WHERE UID = (?);'
+  db.query(sqlSelect, [UID], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
