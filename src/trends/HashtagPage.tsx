@@ -15,16 +15,16 @@ export const HashtagPage = () => {
   const [title, setTitle] = useState("");
 
   const getTitle = () => {
-    Axios.get(
-      `http://localhost:3000/hashtagvalue/?HashTagID=${hashtagID.id}`
-    ).then((response: any) => {
-      setTitleData(response.data);
-      {
-        titleData.map((value: any) => {
-          setTitle(value.HashTag);
-        });
+    Axios.get(`http://localhost:3000/hashtag/?HashTagID=${hashtagID.id}`).then(
+      (response: any) => {
+        setTitleData(response.data);
+        {
+          titleData.map((value: any) => {
+            setTitle(value.HashTag);
+          });
+        }
       }
-    });
+    );
   };
 
   const getPosts = () => {
