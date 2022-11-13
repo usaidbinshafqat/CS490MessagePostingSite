@@ -8,18 +8,6 @@ import { default as Axios } from "axios";
 import { useEffect, useState } from "react";
 
 export const ProfilePage = () => {
-  const [trendsData, setTrendsData] = useState([]);
-
-  const getTrendsData = () => {
-    Axios.get("http://localhost:3000/trends").then((response: any) => {
-      setTrendsData(response.data);
-    });
-  };
-
-  useEffect(() => {
-    getTrendsData();
-  });
-
   return (
     <div
       style={{
@@ -57,7 +45,7 @@ export const ProfilePage = () => {
           <ProfileCards />
         </Grid>
         <Grid xs>
-          <Trends data={trendsData} />
+          <Trends />
         </Grid>
       </Grid>
     </div>

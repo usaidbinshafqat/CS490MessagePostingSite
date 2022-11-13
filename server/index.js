@@ -57,13 +57,14 @@ app.post('/api/register', (req, res) => {
   const country = req.body.country
   const picturePath = req.body.picturePath
   const dateOfReg = req.body.dateOfReg
+  const age = req.body.age
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) {
       console.log(err)
     }
     const sqlInsert =
-      'INSERT INTO User (Username, Password, Email, DateOfRegistration, FirstName, LastName, PicturePath, Country, City) VALUES (?,?,?,?,?,?,?,?,?);'
+      'INSERT INTO User (Username, Password, Email, DateOfRegistration, FirstName, LastName, PicturePath, Country, City, Age) VALUES (?,?,?,?,?,?,?,?,?,?);'
     db.query(
       sqlInsert,
       [
@@ -75,7 +76,8 @@ app.post('/api/register', (req, res) => {
         lastName,
         picturePath,
         country,
-        city
+        city,
+        age
       ],
       (err, result) => {
         console.log(err)
@@ -243,6 +245,43 @@ app.get('/profileInfo', (req, res) => {
 
   const sqlSelect = 'SELECT * FROM User WHERE UID = (?);'
   db.query(sqlSelect, [UID], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.get('/ageData', (req, res) => {
+  const age = req.query.age
+  
+  const sqlSelect = 'SELECT * FROM User WHERE Age = (?);'
+  db.query(sqlSelect, [age], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.get('/cityData', (req, res) => {
+  const city = req.query.city
+  
+  const sqlSelect = 'SELECT * FROM User WHERE City = (?);'
+  db.query(sqlSelect, [city], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.get('/messageLikes', (req, res) => {
+  const sqlSelect = 'SELECT * FROM Message ORDER BY Likes DESC, Date DESC'
+  db.query(sqlSelect, (err, result) => {
     if (err) {
       console.log(err)
     } else {

@@ -4,6 +4,7 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Diversity1Icon from "@mui/icons-material/Diversity1";
 import Divider from "@mui/material/Divider";
 
 import {
@@ -39,21 +40,29 @@ export default function LeftTabs() {
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItemButton>
-      </List>
-      <Divider />
-      <List component="nav">
         <ListItemButton
-          href="/Settings"
+          href="/ForYou"
           selected={selectedIndex === 2}
           onClick={() => setSelectedIndex(2)}
+        >
+          <ListItemIcon>
+            <Diversity1Icon />
+          </ListItemIcon>
+          <ListItemText primary="For You" />
+        </ListItemButton>
+      </List>
+      <Divider />
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItemButton
+          href="/Settings"
+          selected={selectedIndex === 3}
+          onClick={() => setSelectedIndex(3)}
         >
           <ListItemIcon>
             <SettingsRounded />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItemButton>
-      </List>
-      <List component="nav">
         <ListItemButton href="/">
           <ListItemIcon>
             <ExitToApp />

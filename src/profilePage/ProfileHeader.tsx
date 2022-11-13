@@ -39,29 +39,29 @@ export const Header = () => {
     setDay(dateArray[2]);
     const mnum = dateArray[1];
     if (mnum === "1") {
-      setMonth("Jan.");
+      setMonth("Jan");
     } else if (mnum === "2") {
-      setMonth("Feb.");
+      setMonth("Feb");
     } else if (mnum === "3") {
-      setMonth("March.");
+      setMonth("March");
     } else if (mnum === "4") {
-      setMonth("April.");
+      setMonth("April");
     } else if (mnum === "5") {
-      setMonth("May.");
+      setMonth("May");
     } else if (mnum === "6") {
-      setMonth("Jun.");
+      setMonth("Jun");
     } else if (mnum === "7") {
-      setMonth("Jul.");
+      setMonth("Jul");
     } else if (mnum === "8") {
-      setMonth("Aug.");
+      setMonth("Aug");
     } else if (mnum === "9") {
-      setMonth("Sept.");
+      setMonth("Sept");
     } else if (mnum === "10") {
-      setMonth("Oct.");
+      setMonth("Oct");
     } else if (mnum === "11") {
-      setMonth("Nov.");
+      setMonth("Nov");
     } else if (mnum === "12") {
-      setMonth("Dec.");
+      setMonth("Dec");
     }
 
     setDateFormatted(`${month} ${day}, ${year}`);

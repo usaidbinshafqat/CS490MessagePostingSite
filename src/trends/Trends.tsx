@@ -11,15 +11,22 @@ import {
 } from "@mui/material";
 import { TrendsList } from "./TrendsList";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ListItems } from "./listItems";
-import { ListFiltered } from "./listFiltered";
+import { ListFiltered } from "./trendsFiltered";
+import { default as Axios } from "axios";
 
 export const Trends = (props: any) => {
-  const data = props.data;
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
+
+  const getTrendsData = () => {
+    Axios.get("http://localhost:3000/trends").then((response: any) => {
+      setData(response.data);
+    });
+  };
 
   const handleFilter = (e: { target: { value: any } }) => {
     const searchWord = e.target.value;
@@ -38,6 +45,10 @@ export const Trends = (props: any) => {
     setFilteredData([]);
     setWordEntered("");
   };
+
+  useEffect(() => {
+    getTrendsData();
+  });
 
   return (
     <div>
