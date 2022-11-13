@@ -12,6 +12,7 @@ export const ProfilePage = () => {
   let { UID } = useParams();
 
   const [messageData, setMessageData] = useState([]);
+  const [trendsData, setTrendsData] = useState([]);
 
   useEffect(() => {
     const getMessageData = () => {
@@ -21,8 +22,15 @@ export const ProfilePage = () => {
         }
       );
     };
+    const getTrendsData = () => {
+      Axios.get("http://localhost:3000/hashtag").then((response: any) => {
+        setTrendsData(response.data);
+      });
+    };
     getMessageData();
+    getTrendsData();
   }, []);
+
   return (
     <div
       style={{
@@ -66,7 +74,7 @@ export const ProfilePage = () => {
           ))}
         </Grid>
         <Grid xs>
-          <Trends />
+          <Trends data={trendsData} />
         </Grid>
       </Grid>
     </div>

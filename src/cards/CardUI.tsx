@@ -14,6 +14,8 @@ import { HashtagButton } from "./Hashtags";
 import { FollowButton } from "./FollowButton";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { default as Axios } from "axios";
+import { useState } from "react";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -25,30 +27,22 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
-class LikeButton extends React.Component<{}, { liked: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      liked: false,
-    };
-  }
-
-  render() {
-    return (
-      <IconButton
-        color={this.state.liked ? "warning" : "error"}
-        onClick={() => this.setState({ liked: !this.state.liked })}
-      >
-        <FavoriteIcon />
-      </IconButton>
-    );
-  }
-}
-
 export const CardUI = (props: MessageDataProps) => {
-  const testing = String(props.Date);
   let navigate = useNavigate();
-  return (
+
+  const [likeButton, setLikeButton] = useState(false);
+  const testing = String(props.Date);
+  const [likes, setLikes] = useState(props.Likes);
+  const updateLikes = (id: number) => {
+    Axios.put(`http://localhost:3000/addLikes/?id=${id}`).then((response) => {
+      console.log("id", id);
+      setLikes(likes + 1);
+    });
+    setLikes(likes + 1);
+  };
+
+
+return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
       <Card variant="outlined">
         <CardHeader
@@ -75,9 +69,17 @@ export const CardUI = (props: MessageDataProps) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <Box></Box>
-          <LikeButton> </LikeButton>
-          <Typography> {props.Likes}</Typography>
+          <IconButton
+            color={likeButton ? "error" : "warning"}
+            onClick={() => {
+              updateLikes(props.MessageID);
+              setLikeButton(!likeButton);
+            }}
+            disabled={likeButton === true ? true : false}
+          >
+            <FavoriteIcon />
+          </IconButton>
+          <Typography> {likes}</Typography>
         </CardActions>
       </Card>
     </Box>

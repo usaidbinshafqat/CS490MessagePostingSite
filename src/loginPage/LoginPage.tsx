@@ -31,7 +31,19 @@ export const LoginPage = () => {
     }
   }, [userName, password]);
 
-  const login = () => {
+  useEffect(() => {
+    if (userName === "" || password === "") {
+      setErrorMsg("All fields must be filled in!");
+      setDisplayError(true);
+      setDisable(true);
+    } else {
+      setDisplayError(false);
+      setDisable(false);
+    }
+  }, [userName, password]);
+
+  
+const login = () => {
     Axios.post("http://localhost:3000/users/login", {
       Username: userName,
       Password: password,
@@ -81,6 +93,13 @@ export const LoginPage = () => {
           {!loginStatus && responseMessage.length > 0 && (
             <Alert severity="warning">{responseMessage}</Alert>
           )}
+          <>
+            {displayError ? (
+              <Alert severity="warning">{errorMsg}</Alert>
+            ) : (
+              <></>
+            )}
+          </>
           <CustomTextField
             label="Username"
             variant={"filled"}

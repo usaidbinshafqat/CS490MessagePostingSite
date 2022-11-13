@@ -1,7 +1,6 @@
 import { Alert, Button, Container, Stack, Typography } from "@mui/material";
 import { default as Axios } from "axios";
 import React, { useEffect, useState } from "react";
-import { convertCompilerOptionsFromJson } from "typescript";
 import Logo from "../loginPage/logo_transparent.png";
 import { CountryList } from "./CountryList";
 import { CustomTextField } from "./CustomTextField";
@@ -144,7 +143,6 @@ export const SignUp = () => {
             <CountryList
               id="countryName"
               onInputChange={(e: any, value: string) => {
-                console.log(value);
                 setCountry(value);
               }}
             />
@@ -190,7 +188,7 @@ export const SignUp = () => {
             disabled={disable}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
-            href="/Home"
+            href="/Login"
             onClick={register}
           >
             Sign Up

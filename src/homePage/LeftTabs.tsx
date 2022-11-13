@@ -10,10 +10,15 @@ import {
   PersonRounded,
   HomeRounded,
   SettingsRounded,
+  ExitToApp,
 } from "@mui/icons-material";
 
 export default function LeftTabs() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+  };
 
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
@@ -40,7 +45,7 @@ export default function LeftTabs() {
         </ListItemButton>
       </List>
       <Divider />
-      <List component="nav" aria-label="secondary mailbox folder">
+      <List component="nav">
         <ListItemButton
           href="/Settings"
           selected={selectedIndex === 2}
@@ -50,6 +55,14 @@ export default function LeftTabs() {
             <SettingsRounded />
           </ListItemIcon>
           <ListItemText primary="Settings" />
+        </ListItemButton>
+      </List>
+      <List component="nav">
+        <ListItemButton onClick={logout} href="/">
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
         </ListItemButton>
       </List>
     </Box>

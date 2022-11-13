@@ -40,7 +40,6 @@ export const Weather = () => {
     .request(options)
     .then(function (response) {
       setData(response.data);
-      // console.log(data);
     })
     .catch(function (error) {
       console.error(error);

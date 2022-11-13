@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mention, MentionsInput } from "react-mentions";
 import mentionsStyles from "./mentionsStyles";
 import mentionsInputStyles from "./mentionsInputStyles";
 import merge from "lodash/merge";
 import { default as Axios } from "axios";
-import { Button, CardActions } from "@mui/material";
+import { Button, CardActions, CircularProgress } from "@mui/material";
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
@@ -13,6 +13,7 @@ import { HashtagButton } from "../cards/Hashtags";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
+  const [disablePostButton, setDisablePostButton] = useState(true);
   const [newPost, setNewPost] = useState("");
   const [messageType, setMessageType] = useState("");
   const [path, setPath] = useState("");
@@ -52,6 +53,18 @@ export const InputTextField = () => {
       setNewPost("");
     });
   };
+
+  const resetCard = () => {
+    setNewPost("");
+  };
+
+  useEffect(() => {
+    if (newPost.length > 3) {
+      setDisablePostButton(false);
+    } else {
+      setDisablePostButton(true);
+    }
+  }, [newPost]);
 
   function CardToggleButton() {
     const handleTooltipTitle = () => {
@@ -151,17 +164,28 @@ export const InputTextField = () => {
             setNewPost(e.target.value);
             setHashTags(newPost.match(/#[^\s#.;]*/gim));
           }}
+          maxLength={200}
         >
           <Mention style={mentionsStyles} data={users} trigger={"@"} />
         </MentionsInput>
       </div>
       <CardActions>
+        <CircularProgress
+          style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
+          variant="determinate"
+          value={(newPost.length / 200) * 100}
+        />
+
         <Button
           size="small"
           variant="contained"
           style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
           fullWidth
-          onClick={createPost}
+          disabled={disablePostButton}
+          onClick={() => {
+            createPost();
+            resetCard();
+          }}
         >
           Post
         </Button>

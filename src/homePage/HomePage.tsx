@@ -9,15 +9,14 @@ import { useEffect, useState } from "react";
 
 export const HomePage = () => {
   const [loginStatus, setLoginStatus] = useState("");
+  const [messageData, setMessageData] = React.useState([]);
 
   useEffect(() => {
     Axios.get("http://localhost:3000/users").then((response) => {
-        setLoginStatus(response.data[0].UID);
+      setLoginStatus(response.data[0].UID);
       console.log(response.data);
     });
   }, []);
-
-  const [messageData, setMessageData] = React.useState([]);
 
   const getMessageData = () => {
     Axios.get("http://localhost:3000/message").then((response: any) => {
