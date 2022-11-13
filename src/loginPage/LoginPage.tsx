@@ -72,7 +72,7 @@ export const LoginPage = () => {
               <></>
             )}
           </>
-          {!successful && <Alert severity="info">{loginStatus}</Alert>}
+          {!successful && <Alert severity="warning">{loginStatus}</Alert>}
           <CustomTextField
             label="Username"
             variant={"filled"}
@@ -84,6 +84,7 @@ export const LoginPage = () => {
           <CustomTextField
             label="Password"
             variant={"filled"}
+            type="password"
             id="password"
             onChange={(e) => {
               setPassword(e.target.value);

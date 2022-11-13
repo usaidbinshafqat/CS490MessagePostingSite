@@ -289,3 +289,29 @@ app.get('/messageLikes', (req, res) => {
     }
   })
 })
+
+app.get('/hashtagPage', (req, res) => {
+  const HashTagID = req.query.HashTagID
+
+  const sqlSelect = "SELECT * FROM Message INNER JOIN MessageHashTags ON Message.MessageID = MessageHashTags.MessageID WHERE HashTagID = (?);"
+  db.query(sqlSelect, [HashTagID], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+app.get('/hashtagvalue', (req, res) => {
+  const HashTagID = req.query.HashTagID
+
+  const sqlSelect = "SELECT * FROM HashTags WHERE HashTagID = (?);"
+  db.query(sqlSelect, [HashTagID], (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
+})

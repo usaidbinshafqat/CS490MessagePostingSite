@@ -103,7 +103,6 @@ export const Header = () => {
             style={{ width: 60, height: 60 }}
           />
         }
-        action={<FollowButton />}
       />
       <CardContent>
         <Typography variant="h5" component="div" align="left">

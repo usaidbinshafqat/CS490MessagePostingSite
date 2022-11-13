@@ -7,6 +7,7 @@ import { SignUp } from "./signupPage/SignUp";
 import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";
 import { ForYouPage } from "./ForYouPage/ForYou";
+import { HashtagPage } from "./trends/HashtagPage";
 
 function App() {
   const theme = createTheme({
@@ -53,6 +54,7 @@ function App() {
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Profile" element={<ProfilePage />} />
             <Route path="/ForYou" element={<ForYouPage />} />
+            <Route path="/Hashtag/:id" element={<HashtagPage />} />
           </Routes>
         </BrowserRouter>
       </div>
