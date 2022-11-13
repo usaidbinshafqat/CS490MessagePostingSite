@@ -23,7 +23,7 @@ export const Trends = (props: any) => {
   const [wordEntered, setWordEntered] = useState("");
 
   const getTrendsData = () => {
-    Axios.get("http://localhost:3000/trends").then((response: any) => {
+    Axios.get("http://localhost:3000/hashtag").then((response: any) => {
       setData(response.data);
     });
   };
