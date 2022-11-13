@@ -35,12 +35,6 @@ export const ProfilePage = () => {
         </Grid>
         <Grid xs={6}>
           <Header />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
-          <ProfileCards />
         </Grid>
         <Grid xs>
           <Trends />
