@@ -11,7 +11,6 @@ export const DeskopAppView = () => {
   const getTrendsData = () => {
     Axios.get("http://localhost:3000/trends").then((response: any) => {
       setTrendsData(response.data);
-      console.log(response.data);
     });
   };
 

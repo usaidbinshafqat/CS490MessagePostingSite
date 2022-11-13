@@ -12,7 +12,7 @@ import {
   List,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const SearchBarU = (props: any) => {

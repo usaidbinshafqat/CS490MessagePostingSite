@@ -11,7 +11,6 @@ export const BottomBar = () => {
   const [currentTab, setCurrentTab] = React.useState(homePageState);
 
   const dispatch = useAppDispatch();
-  console.log(homePageState);
   return (
     <BottomNavigation
       showLabels
