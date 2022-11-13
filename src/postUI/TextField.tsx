@@ -14,7 +14,6 @@ import { HashtagButton } from "../cards/Hashtags";
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
   const [newPost, setNewPost] = useState("");
-  const [userID, setUserID] = useState(3);
   const [messageType, setMessageType] = useState("");
   const [path, setPath] = useState("");
   const [postDate, setPostDate] = useState(
@@ -29,7 +28,6 @@ export const InputTextField = () => {
       "http://localhost:3000/message",
       {
         Message: newPost,
-        UID: userID,
         TypeOfMessage: messageType,
         Path: path,
         Date: postDate,
@@ -38,7 +36,7 @@ export const InputTextField = () => {
       },
       {
         headers: {
-          accessToken: sessionStorage.getItem("accessToken"),
+          accessToken: localStorage.getItem("accessToken"),
         },
       }
     ).then((response: { data: any }) => {

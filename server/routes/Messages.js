@@ -20,8 +20,10 @@ router.get("/byId/:UID", async (req, res) => {
 
 router.post("/", verifyToken, async (req, res) => {
     const message = req.body
+    const UID = req.user.UID;
+    message.UID = UID;
     await Message.create(message);
-    res.json(message)
+    res.json(message);
 })
 
 module.exports = router;

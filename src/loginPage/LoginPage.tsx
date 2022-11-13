@@ -44,7 +44,7 @@ export const LoginPage = () => {
         console.log(response.data.message);
         navigate("/Login");
       } else {
-        sessionStorage.setItem("accessToken", response.data);
+        localStorage.setItem("accessToken", response.data);
         console.log(response.data);
         localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
