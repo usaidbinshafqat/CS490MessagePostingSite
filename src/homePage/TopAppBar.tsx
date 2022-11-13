@@ -27,7 +27,7 @@ export const TopAppBar = () => {
   const [userData, setUserData] = React.useState([]);
 
   const getUserData = () => {
-    Axios.get("http://localhost:3000/register").then((response: any) => {
+    Axios.get("http://localhost:3000/users").then((response: any) => {
       setUserData(response.data);
     });
   };

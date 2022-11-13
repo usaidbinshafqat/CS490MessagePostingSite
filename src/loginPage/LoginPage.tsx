@@ -17,10 +17,8 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const [loginStatus, setLoginStatus] = useState("");
-  const [successful, setSuccessful] = useState(true);
-
-  Axios.defaults.withCredentials = true;
+  const [loginStatus, setLoginStatus] = useState(false); //initialize to true or false?
+  const [responseMessage, setResponseMessage] = useState("");
 
   useEffect(() => {
     if (userName === "" || password === "") {
@@ -33,20 +31,47 @@ export const LoginPage = () => {
     }
   }, [userName, password]);
 
-  const login = () => {
-    Axios.post("http://localhost:3000/api/login", {
-      userName: userName,
-      password: password,
+  useEffect(() => {
+    if (userName === "" || password === "") {
+      setErrorMsg("All fields must be filled in!");
+      setDisplayError(true);
+      setDisable(true);
+    } else {
+      setDisplayError(false);
+      setDisable(false);
+    }
+  }, [userName, password]);
+
+  
+const login = () => {
+    Axios.post("http://localhost:3000/users/login", {
+      Username: userName,
+      Password: password,
     }).then((response) => {
       if (response.data.message) {
-        setLoginStatus(response.data.message);
-        setSuccessful(false);
+        // alert(response.data.message);
+        console.log(response.data.error);
+        setLoginStatus(false);
+        setResponseMessage(response.data.message);
+        console.log(response.data.message);
         navigate("/Login");
       } else {
-        setLoginStatus(response.data[0].Username);
-        setSuccessful(true);
+        localStorage.setItem("accessToken", response.data);
+        console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        setLoginStatus(true);
         navigate("/Home");
       }
+    });
+  };
+
+  const userAuthentication = () => {
+    Axios.get("http://localhost:3000/api/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    }).then((response) => {
+      console.log(response);
     });
   };
 
@@ -65,6 +90,9 @@ export const LoginPage = () => {
         <Stack spacing={2}>
           <img src={Logo} alt="logo" />
           <Typography variant="h4">Login</Typography>
+          {!loginStatus && responseMessage.length > 0 && (
+            <Alert severity="warning">{responseMessage}</Alert>
+          )}
           <>
             {displayError ? (
               <Alert severity="warning">{errorMsg}</Alert>
@@ -72,7 +100,6 @@ export const LoginPage = () => {
               <></>
             )}
           </>
-          {!successful && <Alert severity="info">{loginStatus}</Alert>}
           <CustomTextField
             label="Username"
             variant={"filled"}
@@ -85,6 +112,7 @@ export const LoginPage = () => {
             label="Password"
             variant={"filled"}
             id="password"
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -92,6 +120,7 @@ export const LoginPage = () => {
           <Button
             disabled={disable}
             onClick={login}
+            // href="/Home"
             variant="outlined"
             style={{ borderRadius: 20 }}
           >

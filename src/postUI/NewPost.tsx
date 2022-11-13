@@ -8,12 +8,13 @@ import {
   CardContent,
   CardHeader,
   Card,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 import { InputTextField } from "./TextField";
-import { Close } from "@mui/icons-material";
+import { Close, InfoOutlined } from "@mui/icons-material";
 import { TransitionProps } from "@mui/material/transitions";
 
 export const NewPost = () => {

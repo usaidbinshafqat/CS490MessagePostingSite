@@ -16,6 +16,10 @@ import {
 export default function LeftTabs() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+  };
+
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <List component="nav" aria-label="main mailbox folders">
@@ -54,7 +58,7 @@ export default function LeftTabs() {
         </ListItemButton>
       </List>
       <List component="nav">
-        <ListItemButton href="/">
+        <ListItemButton onClick={logout} href="/">
           <ListItemIcon>
             <ExitToApp />
           </ListItemIcon>

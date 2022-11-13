@@ -11,7 +11,7 @@ export const MobileAppView = () => {
   const [trendsData, setTrendsData] = useState([]);
 
   const getTrendsData = () => {
-    Axios.get("http://localhost:3000/trends").then((response: any) => {
+    Axios.get("http://localhost:3000/hashtag").then((response: any) => {
       setTrendsData(response.data);
     });
   };
