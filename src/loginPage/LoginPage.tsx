@@ -23,7 +23,7 @@ export const LoginPage = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    if (userName == "" || password == "") {
+    if (userName === "" || password === "") {
       setErrorMsg("All fields must be filled in!");
       setDisplayError(true);
       setDisable(true);

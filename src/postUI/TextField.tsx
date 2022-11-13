@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mention, MentionsInput } from "react-mentions";
 import mentionsStyles from "./mentionsStyles";
 import mentionsInputStyles from "./mentionsInputStyles";
 import merge from "lodash/merge";
 import { default as Axios } from "axios";
-import { Button, CardActions } from "@mui/material";
+import { Button, CardActions, CircularProgress } from "@mui/material";
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
@@ -12,6 +12,7 @@ import { Tooltip } from "@mui/material";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
+  const [disablePostButton, setDisablePostButton] = useState(true);
   const [newPost, setNewPost] = useState("");
   const [userID, setUserID] = useState(3);
   const [messageType, setMessageType] = useState("");
@@ -45,6 +46,14 @@ export const InputTextField = () => {
   const resetCard = () => {
     setNewPost("");
   };
+
+  useEffect(() => {
+    if (newPost.length > 3) {
+      setDisablePostButton(false);
+    } else {
+      setDisablePostButton(true);
+    }
+  }, [newPost]);
 
   function CardToggleButton() {
     const handleTooltipTitle = () => {
@@ -141,16 +150,24 @@ export const InputTextField = () => {
           placeholder={randomPlaceholderGenerator()}
           a11ySuggestionsListLabel={"Suggested mentions"}
           onChange={(e) => setNewPost(e.target.value)}
+          maxLength={200}
         >
           <Mention style={mentionsStyles} data={users} trigger={"@"} />
         </MentionsInput>
       </div>
       <CardActions>
+        <CircularProgress
+          style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
+          variant="determinate"
+          value={(newPost.length / 200) * 100}
+        />
+
         <Button
           size="small"
           variant="contained"
           style={{ borderRadius: 20, marginLeft: "10px", marginBottom: "10px" }}
           fullWidth
+          disabled={disablePostButton}
           onClick={() => {
             createPost();
             resetCard();
