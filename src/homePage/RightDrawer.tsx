@@ -16,6 +16,7 @@ export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);
   const dispatch = useAppDispatch();
 
+
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>

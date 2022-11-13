@@ -53,17 +53,16 @@ export const SignUp = () => {
 
   // Axios.defaults.withCredentials = true;
   const register = () => {
-    Axios.post("http://localhost:3000/api/register", {
-      firstName: firstName,
-      lastName: lastName,
-      userName: userName,
-      email: email,
-      password: password,
-      city: city,
-      country: country,
-      picturePath: picturePath,
-      dateOfReg: dateOfReg,
-      age: parseInt(age),
+    Axios.post("http://localhost:3000/users", {
+      FirstName: firstName,
+      LastName: lastName,
+      Username: userName,
+      Email: email,
+      Password: password,
+      City: city,
+      Country: country,
+      PicturePath: picturePath,
+      DateOfRegistration: dateOfReg,
     }).then((response: { data: any }) => {
       console.log(response.data);
     });
@@ -201,7 +200,7 @@ export const SignUp = () => {
             disabled={disable}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
-            href="/Home"
+            href="/Login"
             onClick={register}
           >
             Sign Up

@@ -12,7 +12,8 @@ import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { HashtagButton } from "./Hashtags";
 import { FollowButton } from "./FollowButton";
-import moment from "moment-timezone";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
 import { useState } from "react";
 
@@ -26,8 +27,9 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
-
 export const CardUI = (props: MessageDataProps) => {
+  let navigate = useNavigate();
+
   const [likeButton, setLikeButton] = useState(false);
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
@@ -44,12 +46,18 @@ export const CardUI = (props: MessageDataProps) => {
       <Card variant="outlined">
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
+            <Avatar
+              sx={{ bgcolor: "#453750" }}
+              aria-label="profile pic"
+              onClick={() => {
+                navigate(`/Profile/${props.UID}`);
+              }}
+            >
               U
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}
-          title="User"
+          title={props.UID}
           subheaderTypographyProps={{ align: "left" as const }}
           // subheader={moment
           //   .tz(testing, "US/Eastern")

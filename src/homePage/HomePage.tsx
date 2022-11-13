@@ -5,19 +5,18 @@ import "./index.css";
 import { default as Axios } from "axios";
 
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
+import { useEffect, useState } from "react";
 
 export const HomePage = () => {
-  // const [loginStatus, setLoginStatus] = useState("");
-
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
-  //     if (response.data.loggedIn === true) {
-  //     setLoginStatus(response.data.user[0].UID)
-  //     }
-  //   })
-  // }, [])
-
+  const [loginStatus, setLoginStatus] = useState("");
   const [messageData, setMessageData] = React.useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users").then((response) => {
+      setLoginStatus(response.data[0].UID);
+      console.log(response.data);
+    });
+  }, []);
 
   const getMessageData = () => {
     Axios.get("http://localhost:3000/message").then((response: any) => {

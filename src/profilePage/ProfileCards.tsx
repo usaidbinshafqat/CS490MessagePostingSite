@@ -11,6 +11,20 @@ import {
 import React from "react";
 import { HashtagButton } from "../cards/Hashtags";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import { FollowButton } from "../cards/FollowButton";
+
+export interface MessageDataProps {
+  MessageID: number;
+  UID: number;
+  TypeOfMessage: string;
+  Message: string;
+  Path: string;
+  Date: Date;
+  Likes: number;
+  Privacy: boolean;
+}
 
 class LikeButton extends React.Component<{}, { liked: boolean }> {
   constructor(props: any) {
@@ -31,38 +45,43 @@ class LikeButton extends React.Component<{}, { liked: boolean }> {
     );
   }
 }
-const card = (
-  <React.Fragment>
-    <CardHeader
-      avatar={
-        <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
-          U
-        </Avatar>
-      }
-      titleTypographyProps={{ align: "left" as const }}
-      title="User"
-      subheaderTypographyProps={{ align: "left" as const }}
-      subheader="Time/Date Posted"
-    />
-    <CardContent>
-      <Typography>CS Final Project</Typography>
-      <Typography>
-        {" "}
-        <HashtagButton message="Phumz, Mallory, Usaid, Kyle, Jackson #hashtag #csproject"></HashtagButton>{" "}
-      </Typography>
-    </CardContent>
-    <CardActions disableSpacing>
-      <Box></Box>
-      <LikeButton> </LikeButton>
-      <Typography> 200 </Typography>
-    </CardActions>
-  </React.Fragment>
-);
 
-export const ProfileCards = () => {
+export const ProfileCards = (props: MessageDataProps) => {
+  const testing = String(props.Date);
+  let navigate = useNavigate();
+
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
-      <Card variant="outlined">{card}</Card>
+      <Card variant="outlined">
+        <CardHeader
+          avatar={
+            <Avatar
+              sx={{ bgcolor: "#453750" }}
+              aria-label="profile pic"
+              onClick={() => {
+                navigate(`/Profile/${props.UID}`);
+              }}
+            >
+              U
+            </Avatar>
+          }
+          titleTypographyProps={{ align: "left" as const }}
+          title={props.UID}
+          subheaderTypographyProps={{ align: "left" as const }}
+          subheader={moment(testing).format("MMM Do YYYY, h:mm a")}
+          action={<FollowButton></FollowButton>}
+        />
+        <CardContent>
+          <Typography align="left">
+            <HashtagButton message={props.Message}></HashtagButton>{" "}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <Box></Box>
+          <LikeButton> </LikeButton>
+          <Typography> {props.Likes}</Typography>
+        </CardActions>
+      </Card>
     </Box>
   );
 };
