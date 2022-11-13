@@ -112,7 +112,6 @@ export const LoginPage = () => {
             variant={"filled"}
             type="password"
             id="password"
-            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
