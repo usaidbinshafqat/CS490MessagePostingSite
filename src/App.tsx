@@ -55,6 +55,7 @@ function App() {
             <Route path="/Profile" element={<ProfilePage />} />
             <Route path="/ForYou" element={<ForYouPage />} />
             <Route path="/Hashtag/:id" element={<HashtagPage />} />
+            <Route path="/ProfilePage/:UID" element={<ProfilePage />} />
           </Routes>
         </BrowserRouter>
       </div>
