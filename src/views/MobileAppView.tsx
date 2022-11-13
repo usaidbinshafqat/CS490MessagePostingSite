@@ -21,9 +21,9 @@ export const MobileAppView = () => {
   );
   const dialogState = useAppSelector((state) => state.reducers.modalOpen);
 
-  useEffect(() => {
-    getTrendsData();
-  });
+  // useEffect(() => {
+  //   getTrendsData();
+  // });
 
   return (
     <>
