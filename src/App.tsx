@@ -6,6 +6,8 @@ import { LoginPage } from "./loginPage/LoginPage";
 import { SignUp } from "./signupPage/SignUp";
 import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";
+import { SettingsPage } from "./settingsPage/Settings";
+import { AboutUs } from "./aboutUs/AboutUs";
 
 function App() {
   const theme = createTheme({
@@ -52,7 +54,8 @@ function App() {
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Profile" element={<ProfilePage />} />
             <Route path="/Profile/:UID" element={<ProfilePage />} />
-
+            <Route path="/Settings" element={<SettingsPage />} />
+            <Route path="/AboutUs" element={<AboutUs />} />
           </Routes>
         </BrowserRouter>
       </div>
