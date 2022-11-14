@@ -32,6 +32,15 @@ router.get("/byage/:Age", async (req, res) => {
     res.json(userInfo);
 })
 
+router.get("/bycity/:City", async (req, res) => {
+    const City = req.params.City;
+
+    const userInfo = await User.findAll({
+        where: { City: City }
+    });
+    res.json(userInfo);
+})
+
 router.get("/byusername/:Username", async (req, res) => {
     const Username = req.params.Username;
 

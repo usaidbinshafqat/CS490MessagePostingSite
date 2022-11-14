@@ -45,11 +45,9 @@ export const ForYouPage = () => {
   };
 
   const getAgeData = () => {
-    Axios.get(`http://localhost:3000/users/${userAge}`).then(
-      (response: any) => {
-        setAgeData(response.data);
-      }
-    );
+    Axios.get("http://localhost:3000/users/byage/20").then((response: any) => {
+      setAgeData(response.data);
+    });
   };
 
   const ageClick = () => {
@@ -141,7 +139,7 @@ export const ForYouPage = () => {
   };
 
   const getCityData = () => {
-    Axios.get(`http://localhost:3000/cityData/?city=${userCity}`).then(
+    Axios.get("http://localhost:3000/users/bycity/Cadillac").then(
       (response: any) => {
         setCityData(response.data);
       }
