@@ -45,6 +45,16 @@ export const SettingsPage = () => {
         </ListItem>
         <Divider />
         <ListItem>
+          <ListItemButton>
+            <ListItemAvatar>
+              <Avatar>
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Change Profile Icon" />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        <ListItem>
           <ListItemButton onClick={handleClickOpen}>
             <ListItemAvatar>
               <Avatar>
