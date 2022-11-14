@@ -42,9 +42,8 @@ export const LoginPage = () => {
     }
   }, [userName, password]);
 
-  
-const login = () => {
-    Axios.post("http://localhost:3000/users/login", {
+  const login = () => {
+    Axios.post("https://cs490msgpstr.herokuapp.com/users/login", {
       Username: userName,
       Password: password,
     }).then((response) => {
@@ -66,7 +65,7 @@ const login = () => {
   };
 
   const userAuthentication = () => {
-    Axios.get("http://localhost:3000/api/isUserAuth", {
+    Axios.get("https://cs490msgpstr.herokuapp.com/api/isUserAuth", {
       headers: {
         "x-access-token": localStorage.getItem("token"),
       },

@@ -9,9 +9,11 @@ export const DeskopAppView = () => {
   const [trendsData, setTrendsData] = useState([]);
 
   const getTrendsData = () => {
-    Axios.get("http://localhost:3000/hashtag").then((response: any) => {
-      setTrendsData(response.data);
-    });
+    Axios.get("https://cs490msgpstr.herokuapp.com/hashtag").then(
+      (response: any) => {
+        setTrendsData(response.data);
+      }
+    );
   };
 
   useEffect(() => {

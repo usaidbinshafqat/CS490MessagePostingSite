@@ -26,7 +26,7 @@ export const InputTextField = () => {
 
   const createPost = () => {
     Axios.post(
-      "http://localhost:3000/message",
+      "https://cs490msgpstr.herokuapp.com/message",
       {
         Message: newPost,
         TypeOfMessage: messageType,
@@ -45,7 +45,7 @@ export const InputTextField = () => {
     });
 
     hashTags?.forEach((hashTag: any) => {
-      Axios.post("http://localhost:3000/hashtag", {
+      Axios.post("https://cs490msgpstr.herokuapp.com/hashtag", {
         HashTag: hashTag.slice(1),
       }).then((response) => {
         console.log(response);

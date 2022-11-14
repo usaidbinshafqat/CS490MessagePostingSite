@@ -35,7 +35,7 @@ export const CardUI = (props: MessageDataProps) => {
   const [likes, setLikes] = useState(props.Likes);
 
   const updateLikes = (id: number) => {
-    Axios.put(`http://localhost:3000/likes/?id=${id}`, {
+    Axios.put(`https://cs490msgpstr.herokuapp.com/likes/?id=${id}`, {
       MessageID: id,
       Likes: likes + 1,
     }).then((response) => {
