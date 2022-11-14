@@ -22,7 +22,7 @@ export const ListItems = (props: any) => {
           }}
         >
           <ListItemButton
-            href={`/Hashtag/${value.HashTagID}`}
+            href={`/Hashtag/${value.HashTag}`}
             alignItems="flex-start"
           >
             <ListItemAvatar>

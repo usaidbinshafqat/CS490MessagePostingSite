@@ -18,6 +18,12 @@ router.get("/byId/:UID", async (req, res) => {
     res.json(userMessages);
 });
 
+router.get("/bypost/:Post", async (req, res) => {
+    const Post = req.params.Post;
+    const listMessages = await Message.findOne({ where: { Message : Post } });
+    res.json(listMessages);
+});
+
 router.post("/", verifyToken, async (req, res) => {
     const message = req.body
     const UID = req.user.UID;

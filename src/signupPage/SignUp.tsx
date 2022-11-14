@@ -25,8 +25,6 @@ export const SignUp = () => {
       month: "short",
       year: "numeric",
       day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
     })}`
   );
 

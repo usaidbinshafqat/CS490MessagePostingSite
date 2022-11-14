@@ -9,7 +9,7 @@ import {
   Card,
 } from "@mui/material";
 import React from "react";
-import { HashtagButton } from "../cards/Hashtags";
+import { Hashtag } from "../cards/Hashtags";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -73,7 +73,7 @@ export const ProfileCards = (props: MessageDataProps) => {
         />
         <CardContent>
           <Typography align="left">
-            <HashtagButton message={props.Message}></HashtagButton>{" "}
+            <Hashtag message={props.Message}></Hashtag>
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

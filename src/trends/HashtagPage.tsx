@@ -9,36 +9,22 @@ import { TopAppBar } from "../homePage/TopAppBar";
 import { Trends } from "./Trends";
 
 export const HashtagPage = () => {
-  const hashtagID = useParams();
+  const hashtag = useParams();
   const [data, setData] = useState([]);
-  const [titleData, setTitleData] = useState([]);
   const [title, setTitle] = useState("");
+  const [messageData, setMessageData] = useState([]);
 
-  const getTitle = () => {
-    Axios.get(`http://localhost:3000/hashtag/?HashTagID=${hashtagID.id}`).then(
-      (response: any) => {
-        setTitleData(response.data);
-        {
-          titleData.map((value: any) => {
-            setTitle(value.HashTag);
-          });
-        }
-      }
-    );
-  };
-
-  const getPosts = () => {
+  const getInfo = () => {
     Axios.get(
-      `http://localhost:3000/hashtagPage/?HashTagID=${hashtagID.id}`
+      `http://localhost:3000/hashtag/byhashtag/${hashtag.HashTag}`
     ).then((response: any) => {
-      setData(response.data);
+      setTitle(response.data.HashTag);
     });
   };
 
   useEffect(() => {
-    getTitle();
-    getPosts();
-  });
+    getInfo();
+  }, []);
 
   return (
     <div
@@ -83,7 +69,7 @@ export const HashtagPage = () => {
             {`#${title}`}
           </Typography>
           <div>
-            {data.map((event: any) => (
+            {messageData.map((event: any) => (
               <CardUI
                 MessageID={event.MessageID}
                 UID={event.UID}

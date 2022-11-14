@@ -10,12 +10,12 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { HashtagButton } from "./Hashtags";
 import { FollowButton } from "./FollowButton";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
-import { useState } from "react";
+import { memo, useState } from "react";
+import { Hashtag } from "./Hashtags";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -27,7 +27,7 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
-export const CardUI = (props: MessageDataProps) => {
+const Cards = (props: MessageDataProps) => {
   let navigate = useNavigate();
 
   const [likeButton, setLikeButton] = useState(false);
@@ -67,7 +67,7 @@ export const CardUI = (props: MessageDataProps) => {
         />
         <CardContent>
           <Typography align="left">
-            <HashtagButton message={props.Message}></HashtagButton>{" "}
+            <Hashtag message={props.Message}></Hashtag>
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -87,3 +87,5 @@ export const CardUI = (props: MessageDataProps) => {
     </Box>
   );
 };
+
+export const CardUI = memo(Cards);

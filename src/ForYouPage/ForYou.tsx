@@ -44,6 +44,8 @@ export const ForYouPage = () => {
     });
   };
 
+  console.log(messageData);
+
   const getAgeData = () => {
     Axios.get(`http://localhost:3000/ageData/?age=${userAge}`).then(
       (response: any) => {
@@ -200,7 +202,7 @@ export const ForYouPage = () => {
     getMessageData();
     getAgeData();
     getCityData();
-  });
+  }, []);
 
   return (
     <div

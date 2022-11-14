@@ -10,7 +10,7 @@ import { default as Axios } from "axios";
 
 export const ProfilePageLoggedIn = () => {
   const [messageData, setMessageData] = useState([]);
-  const [UID, setUID] = useState(1);
+  const [UID, setUID] = useState(2);
 
   const getMessageData = () => {
     Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {

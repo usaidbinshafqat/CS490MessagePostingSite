@@ -26,46 +26,11 @@ export const Header = () => {
   const [lastname, setLastname] = useState("");
   const [city, setCity] = useState("");
   const [date, setDate] = useState("");
-  const [dateFormatted, setDateFormatted] = useState("");
   const [numFollowing, setNumFollowing] = useState(0);
   const [numFollowers, setNumFollowers] = useState(0);
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
-
-  const formatDate = () => {
-    const dateArray = date.slice(0, 10).split("-");
-    setYear(dateArray[0]);
-    setDay(dateArray[2]);
-    const mnum = dateArray[1];
-    if (mnum === "1") {
-      setMonth("Jan");
-    } else if (mnum === "2") {
-      setMonth("Feb");
-    } else if (mnum === "3") {
-      setMonth("March");
-    } else if (mnum === "4") {
-      setMonth("April");
-    } else if (mnum === "5") {
-      setMonth("May");
-    } else if (mnum === "6") {
-      setMonth("Jun");
-    } else if (mnum === "7") {
-      setMonth("Jul");
-    } else if (mnum === "8") {
-      setMonth("Aug");
-    } else if (mnum === "9") {
-      setMonth("Sept");
-    } else if (mnum === "10") {
-      setMonth("Oct");
-    } else if (mnum === "11") {
-      setMonth("Nov");
-    } else if (mnum === "12") {
-      setMonth("Dec");
-    }
-
-    setDateFormatted(`${month} ${day}, ${year}`);
-  };
 
   const fillUserData = () => {
     Axios.get(`http://localhost:3000/users/byId/${UID}`).then(
@@ -93,7 +58,7 @@ export const Header = () => {
 
   useEffect(() => {
     fillUserData();
-  });
+  }, []);
 
   return (
     <Card style={{ margin: "10px" }}>
@@ -132,7 +97,7 @@ export const Header = () => {
               &nbsp;
             </Typography>
             <Typography variant="body2" color="text.secondary" align="left">
-              {dateFormatted}
+              {date}
             </Typography>
           </div>
         </div>

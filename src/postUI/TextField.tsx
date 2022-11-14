@@ -9,7 +9,6 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import { HashtagButton } from "../cards/Hashtags";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
@@ -29,6 +28,8 @@ export const InputTextField = () => {
   const [likes, setLikes] = useState(0);
   const [privacy, setPrivacy] = useState(false);
   const [hashTags, setHashTags] = useState([] as any);
+  const [msgID, setMsgID] = useState(0);
+  const [hashID, setHashID] = useState(0);
 
   const createPost = () => {
     Axios.post(
@@ -50,12 +51,34 @@ export const InputTextField = () => {
       console.log(response.data);
     });
 
-    hashTags?.forEach((hashTag: any) => {
+    // Axios.get("http://localhost:3000/message/bypost/#testing2").then(
+    //   (response: any) => {
+    //     console.log(response.data);
+    //     // setMsgID(response?.data?.MessageID);
+    //   }
+    // );
+
+    hashTags?.forEach((hashTag: string) => {
       Axios.post("http://localhost:3000/hashtag", {
         HashTag: hashTag.slice(1),
       }).then((response) => {
         console.log(response);
       });
+
+      // Axios.get(
+      //   `http://localhost:3000/hashtag/byhashtag/${hashTag.slice(1)}`
+      // ).then((response: any) => {
+      //   console.log(response?.data?.HashTagID);
+      //   setHashID(response?.data?.HashTagID);
+      // });
+
+      Axios.post("http://localhost:3000/messagehashtag", {
+        MessageID: msgID,
+        HashTagID: hashID,
+      }).then((response) => {
+        console.log(response);
+      });
+
       setNewPost("");
     });
   };

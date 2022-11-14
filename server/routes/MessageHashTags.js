@@ -23,4 +23,17 @@ router.post("/", async (req, res) => {
     res.json(messageHashTag)
 })
 
+router.post("/", async (req, res) => {
+    const {
+        MessageID,
+        HashTagID
+    } = req.body;
+
+        MessageHashTags.create({
+            MessageID: MessageID,
+            HashTagID: HashTagID
+        });
+        res.json("Success");
+});
+
 module.exports = router;

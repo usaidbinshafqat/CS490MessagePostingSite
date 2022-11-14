@@ -55,7 +55,7 @@ function App() {
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Profile" element={<ProfilePageLoggedIn />} />
             <Route path="/ForYou" element={<ForYouPage />} />
-            <Route path="/Hashtag/:id" element={<HashtagPage />} />
+            <Route path="/Hashtag/:HashTag" element={<HashtagPage />} />
             <Route path="/ProfilePage/:UID" element={<ProfilePageUser />} />
           </Routes>
         </BrowserRouter>

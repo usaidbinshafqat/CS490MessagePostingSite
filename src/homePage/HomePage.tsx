@@ -3,7 +3,6 @@ import { CardUI } from "../cards/CardUI";
 import { NewPostFab } from "./NewPostFab";
 import "./index.css";
 import { default as Axios } from "axios";
-
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
 import { useEffect, useState } from "react";
 
@@ -18,15 +17,14 @@ export const HomePage = () => {
     });
   }, []);
 
-  const getMessageData = () => {
-    Axios.get("http://localhost:3000/message").then((response: any) => {
-      setMessageData(response.data);
-    });
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
+    const getMessageData = () => {
+      Axios.get("http://localhost:3000/message").then((response: any) => {
+        setMessageData(response.data);
+      });
+    };
     getMessageData();
-  });
+  }, []);
 
   return (
     <React.Fragment>

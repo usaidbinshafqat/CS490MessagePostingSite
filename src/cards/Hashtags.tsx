@@ -1,20 +1,22 @@
 /* eslint-disable no-lone-blocks */
 import { ButtonBase } from "@mui/material";
-import "./index.css";
 import { default as Axios } from "axios";
-import { useState, memo } from "react";
-import { FastfoodOutlined, WorkRounded } from "@mui/icons-material";
+import { memo, useEffect, useState } from "react";
+import "./index.css";
 
-const Hashtag = (props: any) => {
+export const Hashtag = (props: any) => {
   const message = props.message;
   const messageSplit = message.split(" ");
+  const [ID, setID] = useState(0);
+  const [hashtag, setHashtag] = useState("");
+
   if (message.includes("#") || message.includes("@")) {
     return messageSplit.map((word: string) => {
       if (word.includes("#")) {
         {
           return (
             <ButtonBase
-              href="/Login"
+              href={`/Hashtag/${word.slice(1)}`}
               className="hashat-button"
               sx={{ color: "#C197D2" }}
             >
@@ -43,7 +45,7 @@ const Hashtag = (props: any) => {
   }
 };
 
-export const HashtagButton = memo(Hashtag);
+// export const HashtagButton = memo(Hashtag);
 
 export function HashtagLink(props: any) {
   const message = props.message;
