@@ -48,7 +48,6 @@ export const InputTextField = () => {
         },
       }
     ).then((response: { data: any }) => {
-      console.log(response.data);
     });
 
     // Axios.get("http://localhost:3000/message/bypost/#testing2").then(
@@ -153,6 +152,9 @@ export const InputTextField = () => {
     ];
     return placeholders[Math.floor(Math.random() * placeholders.length)];
   }
+  useEffect(() => {
+    setHashTags(newPost.match(/#[^\s#]*/gim));
+  }, [newPost]);
 
   useEffect(() => {
     setHashTags(newPost.match(/#[^\s#]*/gim));
