@@ -27,7 +27,7 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
-const Cards = (props: MessageDataProps) => {
+export const CardUI = (props: MessageDataProps) => {
   let navigate = useNavigate();
   let userID = props.UID;
 
@@ -97,5 +97,3 @@ const Cards = (props: MessageDataProps) => {
     </Box>
   );
 };
-
-export const CardUI = memo(Cards);
