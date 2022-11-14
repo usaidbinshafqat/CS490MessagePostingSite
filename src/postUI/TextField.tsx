@@ -30,6 +30,7 @@ export const InputTextField = () => {
   const [hashTags, setHashTags] = useState([] as any);
   const [msgID, setMsgID] = useState(0);
   const [hashID, setHashID] = useState(0);
+  const [currentHash, setCurrentHash] = useState("");
 
   const createPost = () => {
     Axios.post(
@@ -49,30 +50,10 @@ export const InputTextField = () => {
       }
     ).then((response: { data: any }) => {});
 
-    Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
-      (response: any) => {
-        console.log(response.data);
-        setMsgID(response.data.MessageID);
-      }
-    );
-
     hashTags?.forEach((hashTag: string) => {
+      setCurrentHash(hashTag.slice(1));
       Axios.post("http://localhost:3000/hashtag", {
         HashTag: hashTag.slice(1),
-      }).then((response) => {
-        console.log(response);
-      });
-
-      Axios.get(
-        `http://localhost:3000/hashtag/byhashtag/${hashTag.slice(1)}`
-      ).then((response: any) => {
-        console.log(response?.data?.HashTagID);
-        setHashID(response?.data?.HashTagID);
-      });
-
-      Axios.post("http://localhost:3000/messagehashtag", {
-        MessageID: msgID,
-        HashTagID: hashID,
       }).then((response) => {
         console.log(response);
       });
@@ -86,12 +67,35 @@ export const InputTextField = () => {
   };
 
   useEffect(() => {
-    if (newPost.length > 3) {
+    if (newPost.length > 0) {
       setDisablePostButton(false);
     } else {
       setDisablePostButton(true);
     }
   }, [newPost]);
+
+  // useEffect(() => {
+  //   Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
+  //     (response: any) => {
+  //       setMsgID(response.data.MessageID);
+  //       console.log(msgID);
+  //     }
+  //   );
+
+  //   Axios.get(`http://localhost:3000/hashtag/byhashtag/${currentHash}`).then(
+  //     (response: any) => {
+  //       setHashID(response.data.HashTagID);
+  //       console.log(hashID);
+  //     }
+  //   );
+
+  //   Axios.post("http://localhost:3000/messagehashtag", {
+  //     MessageID: msgID,
+  //     HashTagID: hashID,
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // }, [currentHash, newPost]);
 
   function CardToggleButton() {
     const handleTooltipTitle = () => {

@@ -67,8 +67,6 @@ export default function LeftTabs() {
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItemButton>
-      </List>
-      <List component="nav">
         <ListItemButton onClick={logout} href="/">
           <ListItemIcon>
             <ExitToApp />
