@@ -57,7 +57,7 @@ export const SignUp = () => {
 
   // Axios.defaults.withCredentials = true;
   const register = () => {
-    Axios.post("http://localhost:3000/users", {
+    Axios.post("https://cs490msgpstr.herokuapp.com/users", {
       FirstName: firstName,
       LastName: lastName,
       Username: userName,

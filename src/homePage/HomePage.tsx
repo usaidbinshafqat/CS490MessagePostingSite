@@ -11,7 +11,7 @@ export const HomePage = () => {
   const [messageData, setMessageData] = React.useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users").then((response) => {
+    Axios.get("https://cs490msgpstr.herokuapp.com/users").then((response) => {
       setLoginStatus(response.data[0].UID);
     });
   }, []);

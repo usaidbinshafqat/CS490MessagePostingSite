@@ -43,7 +43,7 @@ export const LoginPage = () => {
   }, [userName, password]);
 
   const login = () => {
-    Axios.post("http://localhost:3000/users/login", {
+    Axios.post("https://cs490msgpstr.herokuapp.com/users/login", {
       Username: userName,
       Password: password,
     }).then((response) => {
@@ -62,6 +62,25 @@ export const LoginPage = () => {
       }
     });
   };
+
+  const userAuthentication = () => {
+    Axios.get("https://cs490msgpstr.herokuapp.com/api/isUserAuth", {
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  // useEffect(() => {
+  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
+  //     if (response.data.loggedIn === true) {
+  //     setLoginStatus(response.data.user[0].UID)
+  //     }
+  //     console.log(response);
+  //   })
+  // }, [])
 
   return (
     <div>
