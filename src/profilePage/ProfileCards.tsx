@@ -10,9 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hashtag } from "../cards/Hashtags";
+import { default as Axios } from "axios";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -48,6 +49,14 @@ class LikeButton extends React.Component<{}, { liked: boolean }> {
 export const ProfileCards = (props: MessageDataProps) => {
   const testing = String(props.Date);
   let navigate = useNavigate();
+  let userID = props.UID;
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users").then((response: any) => {
+      setName(response.data.find((row: any) => row.UID === userID)?.Username);
+    });
+  }, [userID]);
 
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
@@ -65,7 +74,7 @@ export const ProfileCards = (props: MessageDataProps) => {
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}
-          title={props.UID}
+          title={name}
           subheaderTypographyProps={{ align: "left" as const }}
           subheader={moment(testing).format("MMM Do YYYY, h:mm a")}
         />
