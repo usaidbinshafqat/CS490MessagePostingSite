@@ -26,3 +26,5 @@ server/node_modules
 server/node
 /server/node_modules
 .env
+
+/build

@@ -51,7 +51,7 @@ export const SignUp = () => {
 
   // Axios.defaults.withCredentials = true;
   const register = () => {
-    Axios.post("http://localhost:3000/users", {
+    Axios.post("http://msgpstrDB/", {
       FirstName: firstName,
       LastName: lastName,
       Username: userName,

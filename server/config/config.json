@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
+    "username": "msgpstrdb:us-central1:msgpstrdb",
     "password": "WebCS490MP",
-    "database": "MessagePostingDB",
-    "host": "localhost",
+    "database": "MsgPstrDB",
+    "host": "34.27.64.212",
     "dialect": "mysql"
   },
   "test": {
