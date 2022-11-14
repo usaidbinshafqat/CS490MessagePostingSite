@@ -57,15 +57,18 @@ router.post('/', verifyToken, async (req, res) => {
   res.json(message)
 })
 
-router.put('/likes/:id', verifyToken, async (req, res) => {
-  const messageID = req.params.MessageID
-  await Message.increment('Likes', { by: 1, where: { MessageID: messageID } })
-  res.json({ success: true })
+router.put("/likes", async (req, res) => {
+  const {
+    likes,
+    msgID
+} = req.body;
+  
+await Messages.update({ Likes: likes+1 }, {
+  where: {
+    MessageID: msgID 
+  }
+});
+res.json("success")
 })
-
-// router.update('/likes/:id', async (req, res) => {
-//   const [results, metadata] = await sequelize.query("UPDATE Messages SET y = 42 WHERE x = 12");
-//   res.json({results})
-// })
 
 module.exports = router

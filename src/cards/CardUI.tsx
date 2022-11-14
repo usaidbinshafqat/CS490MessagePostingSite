@@ -37,11 +37,11 @@ export const CardUI = (props: MessageDataProps) => {
   const [name, setName] = useState("");
 
   const updateLikes = (id: number) => {
-    Axios.put(`http://localhost:3000/likes/?id=${id}`, {
+    Axios.put("http://localhost:3000/message/likes", {
       MessageID: id,
-      Likes: likes + 1,
+      Likes: likes,
     }).then((response) => {
-      console.log("id", id);
+      console.log("success");
     });
   };
 
