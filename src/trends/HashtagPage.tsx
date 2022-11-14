@@ -13,18 +13,35 @@ export const HashtagPage = () => {
   const [data, setData] = useState([]);
   const [title, setTitle] = useState("");
   const [messageData, setMessageData] = useState([]);
+  const [hashTag, setHashTag] = useState("");
 
   const getInfo = () => {
     Axios.get(
       `http://localhost:3000/hashtag/byhashtag/${hashtag.HashTag}`
     ).then((response: any) => {
       setTitle(response.data.HashTag);
+      setHashTag(response.data.HashTag);
     });
+  };
+
+  const getMessageData = () => {
+    Axios.get("http://localhost:3000/message/bylikes").then((response: any) => {
+      setData(response.data);
+    });
+  };
+
+  const filter = () => {
+    const newFilter = data.filter((msg: { Message: string }) => {
+      return msg.Message?.split(" ").includes(`#${hashTag}`);
+    });
+    setMessageData(newFilter);
   };
 
   useEffect(() => {
     getInfo();
-  }, []);
+    getMessageData();
+    filter();
+  });
 
   return (
     <div
