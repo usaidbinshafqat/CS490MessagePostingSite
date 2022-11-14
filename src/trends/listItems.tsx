@@ -5,11 +5,13 @@ import {
   Avatar,
   ListItemText,
   Divider,
+  Link,
+  ListItemButton,
 } from "@mui/material";
 
 export const ListItems = (props: any) => {
   const data = props.data;
-  return data.slice(0, 20).map((value: { HashTag: string }) => {
+  return data.slice(0, 20).map((value: { HashTag: string; HashTagID: any }) => {
     return (
       <>
         <List
@@ -19,12 +21,15 @@ export const ListItems = (props: any) => {
             alignItems: "center",
           }}
         >
-          <ListItem alignItems="flex-start">
+          <ListItemButton
+            href={`/Hashtag/${value.HashTag}`}
+            alignItems="flex-start"
+          >
             <ListItemAvatar>
               <Avatar alt="#" src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
             <ListItemText primary={`#${value.HashTag}`}></ListItemText>
-          </ListItem>
+          </ListItemButton>
           <Divider variant="inset" component="li" />
         </List>
       </>

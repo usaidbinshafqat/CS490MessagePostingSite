@@ -9,7 +9,6 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
-import { HashtagButton } from "../cards/Hashtags";
 
 export const InputTextField = () => {
   // const [value, setValue] = useState("")
@@ -18,11 +17,20 @@ export const InputTextField = () => {
   const [messageType, setMessageType] = useState("");
   const [path, setPath] = useState("");
   const [postDate, setPostDate] = useState(
-    `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
+    `${new Date().toLocaleString("en-US", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    })}`
   );
   const [likes, setLikes] = useState(0);
   const [privacy, setPrivacy] = useState(false);
   const [hashTags, setHashTags] = useState([] as any);
+  const [msgID, setMsgID] = useState(0);
+  const [hashID, setHashID] = useState(0);
+  const [currentHash, setCurrentHash] = useState("");
 
   const createPost = () => {
     Axios.post(
@@ -40,16 +48,16 @@ export const InputTextField = () => {
           accessToken: localStorage.getItem("accessToken"),
         },
       }
-    ).then((response: { data: any }) => {
-      console.log(response.data);
-    });
+    ).then((response: { data: any }) => {});
 
-    hashTags?.forEach((hashTag: any) => {
-      Axios.post("https://cs490msgpstr.herokuapp.com/hashtag", {
+    hashTags?.forEach((hashTag: string) => {
+      setCurrentHash(hashTag.slice(1));
+      Axios.post("http://localhost:3000/hashtag", {
         HashTag: hashTag.slice(1),
       }).then((response) => {
         console.log(response);
       });
+
       setNewPost("");
     });
   };
@@ -59,12 +67,35 @@ export const InputTextField = () => {
   };
 
   useEffect(() => {
-    if (newPost.length > 3) {
+    if (newPost.length > 0) {
       setDisablePostButton(false);
     } else {
       setDisablePostButton(true);
     }
   }, [newPost]);
+
+  // useEffect(() => {
+  //   Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
+  //     (response: any) => {
+  //       setMsgID(response.data.MessageID);
+  //       console.log(msgID);
+  //     }
+  //   );
+
+  //   Axios.get(`http://localhost:3000/hashtag/byhashtag/${currentHash}`).then(
+  //     (response: any) => {
+  //       setHashID(response.data.HashTagID);
+  //       console.log(hashID);
+  //     }
+  //   );
+
+  //   Axios.post("http://localhost:3000/messagehashtag", {
+  //     MessageID: msgID,
+  //     HashTagID: hashID,
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // }, [currentHash, newPost]);
 
   function CardToggleButton() {
     const handleTooltipTitle = () => {
@@ -124,6 +155,9 @@ export const InputTextField = () => {
     ];
     return placeholders[Math.floor(Math.random() * placeholders.length)];
   }
+  useEffect(() => {
+    setHashTags(newPost.match(/#[^\s#]*/gim));
+  }, [newPost]);
 
   let customStyle = merge({}, mentionsInputStyles, {
     input: {
@@ -162,7 +196,6 @@ export const InputTextField = () => {
           a11ySuggestionsListLabel={"Suggested mentions"}
           onChange={(e) => {
             setNewPost(e.target.value);
-            setHashTags(newPost.match(/#[^\s#.;]*/gim));
           }}
           maxLength={200}
         >

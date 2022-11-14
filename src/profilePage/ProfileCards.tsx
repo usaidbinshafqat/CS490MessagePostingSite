@@ -1,19 +1,18 @@
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
-  IconButton,
-  CardHeader,
   Avatar,
-  CardContent,
-  Typography,
-  CardActions,
   Box,
   Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
 } from "@mui/material";
-import React from "react";
-import { HashtagButton } from "../cards/Hashtags";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { FollowButton } from "../cards/FollowButton";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Hashtag } from "../cards/Hashtags";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -69,11 +68,10 @@ export const ProfileCards = (props: MessageDataProps) => {
           title={props.UID}
           subheaderTypographyProps={{ align: "left" as const }}
           subheader={moment(testing).format("MMM Do YYYY, h:mm a")}
-          action={<FollowButton></FollowButton>}
         />
         <CardContent>
           <Typography align="left">
-            <HashtagButton message={props.Message}></HashtagButton>{" "}
+            <Hashtag message={props.Message}></Hashtag>
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

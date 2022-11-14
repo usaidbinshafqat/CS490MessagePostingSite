@@ -19,19 +19,25 @@ export const SignUp = () => {
   const [picturePath, setPicturePath] = useState(
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
   );
+  const [age, setAge] = useState("");
   const [dateOfReg, setDateOfReg] = useState(
-    `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
+    `${new Date().toLocaleString("en-US", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+    })}`
   );
 
   useEffect(() => {
     if (
-      firstName === "" ||
-      lastName === "" ||
-      userName === "" ||
-      email === "" ||
-      password === "" ||
-      city === "" ||
-      country === ""
+      firstName == "" ||
+      lastName == "" ||
+      userName == "" ||
+      email == "" ||
+      password == "" ||
+      city == "" ||
+      country == "" ||
+      age == ""
     ) {
       setDisable(true);
       setDisplayError(true);
@@ -47,7 +53,7 @@ export const SignUp = () => {
       setDisplayError(false);
       // console.log("valid!");
     }
-  }, [firstName, lastName, userName, email, password, city, country]);
+  }, [firstName, lastName, userName, email, password, city, country, age]);
 
   // Axios.defaults.withCredentials = true;
   const register = () => {
@@ -61,6 +67,7 @@ export const SignUp = () => {
       Country: country,
       PicturePath: picturePath,
       DateOfRegistration: dateOfReg,
+      Age: age,
     }).then((response: { data: any }) => {
       console.log(response.data);
     });
@@ -118,6 +125,16 @@ export const SignUp = () => {
               fullWidth
               onChange={(e) => {
                 setLastName(e.target.value);
+              }}
+            />
+            <CustomTextField
+              label="age"
+              id="age"
+              name="age"
+              variant={"filled"}
+              required
+              onChange={(e) => {
+                setAge(e.target.value);
               }}
             />
           </Stack>

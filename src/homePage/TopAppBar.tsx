@@ -36,7 +36,7 @@ export const TopAppBar = () => {
 
   useEffect(() => {
     getUserData();
-  });
+  }, []);
 
   function zIndexBasedOnScreenSize() {
     if (windowSize < 600) {

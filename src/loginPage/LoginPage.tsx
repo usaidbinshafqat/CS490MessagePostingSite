@@ -57,7 +57,6 @@ export const LoginPage = () => {
       } else {
         localStorage.setItem("accessToken", response.data);
         console.log(response.data);
-        localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
         navigate("/Home");
       }
@@ -110,8 +109,8 @@ export const LoginPage = () => {
           <CustomTextField
             label="Password"
             variant={"filled"}
-            id="password"
             type="password"
+            id="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -119,7 +118,6 @@ export const LoginPage = () => {
           <Button
             disabled={disable}
             onClick={login}
-            // href="/Home"
             variant="outlined"
             style={{ borderRadius: 20 }}
           >

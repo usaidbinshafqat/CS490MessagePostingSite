@@ -1,18 +1,18 @@
+import CloseIcon from "@mui/icons-material/Close";
+import SearchIcon from "@mui/icons-material/Search";
 import {
-  Paper,
-  IconButton,
-  InputBase,
-  Popover,
   Avatar,
   Divider,
+  IconButton,
+  InputBase,
+  List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  List,
+  Paper,
+  Popover,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { useState } from "react";
 
 export const SearchBarUMobile = (props: any) => {
   const data = props.data;

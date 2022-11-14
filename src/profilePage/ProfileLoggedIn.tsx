@@ -8,29 +8,51 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
 
-export const ProfilePage = () => {
-  let { UID } = useParams();
-
+export const ProfilePageLoggedIn = () => {
   const [messageData, setMessageData] = useState([]);
-  const [trendsData, setTrendsData] = useState([]);
+  const [UID, setUID] = useState(2);
+  const [username, setUsername] = useState("");
+
+  // const fillUserData = () => {
+  //   Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
+  //     (response: any) => {
+  //       response.data.map((user: { UID: any }) => {
+  //         setUID(user.UID);
+  //       });
+  //     }
+  //   );
+  // };
+
+  // const getMessageData = () => {
+  //   Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {
+  //     setMessageData(response.data);
+  //   });
+  // };
 
   useEffect(() => {
-    const getMessageData = () => {
-      Axios.get(
-        `http://https://cs490msgpstr.herokuapp.com/message/byId/${UID}`
-      ).then((response) => {
-        setMessageData(response.data);
-      });
-    };
-    const getTrendsData = () => {
-      Axios.get("https://cs490msgpstr.herokuapp.com/hashtag").then(
-        (response: any) => {
-          setTrendsData(response.data);
-        }
-      );
-    };
-    getMessageData();
-    getTrendsData();
+    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
+      (response: any) => {
+        response.data.map((user: { UID: any }) => {
+          setUID(user.UID);
+        });
+      }
+    );
+  }, [username]);
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {
+      setMessageData(response.data);
+    });
+  }, [UID]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setUsername(response.data.Username);
+    });
   }, []);
 
   return (
@@ -76,7 +98,7 @@ export const ProfilePage = () => {
           ))}
         </Grid>
         <Grid xs>
-          <Trends data={trendsData} />
+          <Trends />
         </Grid>
       </Grid>
     </div>
