@@ -8,7 +8,7 @@ import { ProfilePageLoggedIn } from "./profilePage/ProfileLoggedIn";
 import { AppView } from "./views/AppView";
 import { ForYouPage } from "./ForYouPage/ForYou";
 import { HashtagPage } from "./trends/HashtagPage";
-import { ProfilePageUser } from "./profilePage/ProfilePageUser";
+import { ProfilePageUser } from "./profilePage/ProfileUser";
 import { SettingsPage } from "./settingsPage/Settings";
 import { AboutUs } from "./aboutUs/AboutUs";
 
