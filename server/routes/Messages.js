@@ -6,7 +6,7 @@ const { verifyToken } = require('../middlewares/AuthMiddleware')
 
 router.get('/', async (req, res) => {
   const listOfMessages = await Message.findAll({
-    order: [['Date', 'DESC']]
+    order: [['createdAt', 'DESC']]
   })
   res.json(listOfMessages)
 })

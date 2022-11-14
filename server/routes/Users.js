@@ -58,7 +58,8 @@ router.post("/", async (req, res) => {
         LastName,
         PicturePath,
         Country,
-        City
+        City,
+        Age
     } = req.body;
     bcrypt.hash(Password, 10).then((hash) => {
         User.create({
@@ -70,7 +71,8 @@ router.post("/", async (req, res) => {
             LastName: LastName,
             PicturePath: PicturePath,
             Country: Country,
-            City: City
+            City: City,
+            Age: Age
         });
         res.json("Success");
     });

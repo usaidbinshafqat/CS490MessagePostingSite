@@ -71,10 +71,9 @@ export const Header = () => {
     <Card style={{ margin: "10px" }}>
       <CardHeader
         avatar={
-          <Avatar
-            src={"https://i.pravatar.cc/300"}
-            style={{ width: 60, height: 60 }}
-          />
+          <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
+            {firstname.slice(0, 1)}
+          </Avatar>
         }
       />
       <CardContent>

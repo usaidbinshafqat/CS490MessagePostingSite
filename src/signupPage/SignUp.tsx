@@ -67,6 +67,7 @@ export const SignUp = () => {
       Country: country,
       PicturePath: picturePath,
       DateOfRegistration: dateOfReg,
+      Age: age,
     }).then((response: { data: any }) => {
       console.log(response.data);
     });
