@@ -6,16 +6,25 @@ const { verifyToken } = require('../middlewares/AuthMiddleware')
 
 router.get('/', async (req, res) => {
   const listOfMessages = await Message.findAll({
-    order: [['createdAt', 'DESC']]
+    order: [['Date', 'DESC']]
   })
   res.json(listOfMessages)
 })
+
+router.get('/bylikes', async (req, res) => {
+    const listOfMessages = await Message.findAll({
+      order: [['Likes', 'DESC']]
+    })
+    res.json(listOfMessages)
+  })
+
 
 router.get('/byId/:UID', async (req, res) => {
   const UID = req.params.UID
 
   const userMessages = await Message.findAll({
-    where: { UID: UID }
+    where: { UID: UID },
+    order: [['Date', 'DESC']]
   })
   res.json(userMessages)
 })

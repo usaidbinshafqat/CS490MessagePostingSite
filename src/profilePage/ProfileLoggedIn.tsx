@@ -11,16 +11,48 @@ import { default as Axios } from "axios";
 export const ProfilePageLoggedIn = () => {
   const [messageData, setMessageData] = useState([]);
   const [UID, setUID] = useState(2);
+  const [username, setUsername] = useState("");
 
-  const getMessageData = () => {
-    Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {
-      setMessageData(response.data);
-      console.log(response.data);
-    });
-  };
+  // const fillUserData = () => {
+  //   Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
+  //     (response: any) => {
+  //       response.data.map((user: { UID: any }) => {
+  //         setUID(user.UID);
+  //       });
+  //     }
+  //   );
+  // };
+
+  // const getMessageData = () => {
+  //   Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {
+  //     setMessageData(response.data);
+  //   });
+  // };
 
   useEffect(() => {
-    getMessageData();
+    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
+      (response: any) => {
+        response.data.map((user: { UID: any }) => {
+          setUID(user.UID);
+        });
+      }
+    );
+  }, [username]);
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/message/byId/${UID}`).then((response) => {
+      setMessageData(response.data);
+    });
+  }, [UID]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setUsername(response.data.Username);
+    });
   }, []);
 
   return (

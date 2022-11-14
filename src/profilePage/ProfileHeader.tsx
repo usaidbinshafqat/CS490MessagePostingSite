@@ -32,10 +32,22 @@ export const Header = () => {
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      console.log(response.data);
+      setUsername(response.data.Username);
+    });
+
+    fillUserData();
+  });
+
   const fillUserData = () => {
-    Axios.get(`http://localhost:3000/users/byId/${UID}`).then(
+    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
       (response: any) => {
-        console.log(response.data);
         response.data.map(
           (user: {
             Username: string;
@@ -44,7 +56,6 @@ export const Header = () => {
             City: string;
             DateOfRegistration: string;
           }) => {
-            setUsername(user.Username);
             setFirstname(user.FirstName);
             setLastname(user.LastName);
             setCity(user.City);
@@ -55,10 +66,6 @@ export const Header = () => {
       }
     );
   };
-
-  useEffect(() => {
-    fillUserData();
-  }, []);
 
   return (
     <Card style={{ margin: "10px" }}>
@@ -72,7 +79,11 @@ export const Header = () => {
       />
       <CardContent>
         <Typography variant="h5" component="div" align="left">
-          Username
+          {`${firstname} ${lastname}`}
+        </Typography>
+        <div style={{ display: "flex", justifyContent: "space-between" }}></div>
+        <Typography variant="body1" component="div" align="left">
+          {`@${username}`}
         </Typography>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>

@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         City: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        Age: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
     })
     return User

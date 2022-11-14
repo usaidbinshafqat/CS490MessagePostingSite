@@ -39,15 +39,13 @@ export const ForYouPage = () => {
   const [messageData, setMessageData] = useState([]);
 
   const getMessageData = () => {
-    Axios.get("http://localhost:3000/messageLikes").then((response: any) => {
+    Axios.get("http://localhost:3000/message/bylikes").then((response: any) => {
       setMessageData(response.data);
     });
   };
 
-  console.log(messageData);
-
   const getAgeData = () => {
-    Axios.get(`http://localhost:3000/ageData/?age=${userAge}`).then(
+    Axios.get(`http://localhost:3000/users/${userAge}`).then(
       (response: any) => {
         setAgeData(response.data);
       }

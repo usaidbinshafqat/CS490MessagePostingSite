@@ -47,15 +47,14 @@ export const InputTextField = () => {
           accessToken: localStorage.getItem("accessToken"),
         },
       }
-    ).then((response: { data: any }) => {
-    });
+    ).then((response: { data: any }) => {});
 
-    // Axios.get("http://localhost:3000/message/bypost/#testing2").then(
-    //   (response: any) => {
-    //     console.log(response.data);
-    //     // setMsgID(response?.data?.MessageID);
-    //   }
-    // );
+    Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
+      (response: any) => {
+        console.log(response.data);
+        setMsgID(response.data.MessageID);
+      }
+    );
 
     hashTags?.forEach((hashTag: string) => {
       Axios.post("http://localhost:3000/hashtag", {
@@ -64,12 +63,12 @@ export const InputTextField = () => {
         console.log(response);
       });
 
-      // Axios.get(
-      //   `http://localhost:3000/hashtag/byhashtag/${hashTag.slice(1)}`
-      // ).then((response: any) => {
-      //   console.log(response?.data?.HashTagID);
-      //   setHashID(response?.data?.HashTagID);
-      // });
+      Axios.get(
+        `http://localhost:3000/hashtag/byhashtag/${hashTag.slice(1)}`
+      ).then((response: any) => {
+        console.log(response?.data?.HashTagID);
+        setHashID(response?.data?.HashTagID);
+      });
 
       Axios.post("http://localhost:3000/messagehashtag", {
         MessageID: msgID,
@@ -152,10 +151,6 @@ export const InputTextField = () => {
     ];
     return placeholders[Math.floor(Math.random() * placeholders.length)];
   }
-  useEffect(() => {
-    setHashTags(newPost.match(/#[^\s#]*/gim));
-  }, [newPost]);
-
   useEffect(() => {
     setHashTags(newPost.match(/#[^\s#]*/gim));
   }, [newPost]);

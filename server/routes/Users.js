@@ -22,6 +22,25 @@ router.get("/byId/:UID", async (req, res) => {
     });
     res.json(userInfo);
 })
+
+router.get("/byage/:Age", async (req, res) => {
+    const Age = req.params.Age;
+
+    const userInfo = await User.findAll({
+        where: { Age: Age }
+    });
+    res.json(userInfo);
+})
+
+router.get("/byusername/:Username", async (req, res) => {
+    const Username = req.params.Username;
+
+    const userInfo = await User.findAll({
+        where: { Username: Username }
+    });
+    res.json(userInfo);
+})
+
 router.get("/isAuth", verifyToken, async (req, res) => {
     const user = req.body
     const Username = req.user.Username;
