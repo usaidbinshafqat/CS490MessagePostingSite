@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { User } = require('../models')
+const { verifyToken } = require('../middlewares/AuthMiddleware')
 const bcrypt = require('bcrypt')
 
 const { sign } = require('jsonwebtoken')
@@ -11,6 +12,13 @@ require("dotenv").config();
 router.get("/", async (req, res) => {
     const listOfUsers = await User.findAll();
     res.json(listOfUsers);
+});
+
+router.get("/isAuth", verifyToken, async (req, res) => {
+    const user = req.body
+    const Username = req.user.Username;
+    user.Username = Username;
+    res.json(user);
 });
 
 router.post("/", async (req, res) => {

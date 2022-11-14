@@ -7,9 +7,22 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
 import { FollowButton } from "../cards/FollowButton";
+import { default as Axios } from "axios";
 
 export const Header = () => {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setUser(response.data.Username);
+    });
+  });
   return (
     <Card style={{ margin: "10px" }}>
       <CardHeader
@@ -22,9 +35,7 @@ export const Header = () => {
         action={<FollowButton />}
       />
       <CardContent>
-        <Typography variant="h5" component="div" align="left">
-          Username
-        </Typography>
+        <Typography variant="h5" component="div" align="left">{user}</Typography>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
             <Typography variant="body2" color="text.secondary" align="left">
