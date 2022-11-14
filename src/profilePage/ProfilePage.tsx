@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
-import LeftTabs from "./homePage/LeftTabs";
-import { TopAppBar } from "./homePage/TopAppBar";
-import { ProfileCards } from "./profilePage/ProfileCards";
-import { Header } from "./profilePage/ProfileHeader";
-import { Trends } from "./trends/Trends";
+import LeftTabs from "../homePage/LeftTabs";
+import { TopAppBar } from "../homePage/TopAppBar";
+import { ProfileCards } from "./ProfileCards";
+import { Header } from "./ProfileHeader";
+import { Trends } from "../trends/Trends";
 
 export const ProfilePageUnique = () => {
   return (

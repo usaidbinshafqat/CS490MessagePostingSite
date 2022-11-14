@@ -10,7 +10,7 @@ import { ForYouPage } from "./ForYouPage/ForYou";
 import { HashtagPage } from "./trends/HashtagPage";
 import { SettingsPage } from "./settingsPage/Settings";
 import { AboutUs } from "./aboutUs/AboutUs";
-import { ProfilePageUser } from "./profilePage/ProfilePageUser";
+import { ProfilePageUnique } from "./profilePage/ProfilePage";
 
 function App() {
   const theme = createTheme({
@@ -58,7 +58,7 @@ function App() {
             <Route path="/Profile" element={<ProfilePageLoggedIn />} />
             <Route path="/ForYou" element={<ForYouPage />} />
             <Route path="/Hashtag/:HashTag" element={<HashtagPage />} />
-            <Route path="/ProfilePage/:UID" element={<ProfilePageUser />} />
+            <Route path="/ProfilePage/:UID" element={<ProfilePageUnique />} />
             <Route path="/Settings" element={<SettingsPage />} />
             <Route path="/AboutUs" element={<AboutUs />} />
           </Routes>

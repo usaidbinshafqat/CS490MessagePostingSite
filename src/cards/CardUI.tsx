@@ -60,7 +60,7 @@ export const CardUI = (props: MessageDataProps) => {
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
               onClick={() => {
-                navigate(`/Profile/${props.UID}`);
+                navigate(`/ProfilePage/${props.UID}`);
               }}
             >
               U
