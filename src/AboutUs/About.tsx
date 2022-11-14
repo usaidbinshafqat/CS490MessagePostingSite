@@ -1,35 +1,20 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-// import CssBaseline from "@mui/material/CssBaseline";
+import React from "react";
+import "./styles.css";
+import KyleCard from "./KyleCard";
+import MalloryCard from "./MalloryCard";
+import UsaidCard from "./UsaidCard";
+import PhumzCard from "./PhumzCard";
+import JacksonCard from "./JacksonCard";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { Typography } from "@mui/material";
 import Link from "@mui/material/Link";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { TopAppBar } from "../homePage/TopAppBar";
-import AboutUsUsaid from "./AboutUsUsaid";
-import AboutUsJackson from "./AboutUsJackson";
-import AboutUsMallory from "./AboutUsMallory";
-import AboutUsKyle from "./AboutUsKyle";
-import AboutUsPhumz from "./AboutUsPhumz";
-import "./index.css";
-// import { create } from "lodash";
-// import { ReactComponent as HeaderLogo } from "../homePage/header_logo_svg";
 
 function Copyright() {
 	return (
 		<Typography variant="body2" color="text.secondary" align="center">
 			{"Copyright © "}
-			<Link color="inherit" href="https://mui.com/">
-				msg.postr
+			<Link color="inherit" href="http://msgpstr.com/About">
+				Msg.Postr
 			</Link>{" "}
 			{new Date().getFullYear()}
 			{"."}
@@ -37,53 +22,35 @@ function Copyright() {
 	);
 }
 
-// const styles = (theme) => ({
-// 	Card: {
-// 		width: 300,
-// 		margin: "auto",
-// 	},
-// 	Media: {
-// 		height: 550,
-// 	},
-// });
-
-export function About(params: any) {
+export default function About() {
 	return (
 		<>
-			<div style={{ marginBottom: "70px" }}>
-				<TopAppBar />
-			</div>
-			<div
-				style={{
-					alignContent: "center",
-				}}
+			<Grid
+				container
+				direction="row"
+				justifyContent="center"
+				alignItems="center"
+				spacing={{ xs: 2, md: 3 }}
+				columns={{ xs: 4, sm: 8, md: 12 }}
 			>
-				<br />
-				<div className="aboutCards">
-					<Grid item xs={6}>
-						<AboutUsKyle />
-					</Grid>
-					&nbsp;
-					<Grid item xs={6}>
-						<AboutUsUsaid />
-					</Grid>
-					&nbsp;
-					<Grid item xs={6}>
-						<AboutUsMallory />
-					</Grid>
-				</div>
-				<br />
-				<br />
-				<div className="aboutCards">
-					<Grid item xs={6}>
-						<AboutUsPhumz />
-					</Grid>
-					&nbsp;
-					<Grid item xs={6}>
-						<AboutUsJackson />
-					</Grid>
-				</div>
-			</div>
+				<Grid item xs={12} sm={6} md={4}>
+					<KyleCard />
+				</Grid>
+				<Grid item xs={12} sm={6} md={4}>
+					<PhumzCard />
+				</Grid>
+				<Grid item xs={12} sm={6} md={4}>
+					<UsaidCard />
+				</Grid>
+				<Grid item xs={12} sm={6} md={4}>
+					<MalloryCard />
+				</Grid>
+				<Grid item xs={12} sm={6} md={4}>
+					<JacksonCard />
+				</Grid>
+			</Grid>
+
+			<Copyright />
 		</>
 	);
 }

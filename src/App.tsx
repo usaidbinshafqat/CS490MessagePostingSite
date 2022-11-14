@@ -6,8 +6,7 @@ import { LoginPage } from "./loginPage/LoginPage";
 import { SignUp } from "./signupPage/SignUp";
 import { ProfilePage } from "./profilePage/Profile";
 import { AppView } from "./views/AppView";
-import { About } from "./AboutUs/About";
-
+import About from "./AboutUs/About";
 function App() {
 	const theme = createTheme({
 		components: {
