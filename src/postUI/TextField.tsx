@@ -34,7 +34,7 @@ export const InputTextField = () => {
 
   const createPost = () => {
     Axios.post(
-      "https://cs490msgpstr.herokuapp.com/message",
+      "http://localhost:3000/message",
       {
         Message: newPost,
         TypeOfMessage: messageType,

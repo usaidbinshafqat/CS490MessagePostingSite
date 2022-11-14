@@ -18,7 +18,7 @@ export const NewPost = () => {
   );
 
   const register = () => {
-    Axios.post("https://cs490msgpstr.herokuapp.com/api/register", {
+    Axios.post("http://localhost:3000/api/register", {
       firstName: firstName,
       lastName: lastName,
       userName: userName,

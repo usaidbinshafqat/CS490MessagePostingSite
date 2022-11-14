@@ -14,18 +14,16 @@ export const ProfilePageUser = () => {
   const [trendsData, setTrendsData] = useState([]);
   useEffect(() => {
     const getMessageData = () => {
-      Axios.get(
-        `http://https://cs490msgpstr.herokuapp.com/message/byId/${UID}`
-      ).then((response) => {
-        setMessageData(response.data);
-      });
-    };
-    const getTrendsData = () => {
-      Axios.get("https://cs490msgpstr.herokuapp.com/hashtag").then(
-        (response: any) => {
-          setTrendsData(response.data);
+      Axios.get(`http://http://localhost:3000/message/byId/${UID}`).then(
+        (response) => {
+          setMessageData(response.data);
         }
       );
+    };
+    const getTrendsData = () => {
+      Axios.get("http://localhost:3000/hashtag").then((response: any) => {
+        setTrendsData(response.data);
+      });
     };
     getMessageData();
     getTrendsData();
