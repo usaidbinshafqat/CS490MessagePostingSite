@@ -5,7 +5,7 @@ import { ProfileCards } from "./profilePage/ProfileCards";
 import { Header } from "./profilePage/ProfileHeader";
 import { Trends } from "./trends/Trends";
 
-export const ProfilePage = () => {
+export const ProfilePageUnique = () => {
   return (
     <div
       style={{
