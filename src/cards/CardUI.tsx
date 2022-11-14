@@ -14,8 +14,8 @@ import { FollowButton } from "./FollowButton";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
-import { memo, useState } from "react";
 import { Hashtag } from "./Hashtags";
+import { useEffect, useState } from "react";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -29,10 +29,12 @@ export interface MessageDataProps {
 }
 const Cards = (props: MessageDataProps) => {
   let navigate = useNavigate();
+  let userID = props.UID;
 
   const [likeButton, setLikeButton] = useState(false);
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
+  const [name, setName] = useState("");
 
   const updateLikes = (id: number) => {
     Axios.put(`http://localhost:3000/likes/?id=${id}`, {
@@ -42,6 +44,12 @@ const Cards = (props: MessageDataProps) => {
       console.log("id", id);
     });
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users").then((response: any) => {
+      setName(response.data.find((row: any) => row.UID === userID)?.Username);
+    });
+  }, [userID]);
 
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
@@ -59,7 +67,7 @@ const Cards = (props: MessageDataProps) => {
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}
-          title={props.UID}
+          title={name}
           subheaderTypographyProps={{ align: "left" as const }}
           // subheader={moment
           //   .tz(testing, "US/Eastern")

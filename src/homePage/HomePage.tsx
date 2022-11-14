@@ -13,7 +13,6 @@ export const HomePage = () => {
   useEffect(() => {
     Axios.get("http://localhost:3000/users").then((response) => {
       setLoginStatus(response.data[0].UID);
-      console.log(response.data);
     });
   }, []);
 

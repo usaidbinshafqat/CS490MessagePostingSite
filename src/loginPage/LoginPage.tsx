@@ -57,31 +57,11 @@ export const LoginPage = () => {
       } else {
         localStorage.setItem("accessToken", response.data);
         console.log(response.data);
-        localStorage.setItem("token", response.data.token);
         setLoginStatus(true);
         navigate("/Home");
       }
     });
   };
-
-  const userAuthentication = () => {
-    Axios.get("http://localhost:3000/api/isUserAuth", {
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    }).then((response) => {
-      console.log(response);
-    });
-  };
-
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3000/api/login").then((response) =>{
-  //     if (response.data.loggedIn === true) {
-  //     setLoginStatus(response.data.user[0].UID)
-  //     }
-  //     console.log(response);
-  //   })
-  // }, [])
 
   return (
     <div>
@@ -119,7 +99,6 @@ export const LoginPage = () => {
           <Button
             disabled={disable}
             onClick={login}
-            // href="/Home"
             variant="outlined"
             style={{ borderRadius: 20 }}
           >
