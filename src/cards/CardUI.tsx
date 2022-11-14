@@ -33,12 +33,14 @@ const Cards = (props: MessageDataProps) => {
   const [likeButton, setLikeButton] = useState(false);
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
+
   const updateLikes = (id: number) => {
-    Axios.put(`http://localhost:3000/addLikes/?id=${id}`).then((response) => {
+    Axios.put(`http://localhost:3000/likes/?id=${id}`, {
+      MessageID: id,
+      Likes: likes + 1,
+    }).then((response) => {
       console.log("id", id);
-      setLikes(likes + 1);
     });
-    setLikes(likes + 1);
   };
 
   return (
