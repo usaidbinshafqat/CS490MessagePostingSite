@@ -41,7 +41,7 @@ export const HashtagPage = () => {
     getInfo();
     getMessageData();
     filter();
-  });
+  }, []);
 
   return (
     <div

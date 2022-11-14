@@ -63,4 +63,9 @@ router.put('/likes/:id', verifyToken, async (req, res) => {
   res.json({ success: true })
 })
 
+// router.update('/likes/:id', async (req, res) => {
+//   const [results, metadata] = await sequelize.query("UPDATE Messages SET y = 42 WHERE x = 12");
+//   res.json({results})
+// })
+
 module.exports = router
