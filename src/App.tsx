@@ -4,10 +4,11 @@ import "./App.css";
 import { LandingPage } from "./landingPage/LandingPage";
 import { LoginPage } from "./loginPage/LoginPage";
 import { SignUp } from "./signupPage/SignUp";
-import { ProfilePage } from "./profilePage/Profile";
+import { ProfilePageLoggedIn } from "./profilePage/ProfileLoggedIn";
 import { AppView } from "./views/AppView";
 import { ForYouPage } from "./ForYouPage/ForYou";
 import { HashtagPage } from "./trends/HashtagPage";
+import { ProfilePageUser } from "./profilePage/ProfilePageUser";
 
 function App() {
   const theme = createTheme({
@@ -52,10 +53,10 @@ function App() {
             <Route path="/Home" element={<AppView />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/SignUp" element={<SignUp />} />
-            <Route path="/Profile" element={<ProfilePage />} />
+            <Route path="/Profile" element={<ProfilePageLoggedIn />} />
             <Route path="/ForYou" element={<ForYouPage />} />
             <Route path="/Hashtag/:id" element={<HashtagPage />} />
-            <Route path="/ProfilePage/:UID" element={<ProfilePage />} />
+            <Route path="/ProfilePage/:UID" element={<ProfilePageUser />} />
           </Routes>
         </BrowserRouter>
       </div>

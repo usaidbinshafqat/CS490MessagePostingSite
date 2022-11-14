@@ -131,6 +131,10 @@ export const InputTextField = () => {
     return placeholders[Math.floor(Math.random() * placeholders.length)];
   }
 
+  useEffect(() => {
+    setHashTags(newPost.match(/#[^\s#]*/gim));
+  }, [newPost]);
+
   let customStyle = merge({}, mentionsInputStyles, {
     input: {
       height: 80,
@@ -168,7 +172,6 @@ export const InputTextField = () => {
           a11ySuggestionsListLabel={"Suggested mentions"}
           onChange={(e) => {
             setNewPost(e.target.value);
-            setHashTags(newPost.match(/#[^\s#.;]*/gim));
           }}
           maxLength={200}
         >

@@ -13,6 +13,15 @@ router.get("/", async (req, res) => {
     res.json(listOfUsers);
 });
 
+router.get("/byId/:UID", async (req, res) => {
+    const UID = req.params.UID;
+
+    const userInfo = await User.findAll({
+        where: { UID: UID }
+    });
+    res.json(userInfo);
+});
+
 router.post("/", async (req, res) => {
     const {
         Username,

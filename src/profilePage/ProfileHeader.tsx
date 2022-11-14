@@ -20,7 +20,7 @@ interface userData {
 }
 
 export const Header = () => {
-  const [UID, setUID] = useState(1);
+  const [UID, setUID] = useState(2);
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -68,8 +68,9 @@ export const Header = () => {
   };
 
   const fillUserData = () => {
-    Axios.get(`http://localhost:3000/profileInfo?UID=${UID}`).then(
+    Axios.get(`http://localhost:3000/users/byId/${UID}`).then(
       (response: any) => {
+        console.log(response.data);
         response.data.map(
           (user: {
             Username: string;
@@ -83,7 +84,7 @@ export const Header = () => {
             setLastname(user.LastName);
             setCity(user.City);
             setDate(user.DateOfRegistration);
-            formatDate();
+            // formatDate();
           }
         );
       }

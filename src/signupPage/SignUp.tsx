@@ -21,7 +21,13 @@ export const SignUp = () => {
   );
   const [age, setAge] = useState("");
   const [dateOfReg, setDateOfReg] = useState(
-    `${new Date().toISOString().slice(0, 19).replace("T", " ")}`
+    `${new Date().toLocaleString("en-US", {
+      month: "short",
+      year: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    })}`
   );
 
   useEffect(() => {

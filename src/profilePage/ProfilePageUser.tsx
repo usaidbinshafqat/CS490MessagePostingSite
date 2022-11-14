@@ -8,12 +8,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
 
-export const ProfilePage = () => {
+export const ProfilePageUser = () => {
   let { UID } = useParams();
-
   const [messageData, setMessageData] = useState([]);
   const [trendsData, setTrendsData] = useState([]);
-
   useEffect(() => {
     const getMessageData = () => {
       Axios.get(`http://localhost:3000/message/byId/${UID}`).then(
@@ -30,7 +28,6 @@ export const ProfilePage = () => {
     getMessageData();
     getTrendsData();
   }, []);
-
   return (
     <div
       style={{
@@ -74,7 +71,7 @@ export const ProfilePage = () => {
           ))}
         </Grid>
         <Grid xs>
-          <Trends />
+          <Trends data={trendsData} />
         </Grid>
       </Grid>
     </div>
