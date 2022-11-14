@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-import { useState, useEffect } from "react";
 import { HomePage } from "../homePage/HomePage";
 import LeftTabs from "../homePage/LeftTabs";
 import { Trends } from "../trends/Trends";

@@ -17,4 +17,3 @@ router.post("/", async (req, res) => {
 module.exports = router;
 
 
-sqlSelect = "MessageHashTags.MessageID FROM MessageHashTags INNER JOIN HashTags ON MessageHashTags.HashTagID = "
