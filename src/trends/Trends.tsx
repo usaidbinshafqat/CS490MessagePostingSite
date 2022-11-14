@@ -48,7 +48,7 @@ export const Trends = (props: any) => {
 
   useEffect(() => {
     getTrendsData();
-  }, []);
+  });
 
   return (
     <div>

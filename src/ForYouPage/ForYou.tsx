@@ -37,6 +37,7 @@ export const ForYouPage = () => {
   const [wordEnteredCity, setWordEnteredCity] = useState("");
   const [searchByAge, setSearchByAge] = useState(true);
   const [messageData, setMessageData] = useState([]);
+  const [username, setUsername] = useState("");
 
   const getMessageData = () => {
     Axios.get("http://localhost:3000/message/bylikes").then((response: any) => {
@@ -45,9 +46,22 @@ export const ForYouPage = () => {
   };
 
   const getAgeData = () => {
-    Axios.get("http://localhost:3000/users/byage/20").then((response: any) => {
-      setAgeData(response.data);
-    });
+    Axios.get(`http://localhost:3000/users/byage/${userAge}`).then(
+      (response: any) => {
+        setAgeData(response.data);
+      }
+    );
+  };
+
+  const fillUserData = () => {
+    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
+      (response: any) => {
+        response.data.map((user: { City: string; Age: any }) => {
+          setUserCity(user.City);
+          setUserAge(user.Age);
+        });
+      }
+    );
   };
 
   const ageClick = () => {
@@ -139,7 +153,7 @@ export const ForYouPage = () => {
   };
 
   const getCityData = () => {
-    Axios.get("http://localhost:3000/users/bycity/Cadillac").then(
+    Axios.get(`http://localhost:3000/users/bycity/${userCity}`).then(
       (response: any) => {
         setCityData(response.data);
       }
@@ -195,10 +209,18 @@ export const ForYouPage = () => {
   };
 
   useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setUsername(response.data.Username);
+    });
+    fillUserData();
     getMessageData();
     getAgeData();
     getCityData();
-  }, []);
+  });
 
   return (
     <div

@@ -23,7 +23,7 @@ export const HomePage = () => {
       });
     };
     getMessageData();
-  }, []);
+  });
 
   return (
     <React.Fragment>
