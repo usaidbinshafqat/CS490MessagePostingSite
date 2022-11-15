@@ -27,7 +27,7 @@ export const Hashtag = (props: any) => {
       } else if (word.includes("@")) {
         return (
           <ButtonBase
-            href="/Login"
+            href={`/ProfilePage/${word.slice(1)}`}
             className="hashat-button"
             sx={{ color: "#C197D2" }}
           >

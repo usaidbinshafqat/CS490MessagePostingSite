@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { FollowButton } from "./FollowButton";
+import { FollowButton, FollowButtonMobile } from "./FollowButton";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
@@ -83,7 +83,13 @@ export const CardUI = (props: MessageDataProps) => {
           //   .tz(testing, "US/Eastern")
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
-          action={<FollowButton></FollowButton>}
+          action={
+            window.screen.width > 600 ? (
+              <FollowButton following={false}></FollowButton>
+            ) : (
+              <FollowButtonMobile following={false}></FollowButtonMobile>
+            )
+          }
         />
         <CardContent>
           <Typography align="left">
