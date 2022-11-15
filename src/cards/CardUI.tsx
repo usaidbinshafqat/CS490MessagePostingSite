@@ -35,13 +35,23 @@ export const CardUI = (props: MessageDataProps) => {
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
   const [name, setName] = useState("");
+  const [messageID, setMessageID] = useState(0);
 
   const updateLikes = (id: number) => {
-    Axios.put("http://localhost:3000/message/likes", {
-      MessageID: id,
+    Axios.get(`http://localhost:3000/message/bymsgid/${id}`).then(
+      (response) => {
+        console.log(response.data.MessageID);
+        console.log(response.data.Likes);
+        setLikes(response.data.Likes);
+        setMessageID(response.data.MessageID);
+      }
+    );
+
+    Axios.post("http://localhost:3000/message", {
       Likes: likes,
+      MessageID: messageID,
     }).then((response) => {
-      console.log("success");
+      console.log(response.data.error);
     });
   };
 
