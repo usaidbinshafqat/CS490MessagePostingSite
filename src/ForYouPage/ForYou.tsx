@@ -40,28 +40,30 @@ export const ForYouPage = () => {
   const [username, setUsername] = useState("");
 
   const getMessageData = () => {
-    Axios.get("http://localhost:3000/message/bylikes").then((response: any) => {
-      setMessageData(response.data);
-    });
+    Axios.get("https://msgpstrbackend.herokuapp.com/message/bylikes").then(
+      (response: any) => {
+        setMessageData(response.data);
+      }
+    );
   };
 
   const getAgeData = () => {
-    Axios.get(`http://localhost:3000/users/byage/${userAge}`).then(
-      (response: any) => {
-        setAgeData(response.data);
-      }
-    );
+    Axios.get(
+      `https://msgpstrbackend.herokuapp.com/users/byage/${userAge}`
+    ).then((response: any) => {
+      setAgeData(response.data);
+    });
   };
 
   const fillUserData = () => {
-    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
-      (response: any) => {
-        response.data.map((user: { City: string; Age: any }) => {
-          setUserCity(user.City);
-          setUserAge(user.Age);
-        });
-      }
-    );
+    Axios.get(
+      `https://msgpstrbackend.herokuapp.com/users/byusername/${username}`
+    ).then((response: any) => {
+      response.data.map((user: { City: string; Age: any }) => {
+        setUserCity(user.City);
+        setUserAge(user.Age);
+      });
+    });
   };
 
   const ageClick = () => {
@@ -153,11 +155,11 @@ export const ForYouPage = () => {
   };
 
   const getCityData = () => {
-    Axios.get(`http://localhost:3000/users/bycity/${userCity}`).then(
-      (response: any) => {
-        setCityData(response.data);
-      }
-    );
+    Axios.get(
+      `https://msgpstrbackend.herokuapp.com/users/bycity/${userCity}`
+    ).then((response: any) => {
+      setCityData(response.data);
+    });
   };
 
   const handleAgeFilter = (e: { target: { value: any } }) => {
@@ -209,7 +211,7 @@ export const ForYouPage = () => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users/isAuth", {
+    Axios.get("https://msgpstrbackend.herokuapp.com/users/isAuth", {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
       },

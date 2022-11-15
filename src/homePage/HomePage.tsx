@@ -11,16 +11,18 @@ export const HomePage = () => {
   const [messageData, setMessageData] = React.useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users").then((response) => {
+    Axios.get("https://msgpstrbackend.herokuapp.com/users").then((response) => {
       setLoginStatus(response.data[0].UID);
     });
   }, []);
 
   useEffect(() => {
     const getMessageData = () => {
-      Axios.get("http://localhost:3000/message").then((response: any) => {
-        setMessageData(response.data);
-      });
+      Axios.get("https://msgpstrbackend.herokuapp.com/message").then(
+        (response: any) => {
+          setMessageData(response.data);
+        }
+      );
     };
     getMessageData();
   }, []);

@@ -17,7 +17,7 @@ export const HashtagPage = () => {
 
   const getInfo = () => {
     Axios.get(
-      `http://localhost:3000/hashtag/byhashtag/${hashtag.HashTag}`
+      `https://msgpstrbackend.herokuapp.com/hashtag/byhashtag/${hashtag.HashTag}`
     ).then((response: any) => {
       setTitle(response.data.HashTag);
       setHashTag(response.data.HashTag);
@@ -25,9 +25,11 @@ export const HashtagPage = () => {
   };
 
   const getMessageData = () => {
-    Axios.get("http://localhost:3000/message/bylikes").then((response: any) => {
-      setData(response.data);
-    });
+    Axios.get("https://msgpstrbackend.herokuapp.com/message/bylikes").then(
+      (response: any) => {
+        setData(response.data);
+      }
+    );
   };
 
   const filter = () => {

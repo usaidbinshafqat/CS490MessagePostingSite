@@ -37,7 +37,7 @@ export const CardUI = (props: MessageDataProps) => {
   const [name, setName] = useState("");
 
   const updateLikes = (id: number) => {
-    Axios.put(`http://localhost:3000/likes/?id=${id}`, {
+    Axios.put(`https://msgpstrbackend.herokuapp.com/likes/?id=${id}`, {
       MessageID: id,
       Likes: likes + 1,
     }).then((response) => {
@@ -46,9 +46,11 @@ export const CardUI = (props: MessageDataProps) => {
   };
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users").then((response: any) => {
-      setName(response.data.find((row: any) => row.UID === userID)?.Username);
-    });
+    Axios.get("https://msgpstrbackend.herokuapp.com/users").then(
+      (response: any) => {
+        setName(response.data.find((row: any) => row.UID === userID)?.Username);
+      }
+    );
   }, [userID]);
 
   return (

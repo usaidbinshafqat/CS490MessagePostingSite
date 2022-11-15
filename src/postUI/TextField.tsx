@@ -34,7 +34,7 @@ export const InputTextField = () => {
 
   const createPost = () => {
     Axios.post(
-      "http://localhost:3000/message",
+      "https://msgpstrbackend.herokuapp.com/message",
       {
         Message: newPost,
         TypeOfMessage: messageType,
@@ -52,7 +52,7 @@ export const InputTextField = () => {
 
     hashTags?.forEach((hashTag: string) => {
       setCurrentHash(hashTag.slice(1));
-      Axios.post("http://localhost:3000/hashtag", {
+      Axios.post("https://msgpstrbackend.herokuapp.com/hashtag", {
         HashTag: hashTag.slice(1),
       }).then((response) => {
         console.log(response);
@@ -73,21 +73,21 @@ export const InputTextField = () => {
   }, [newPost]);
 
   // useEffect(() => {
-  //   Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
+  //   Axios.get(`https://msgpstrbackend.herokuapp.com/message/bypost/${newPost}`).then(
   //     (response: any) => {
   //       setMsgID(response.data.MessageID);
   //       console.log(msgID);
   //     }
   //   );
 
-  //   Axios.get(`http://localhost:3000/hashtag/byhashtag/${currentHash}`).then(
+  //   Axios.get(`https://msgpstrbackend.herokuapp.com/hashtag/byhashtag/${currentHash}`).then(
   //     (response: any) => {
   //       setHashID(response.data.HashTagID);
   //       console.log(hashID);
   //     }
   //   );
 
-  //   Axios.post("http://localhost:3000/messagehashtag", {
+  //   Axios.post("https://msgpstrbackend.herokuapp.com/messagehashtag", {
   //     MessageID: msgID,
   //     HashTagID: hashID,
   //   }).then((response) => {
@@ -215,7 +215,9 @@ export const InputTextField = () => {
           disabled={disablePostButton}
           onClick={() => {
             createPost();
-            resetCard();
+            setTimeout(() => {
+              resetCard();
+            }, 1000);
           }}
         >
           Post

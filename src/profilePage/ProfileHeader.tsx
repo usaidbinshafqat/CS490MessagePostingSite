@@ -33,7 +33,7 @@ export const Header = () => {
   const [day, setDay] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users/isAuth", {
+    Axios.get("https://msgpstrbackend.herokuapp.com/users/isAuth", {
       headers: {
         accessToken: localStorage.getItem("accessToken"),
       },
@@ -46,25 +46,25 @@ export const Header = () => {
   });
 
   const fillUserData = () => {
-    Axios.get(`http://localhost:3000/users/byusername/${username}`).then(
-      (response: any) => {
-        response.data.map(
-          (user: {
-            Username: string;
-            FirstName: string;
-            LastName: string;
-            City: string;
-            DateOfRegistration: string;
-          }) => {
-            setFirstname(user.FirstName);
-            setLastname(user.LastName);
-            setCity(user.City);
-            setDate(user.DateOfRegistration);
-            // formatDate();
-          }
-        );
-      }
-    );
+    Axios.get(
+      `https://msgpstrbackend.herokuapp.com/users/byusername/${username}`
+    ).then((response: any) => {
+      response.data.map(
+        (user: {
+          Username: string;
+          FirstName: string;
+          LastName: string;
+          City: string;
+          DateOfRegistration: string;
+        }) => {
+          setFirstname(user.FirstName);
+          setLastname(user.LastName);
+          setCity(user.City);
+          setDate(user.DateOfRegistration);
+          // formatDate();
+        }
+      );
+    });
   };
 
   return (

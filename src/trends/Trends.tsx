@@ -23,9 +23,11 @@ export const Trends = (props: any) => {
   const [wordEntered, setWordEntered] = useState("");
 
   const getTrendsData = () => {
-    Axios.get("http://localhost:3000/hashtag").then((response: any) => {
-      setData(response.data);
-    });
+    Axios.get("https://msgpstrbackend.herokuapp.com/hashtag").then(
+      (response: any) => {
+        setData(response.data);
+      }
+    );
   };
 
   const handleFilter = (e: { target: { value: any } }) => {
