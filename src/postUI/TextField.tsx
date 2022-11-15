@@ -57,13 +57,11 @@ export const InputTextField = () => {
       }).then((response) => {
         console.log(response);
       });
-
-      setNewPost("");
     });
   };
 
   const resetCard = () => {
-    setNewPost("");
+    window.location.reload();
   };
 
   useEffect(() => {

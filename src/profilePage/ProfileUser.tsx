@@ -14,7 +14,7 @@ export const ProfilePageUser = () => {
   const [trendsData, setTrendsData] = useState([]);
   useEffect(() => {
     const getMessageData = () => {
-      Axios.get(`http://localhost:3000/message/byId/${UID}`).then(
+      Axios.get(`http://http://localhost:3000/message/byId/${UID}`).then(
         (response) => {
           setMessageData(response.data);
         }
