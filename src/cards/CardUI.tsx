@@ -51,6 +51,13 @@ export const CardUI = (props: MessageDataProps) => {
     });
   }, [userID]);
 
+  // useEffect(()=> {
+  //   Axios.get("http://localhost:3000/users/byusername/:Username").then((response: any) => {
+  //     setName(response.data.find((row: any) => row.UID === userID)?.Username);
+  //   });
+  // }, [userID]);
+  // })
+
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
       <Card variant="outlined">
@@ -60,7 +67,7 @@ export const CardUI = (props: MessageDataProps) => {
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
               onClick={() => {
-                navigate(`/ProfilePage/:UID/${props.UID}`);
+                navigate(`/ProfilePage/${name}`);
               }}
             >
               U

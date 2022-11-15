@@ -66,9 +66,6 @@ export const ProfileCards = (props: MessageDataProps) => {
             <Avatar
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
-              onClick={() => {
-                navigate(`/Profile/${props.UID}`);
-              }}
             >
               U
             </Avatar>

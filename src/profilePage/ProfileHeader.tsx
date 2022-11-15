@@ -38,7 +38,6 @@ export const Header = () => {
         accessToken: localStorage.getItem("accessToken"),
       },
     }).then((response: any) => {
-      console.log(response.data);
       setUsername(response.data.Username);
     });
 
