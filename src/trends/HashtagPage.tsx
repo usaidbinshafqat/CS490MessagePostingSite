@@ -35,13 +35,17 @@ export const HashtagPage = () => {
       return msg.Message?.split(" ").includes(`#${hashTag}`);
     });
     setMessageData(newFilter);
+    console.log(messageData);
   };
 
   useEffect(() => {
     getInfo();
+  }, []);
+
+  useEffect(() => {
     getMessageData();
     filter();
-  }, []);
+  }, [title]);
 
   return (
     <div

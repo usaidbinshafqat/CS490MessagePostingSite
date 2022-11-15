@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { FollowButton } from "./FollowButton";
+import { FollowButton, FollowButtonMobile } from "./FollowButton";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
@@ -35,13 +35,23 @@ export const CardUI = (props: MessageDataProps) => {
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
   const [name, setName] = useState("");
+  const [messageID, setMessageID] = useState(0);
 
   const updateLikes = (id: number) => {
-    Axios.put(`http://localhost:3000/likes/?id=${id}`, {
-      MessageID: id,
-      Likes: likes + 1,
+    Axios.get(`http://localhost:3000/message/bymsgid/${id}`).then(
+      (response) => {
+        console.log(response.data.MessageID);
+        console.log(response.data.Likes);
+        setLikes(response.data.Likes);
+        setMessageID(response.data.MessageID);
+      }
+    );
+
+    Axios.post("http://localhost:3000/message", {
+      Likes: likes,
+      MessageID: messageID,
     }).then((response) => {
-      console.log("id", id);
+      console.log(response.data.error);
     });
   };
 
@@ -73,7 +83,13 @@ export const CardUI = (props: MessageDataProps) => {
           //   .tz(testing, "US/Eastern")
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
-          action={<FollowButton></FollowButton>}
+          action={
+            window.screen.width > 600 ? (
+              <FollowButton following={false}></FollowButton>
+            ) : (
+              <FollowButtonMobile following={false}></FollowButtonMobile>
+            )
+          }
         />
         <CardContent>
           <Typography align="left">
