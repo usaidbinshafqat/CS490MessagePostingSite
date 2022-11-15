@@ -220,7 +220,7 @@ export const ForYouPage = () => {
     getMessageData();
     getAgeData();
     getCityData();
-  });
+  }, [username, userCity, userAge]);
 
   return (
     <div
