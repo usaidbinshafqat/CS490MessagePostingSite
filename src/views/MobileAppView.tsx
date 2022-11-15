@@ -6,6 +6,7 @@ import { NewPost } from "../postUI/NewPost";
 import { useAppSelector } from "../store/hooks";
 import { Trends } from "../trends/Trends";
 import { default as Axios } from "axios";
+import { ForYouPageMobile } from "../ForYouPage/ForYouMobile";
 
 export const MobileAppView = () => {
   const homePageState = useAppSelector(
@@ -16,7 +17,7 @@ export const MobileAppView = () => {
   return (
     <>
       <React.Fragment>
-        {homePageState === 0 ? <HomePage /> : <Trends />}
+        {homePageState === 0 ? <HomePage /> : <ForYouPageMobile />}
         {dialogState === true ? <NewPost /> : <></>}
 
         <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}>
