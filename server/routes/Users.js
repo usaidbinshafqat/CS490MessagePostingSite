@@ -61,6 +61,13 @@ router.get("/isAuth", verifyToken, async (req, res) => {
     res.json(user);
 });
 
+router.get("/isAuthID", verifyToken, async (req, res) => {
+    const user = req.body
+    const UID = req.user.UID;
+    user.UID = UID;
+    res.json(user);
+});
+
 router.post("/", async (req, res) => {
     const {
         Username,

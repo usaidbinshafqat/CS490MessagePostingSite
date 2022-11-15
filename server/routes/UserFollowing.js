@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { verifyToken } = require('../middlewares/AuthMiddleware')
+
 
 const { UserFollowing } = require('../models')
 
@@ -8,8 +10,10 @@ router.get("/", async (req, res) => {
     res.json(listOfUserfollowing);
 });
 
-router.post("/", async (req, res) => {
+router.post("/",verifyToken, async (req, res) => {
     const userfollowing = req.body
+    const UID = req.user.UID
+    userfollowing.UID = UID
     await UserFollowing.create(userfollowing);
     res.json(userfollowing)
 })

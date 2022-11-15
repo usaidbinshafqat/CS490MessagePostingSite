@@ -7,6 +7,7 @@ import {
   CardHeader,
   Typography,
   Avatar,
+  Button,
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -16,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
 import { Hashtag } from "./Hashtags";
 import { useEffect, useState } from "react";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -27,6 +29,7 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
+
 export const CardUI = (props: MessageDataProps) => {
   let navigate = useNavigate();
   let userID = props.UID;
@@ -35,6 +38,8 @@ export const CardUI = (props: MessageDataProps) => {
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
   const [name, setName] = useState("");
+  const [following, setFollowing] = useState([] as any);
+  const [currentUID, setCurrentUID] = useState();
 
   const updateLikes = (id: number) => {
     Axios.put(`http://localhost:3000/likes/?id=${id}`, {
@@ -49,14 +54,38 @@ export const CardUI = (props: MessageDataProps) => {
     Axios.get("http://localhost:3000/users").then((response: any) => {
       setName(response.data.find((row: any) => row.UID === userID)?.Username);
     });
-  }, [userID]);
 
-  // useEffect(()=> {
-  //   Axios.get("http://localhost:3000/users/byusername/:Username").then((response: any) => {
-  //     setName(response.data.find((row: any) => row.UID === userID)?.Username);
-  //   });
-  // }, [userID]);
-  // })
+    Axios.get("http://localhost:3000/users/isAuthID", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setCurrentUID(response.data.UID);
+      console.log(response.data.UID);
+    });
+
+    Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
+      // console.log(response.data);
+      setFollowing(
+        response.data.filter((row: any) => row.UID === currentUID)?.Following
+      );
+      console.log(following);
+    });
+  }, [userID, currentUID, following]);
+
+  const followUser = () => {
+    Axios.post(
+      "http://localhost:3000/userfollowing",
+      {
+        Following: userID,
+      },
+      {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      }
+    );
+  };
 
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
@@ -80,7 +109,22 @@ export const CardUI = (props: MessageDataProps) => {
           //   .tz(testing, "US/Eastern")
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
-          action={<FollowButton></FollowButton>}
+          action={
+            <Button
+              variant="contained"
+              style={{ borderRadius: 20 }}
+              size="small"
+              onClick={followUser}
+              disabled={following?.includes(userID) === true ? true : false}
+              endIcon={
+                <PersonAddIcon
+                  color={following?.includes(userID) ? "warning" : "error"}
+                />
+              }
+            >
+              {following?.includes(userID) ? "Following" : "Follow"}
+            </Button>
+          }
         />
         <CardContent>
           <Typography align="left">

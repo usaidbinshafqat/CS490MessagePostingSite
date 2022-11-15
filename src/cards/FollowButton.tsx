@@ -1,28 +1,19 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-export class FollowButton extends React.Component<{}, { followed: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      followed: false,
-    };
-  }
+export const FollowButton = (props: {onClick:()=>void}) => {
 
-  render() {
     return (
       <Button
         variant="contained"
         style={{ borderRadius: 20 }}
         size="small"
-        onClick={() => this.setState({ followed: !this.state.followed })}
         endIcon={
-          <PersonAddIcon color={this.state.followed ? "warning" : "error"} />
+          <PersonAddIcon color={0 ? "warning" : "error"} />
         }
       >
-        {this.state.followed ? "Unfollow" : "Follow"}
+        {0 ? "follow" : "Following"}
       </Button>
     );
-  }
 }
