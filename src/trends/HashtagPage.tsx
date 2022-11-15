@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { ProfileCards } from "../profilePage/ProfileCards";
 import { default as Axios } from "axios";
 import { useState, useEffect } from "react";
 import { CardUI } from "../cards/CardUI";

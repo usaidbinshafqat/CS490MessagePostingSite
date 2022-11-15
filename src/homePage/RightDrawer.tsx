@@ -16,7 +16,10 @@ export const RightDrawer = () => {
   const open = useAppSelector((state) => state.reducers.drawerOpen);
   const dispatch = useAppDispatch();
 
-
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    window.location.href = "/";
+  };
   const getList = () => {
     return (
       <Box sx={{ width: 250 }}>
@@ -27,17 +30,23 @@ export const RightDrawer = () => {
 
           <ListItemText primary="Profile" />
         </ListItem>
-        <ListItem button component={Link} to="/Login">
-          <ListItemIcon>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-        <ListItem button onClick={() => console.log("Logging Settings")}>
+        <ListItem button component={Link} to="/Settings">
           <ListItemIcon>
             <SettingsRounded />
           </ListItemIcon>
           <ListItemText primary="Settings" />
+        </ListItem>
+        <ListItem
+          onClick={() =>
+            setTimeout(() => {
+              logout();
+            }, 500)
+          }
+        >
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
         </ListItem>
       </Box>
     );
