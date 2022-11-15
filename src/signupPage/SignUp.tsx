@@ -73,6 +73,9 @@ export const SignUp = () => {
     });
   };
 
+  const moveToLogin = () => {
+    window.location.href = "/login";
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -205,8 +208,12 @@ export const SignUp = () => {
             disabled={disable}
             variant="outlined"
             style={{ borderRadius: 20, marginBottom: "20px" }}
-            href="/Login"
-            onClick={register}
+            onClick={() => {
+              register();
+              setTimeout(() => {
+                moveToLogin();
+              }, 1000);
+            }}
           >
             Sign Up
           </Button>
