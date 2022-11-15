@@ -26,7 +26,7 @@ import CakeIcon from "@mui/icons-material/Cake";
 import { CardUI } from "../cards/CardUI";
 import Tooltip from "@mui/material/Tooltip";
 
-export const ForYouPage = () => {
+export const ForYouPageMobile = () => {
   const [userAge, setUserAge] = useState(0);
   const [userCity, setUserCity] = useState("Kalamazoo");
   const [ageData, setAgeData] = useState([]);
@@ -226,48 +226,27 @@ export const ForYouPage = () => {
     <div
       style={{
         alignContent: "center",
-        marginLeft: "100px",
+        marginLeft: "auto",
         marginRight: "auto",
       }}
     >
       <div style={{ marginBottom: "70px" }}>
         <TopAppBar />
       </div>
-      <Grid
-        container
-        sx={{
-          "--Grid-borderWidth": "1px",
-          borderLeft: "var(--Grid-borderWidth) solid",
-          borderColor: "divider",
-          "& > div": {
-            borderRight: "var(--Grid-borderWidth) solid",
-            borderBottom: "var(--Grid-borderWidth) solid",
-            borderColor: "divider",
-            gap: 1,
-          },
-        }}
-      >
-        <Grid item xs={2}>
-          <LeftTabs />
-        </Grid>
-        <Grid item xs={6}>
-          <div>
-            {messageData.map((event: any) => (
-              <CardUI
-                MessageID={event.MessageID}
-                UID={event.UID}
-                TypeOfMessage={event.TypeOfMessage}
-                Message={event.Message}
-                Path={event.Path}
-                Date={event.Date}
-                Likes={event.Likes}
-                Privacy={event.Privacy}
-              />
-            ))}
-          </div>
-        </Grid>
-        {searchByAge ? ageSearch() : citySearch()}
-      </Grid>
+      <div>
+        {messageData.map((event: any) => (
+          <CardUI
+            MessageID={event.MessageID}
+            UID={event.UID}
+            TypeOfMessage={event.TypeOfMessage}
+            Message={event.Message}
+            Path={event.Path}
+            Date={event.Date}
+            Likes={event.Likes}
+            Privacy={event.Privacy}
+          />
+        ))}
+      </div>
     </div>
   );
 };
