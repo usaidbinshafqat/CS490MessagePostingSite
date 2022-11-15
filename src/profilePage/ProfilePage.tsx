@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
 import { TopAppBar } from "../homePage/TopAppBar";
-import { ProfileCards } from "./ProfileCards";
 import { Header } from "./ProfileHeader";
 import { Trends } from "../trends/Trends";
 

@@ -58,7 +58,7 @@ export const TopAppBar = () => {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/Home"
               sx={{
                 display: "flex",
                 fontFamily: "monospace",

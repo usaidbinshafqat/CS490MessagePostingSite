@@ -11,7 +11,6 @@ import {
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { FollowButton, FollowButtonMobile } from "./FollowButton";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
 import { Hashtag } from "./Hashtags";
