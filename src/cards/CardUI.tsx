@@ -85,7 +85,49 @@ export const CardUI = (props: MessageDataProps) => {
       );
       setCheckFollow(following?.includes(userID));
     });
-  }, [userID, currentUID, following]);
+  }, [following]);
+
+  const DeskButton = () => {
+    return (
+      <Button
+        variant="contained"
+        style={{ borderRadius: 20 }}
+        size="small"
+        onClick={() => {
+          !checkFollow && followUser();
+        }}
+        endIcon={
+          !checkFollow ? (
+            <PersonAddIcon
+              color={following?.includes(userID) ? "warning" : "error"}
+            />
+          ) : (
+            <Person color={following?.includes(userID) ? "warning" : "error"} />
+          )
+        }
+      >
+        {checkFollow ? "Following" : "Follow"}
+      </Button>
+    );
+  };
+
+  const MobileButton = () => {
+    return (
+      <IconButton
+        onClick={() => {
+          !checkFollow && followUser();
+        }}
+      >
+        {!checkFollow ? (
+          <PersonAddIcon
+            color={following?.includes(userID) ? "warning" : "error"}
+          />
+        ) : (
+          <Person color={following?.includes(userID) ? "warning" : "error"} />
+        )}
+      </IconButton>
+    );
+  };
 
   const followUser = () => {
     Axios.post(
@@ -124,32 +166,11 @@ export const CardUI = (props: MessageDataProps) => {
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
           action={
-            // window.screen.width > 600 ? (
-            //   <FollowButton following={false}></FollowButton>
-            // ) : (
-            //   <FollowButtonMobile following={false}></FollowButtonMobile>
-            // )
-            <Button
-              variant="contained"
-              style={{ borderRadius: 20 }}
-              size="small"
-              onClick={() => {
-                !checkFollow && followUser();
-              }}
-              endIcon={
-                !checkFollow ? (
-                  <PersonAddIcon
-                    color={following?.includes(userID) ? "warning" : "error"}
-                  />
-                ) : (
-                  <Person
-                    color={following?.includes(userID) ? "warning" : "error"}
-                  />
-                )
-              }
-            >
-              {checkFollow ? "Following" : "Follow"}
-            </Button>
+            window.screen.width > 600 ? (
+              <DeskButton></DeskButton>
+            ) : (
+              <MobileButton></MobileButton>
+            )
           }
         />
         <CardContent>
