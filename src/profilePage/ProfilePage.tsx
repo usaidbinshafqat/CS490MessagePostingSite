@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
 import { TopAppBar } from "../homePage/TopAppBar";
 import { Header } from "./ProfileHeader";
@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { default as Axios } from "axios";
 import { UniqueHeader } from "./uniqueHeader";
 import { CardUI } from "../cards/CardUI";
+import { BottomBar } from "../homePage/BottomBar";
 
 export const ProfilePageUnique = () => {
   const [messageData, setMessageData] = useState([]);
@@ -22,8 +23,6 @@ export const ProfilePageUnique = () => {
             Axios.get(`http://localhost:3000/message/byId/${user.UID}`).then(
               (response) => {
                 setMessageData(response.data);
-                console.log(response.data);
-                console.log(messageData);
               }
             );
           });
@@ -31,7 +30,6 @@ export const ProfilePageUnique = () => {
       );
     };
     getMessageByUsername();
-    console.log(messageData);
   }, []);
 
   // useEffect(() => {
@@ -85,7 +83,19 @@ export const ProfilePageUnique = () => {
             <LeftTabs />
           </Grid>
           <Grid xs={6}>
-            <Header />
+            <UniqueHeader username={username.UID} />
+            {Object.values(messageData).map((event: any) => (
+              <CardUI
+                MessageID={event.MessageID}
+                UID={event.UID}
+                TypeOfMessage={event.TypeOfMessage}
+                Message={event.Message}
+                Path={event.Path}
+                Date={event.Date}
+                Likes={event.Likes}
+                Privacy={event.Privacy}
+              />
+            ))}
           </Grid>
           <Grid xs>
             <Trends />

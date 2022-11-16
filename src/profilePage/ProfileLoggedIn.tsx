@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
 import { TopAppBar } from "../homePage/TopAppBar";
 import { Trends } from "../trends/Trends";
@@ -7,6 +7,7 @@ import { Header } from "./ProfileHeader";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
+import { BottomBar } from "../homePage/BottomBar";
 
 export const ProfilePageLoggedIn = () => {
   const [messageData, setMessageData] = useState([]);

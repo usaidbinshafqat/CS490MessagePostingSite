@@ -69,10 +69,10 @@ export const CardUI = (props: MessageDataProps) => {
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
               onClick={() => {
-                navigate(`/ProfilePage/${props.UID}`);
+                navigate(`/ProfilePage/${name}`);
               }}
             >
-              U
+              {name.slice(0, 1).toUpperCase()}
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}

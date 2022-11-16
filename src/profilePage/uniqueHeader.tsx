@@ -63,7 +63,7 @@ export const UniqueHeader = (params: any) => {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
-            {firstname.slice(0, 1)}
+            {username?.slice(0, 1).toUpperCase()}
           </Avatar>
         }
       />
