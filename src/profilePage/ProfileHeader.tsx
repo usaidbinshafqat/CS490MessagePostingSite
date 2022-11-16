@@ -43,7 +43,9 @@ export const Header = () => {
     }).then((response: any) => {
       setUsername(response.data.Username);
     });
+  }, []);
 
+  useEffect(() => {
     fillUserData();
   }, [username]);
 
@@ -89,9 +91,13 @@ export const Header = () => {
           .filter((row: any) => row.Following === currentUID)
           .map((row: any) => row.currentUID)
       );
-      console.log(following);
     });
-  }, [currentUID, following]);
+  }, [username, firstname]);
+
+  useEffect(() => {
+    setNumFollowing(following.length);
+    setNumFollowers(follower.length);
+  }, [UID, following]);
 
   return (
     <Card style={{ margin: "10px" }}>
@@ -142,7 +148,7 @@ export const Header = () => {
             Followers
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {follower.length}
+            {numFollowers}
           </Typography>
         </Box>
         <Box p={2} flex={"auto"}>
@@ -150,7 +156,7 @@ export const Header = () => {
             Following
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {following.length}
+            {numFollowing}
           </Typography>
         </Box>
       </Box>
