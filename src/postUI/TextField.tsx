@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { Mention, MentionsInput } from "react-mentions";
-import mentionsStyles from "./mentionsStyles";
-import mentionsInputStyles from "./mentionsInputStyles";
-import merge from "lodash/merge";
 import { default as Axios } from "axios";
-import { Button, CardActions, CircularProgress } from "@mui/material";
+import {
+  Button,
+  CardActions,
+  CircularProgress,
+  TextField,
+} from "@mui/material";
 import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { LockPersonRounded, LockOpenRounded } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 
 export const InputTextField = () => {
-  // const [value, setValue] = useState("")
+  const [allUsers, setAllUsers] = useState([]);
   const [disablePostButton, setDisablePostButton] = useState(true);
   const [newPost, setNewPost] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -157,48 +158,21 @@ export const InputTextField = () => {
     setHashTags(newPost.match(/#[^\s#]*/gim));
   }, [newPost]);
 
-  let customStyle = merge({}, mentionsInputStyles, {
-    input: {
-      height: 80,
-      overflow: "auto",
-    },
-    highlighter: {
-      height: 80,
-      overflow: "hidden",
-      boxSizing: "border-box",
-    },
-  });
-
-  const users = [
-    {
-      id: "isaac",
-      display: "Isaac Newton",
-    },
-    {
-      id: "sam",
-      display: "Sam Victor",
-    },
-    {
-      id: "emma",
-      display: "Emmanuel",
-    },
-  ];
-
   return (
     <>
       <div className="App">
-        <MentionsInput
-          style={customStyle}
-          value={newPost}
-          placeholder={randomPlaceholderGenerator()}
-          a11ySuggestionsListLabel={"Suggested mentions"}
+        <TextField
+          id="outlined-multiline-static"
+          multiline
+          fullWidth
           onChange={(e) => {
             setNewPost(e.target.value);
           }}
-          maxLength={200}
-        >
-          <Mention style={mentionsStyles} data={users} trigger={"@"} />
-        </MentionsInput>
+          rows={4}
+          placeholder={randomPlaceholderGenerator()}
+          helperText={newPost.length + "/200"}
+          inputProps={{ maxLength: 200 }}
+        />
       </div>
       <CardActions>
         <CircularProgress
