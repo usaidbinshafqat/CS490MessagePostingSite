@@ -75,7 +75,9 @@ export const CardUI = (props: MessageDataProps) => {
     }).then((response: any) => {
       setCurrentUID(response.data.UID);
     });
+  }, []);
 
+  useEffect(() => {
     Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
       // console.log(response.data);
       setFollowing(
@@ -85,7 +87,7 @@ export const CardUI = (props: MessageDataProps) => {
       );
       setCheckFollow(following?.includes(userID));
     });
-  }, [following]);
+  }, [currentUID, name]);
 
   const DeskButton = () => {
     return (
@@ -106,7 +108,7 @@ export const CardUI = (props: MessageDataProps) => {
           )
         }
       >
-        {checkFollow ? "Following" : "Follow"}
+        {following?.includes(userID) ? "Following" : "Follow"}
       </Button>
     );
   };
