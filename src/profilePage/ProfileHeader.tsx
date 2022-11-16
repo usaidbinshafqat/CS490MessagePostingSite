@@ -33,6 +33,7 @@ export const Header = () => {
   const [day, setDay] = useState("");
   const [currentUID, setCurrentUID] = useState();
   const [following, setFollowing] = useState([] as any);
+  const [follower, setFollower] = useState([] as any);
 
   useEffect(() => {
     Axios.get("http://localhost:3000/users/isAuth", {
@@ -82,6 +83,11 @@ export const Header = () => {
         response.data
           .filter((row: any) => row.UID === currentUID)
           .map((row: any) => row.Following)
+      );
+      setFollower(
+        response.data
+          .filter((row: any) => row.Following === currentUID)
+          .map((row: any) => row.currentUID)
       );
       console.log(following);
     });
@@ -136,7 +142,7 @@ export const Header = () => {
             Followers
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {numFollowers}
+            {follower.length}
           </Typography>
         </Box>
         <Box p={2} flex={"auto"}>

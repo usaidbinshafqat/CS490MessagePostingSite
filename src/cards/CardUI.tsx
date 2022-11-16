@@ -18,6 +18,8 @@ import { default as Axios } from "axios";
 import { Hashtag } from "./Hashtags";
 import { useEffect, useState } from "react";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonIcon from "@mui/icons-material/Person";
+import { Person } from "@mui/icons-material";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -40,6 +42,7 @@ export const CardUI = (props: MessageDataProps) => {
   const [name, setName] = useState("");
   const [following, setFollowing] = useState([] as any);
   const [currentUID, setCurrentUID] = useState();
+  const [checkFollow, setCheckFollow] = useState(false);
 
   const updateLikes = (id: number) => {
     Axios.put(`http://localhost:3000/likes/?id=${id}`, {
@@ -61,15 +64,16 @@ export const CardUI = (props: MessageDataProps) => {
       },
     }).then((response: any) => {
       setCurrentUID(response.data.UID);
-      console.log(response.data.UID);
     });
 
     Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
       // console.log(response.data);
       setFollowing(
-        response.data.filter((row: any) => row.UID === currentUID)?.Following
+        response.data
+          .filter((row: any) => row.UID === currentUID)
+          .map((row: any) => row.Following)
       );
-      console.log(following);
+      setCheckFollow(following?.includes(userID));
     });
   }, [userID, currentUID, following]);
 
@@ -114,15 +118,22 @@ export const CardUI = (props: MessageDataProps) => {
               variant="contained"
               style={{ borderRadius: 20 }}
               size="small"
-              onClick={followUser}
-              disabled={following?.includes(userID) === true ? true : false}
+              onClick={() => {
+                !checkFollow && followUser();
+              }}
               endIcon={
-                <PersonAddIcon
-                  color={following?.includes(userID) ? "warning" : "error"}
-                />
+                !checkFollow ? (
+                  <PersonAddIcon
+                    color={following?.includes(userID) ? "warning" : "error"}
+                  />
+                ) : (
+                  <Person
+                    color={following?.includes(userID) ? "warning" : "error"}
+                  />
+                )
               }
             >
-              {following?.includes(userID) ? "Following" : "Follow"}
+              {checkFollow ? "Following" : "Follow"}
             </Button>
           }
         />
