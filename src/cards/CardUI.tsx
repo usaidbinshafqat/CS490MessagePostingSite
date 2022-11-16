@@ -7,14 +7,19 @@ import {
   CardHeader,
   Typography,
   Avatar,
+  Button,
 } from "@mui/material";
 import * as React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { FollowButton, FollowButtonMobile } from "./FollowButton";
+import { FollowButton } from "./FollowButton";
+// import { FollowButton, FollowButtonMobile } from "./FollowButton";
 import { useNavigate } from "react-router-dom";
 import { default as Axios } from "axios";
 import { Hashtag } from "./Hashtags";
 import { useEffect, useState } from "react";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonIcon from "@mui/icons-material/Person";
+import { Person } from "@mui/icons-material";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -26,6 +31,7 @@ export interface MessageDataProps {
   Likes: number;
   Privacy: boolean;
 }
+
 export const CardUI = (props: MessageDataProps) => {
   let navigate = useNavigate();
   let userID = props.UID;
@@ -34,6 +40,9 @@ export const CardUI = (props: MessageDataProps) => {
   const testing = String(props.Date);
   const [likes, setLikes] = useState(props.Likes);
   const [name, setName] = useState("");
+  const [following, setFollowing] = useState([] as any);
+  const [currentUID, setCurrentUID] = useState();
+  const [checkFollow, setCheckFollow] = useState(false);
   const [messageID, setMessageID] = useState(0);
 
   const updateLikes = (id: number) => {
@@ -58,7 +67,39 @@ export const CardUI = (props: MessageDataProps) => {
     Axios.get("http://localhost:3000/users").then((response: any) => {
       setName(response.data.find((row: any) => row.UID === userID)?.Username);
     });
-  }, [userID]);
+
+    Axios.get("http://localhost:3000/users/isAuthID", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setCurrentUID(response.data.UID);
+    });
+
+    Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
+      // console.log(response.data);
+      setFollowing(
+        response.data
+          .filter((row: any) => row.UID === currentUID)
+          .map((row: any) => row.Following)
+      );
+      setCheckFollow(following?.includes(userID));
+    });
+  }, [userID, currentUID, following]);
+
+  const followUser = () => {
+    Axios.post(
+      "http://localhost:3000/userfollowing",
+      {
+        Following: userID,
+      },
+      {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      }
+    );
+  };
 
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
@@ -69,10 +110,10 @@ export const CardUI = (props: MessageDataProps) => {
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
               onClick={() => {
-                navigate(`/ProfilePage/${props.UID}`);
+                navigate(`/ProfilePage/${name}`);
               }}
             >
-              U
+              {name.slice(0, 1).toUpperCase()}
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}
@@ -83,11 +124,32 @@ export const CardUI = (props: MessageDataProps) => {
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
           action={
-            window.screen.width > 600 ? (
-              <FollowButton following={false}></FollowButton>
-            ) : (
-              <FollowButtonMobile following={false}></FollowButtonMobile>
-            )
+            // window.screen.width > 600 ? (
+            //   <FollowButton following={false}></FollowButton>
+            // ) : (
+            //   <FollowButtonMobile following={false}></FollowButtonMobile>
+            // )
+            <Button
+              variant="contained"
+              style={{ borderRadius: 20 }}
+              size="small"
+              onClick={() => {
+                !checkFollow && followUser();
+              }}
+              endIcon={
+                !checkFollow ? (
+                  <PersonAddIcon
+                    color={following?.includes(userID) ? "warning" : "error"}
+                  />
+                ) : (
+                  <Person
+                    color={following?.includes(userID) ? "warning" : "error"}
+                  />
+                )
+              }
+            >
+              {checkFollow ? "Following" : "Follow"}
+            </Button>
           }
         />
         <CardContent>

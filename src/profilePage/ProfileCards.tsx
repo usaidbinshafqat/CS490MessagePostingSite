@@ -10,9 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Hashtag } from "../cards/Hashtags";
+import { default as Axios } from "axios";
 
 export interface MessageDataProps {
   MessageID: number;
@@ -48,6 +49,15 @@ class LikeButton extends React.Component<{}, { liked: boolean }> {
 export const ProfileCards = (props: MessageDataProps) => {
   const testing = String(props.Date);
   let navigate = useNavigate();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/users/byId/${props.UID}`).then(
+      (response) => {
+        setUsername(response.data[0].Username);
+      }
+    );
+  }, []);
 
   return (
     <Box sx={{ minWidth: 275, margin: "10px" }}>
@@ -58,14 +68,14 @@ export const ProfileCards = (props: MessageDataProps) => {
               sx={{ bgcolor: "#453750" }}
               aria-label="profile pic"
               onClick={() => {
-                navigate(`/Profile/${props.UID}`);
+                navigate(`/Profile/${username}`);
               }}
             >
-              U
+              {username.slice(0, 1).toUpperCase()}
             </Avatar>
           }
           titleTypographyProps={{ align: "left" as const }}
-          title={props.UID}
+          title={username}
           subheaderTypographyProps={{ align: "left" as const }}
           subheader={moment(testing).format("MMM Do YYYY, h:mm a")}
         />

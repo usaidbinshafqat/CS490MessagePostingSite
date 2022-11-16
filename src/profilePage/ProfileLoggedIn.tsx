@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import LeftTabs from "../homePage/LeftTabs";
 import { TopAppBar } from "../homePage/TopAppBar";
 import { Trends } from "../trends/Trends";
@@ -7,6 +7,7 @@ import { Header } from "./ProfileHeader";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { default as Axios } from "axios";
+import { BottomBar } from "../homePage/BottomBar";
 
 export const ProfilePageLoggedIn = () => {
   const [messageData, setMessageData] = useState([]);
@@ -55,34 +56,68 @@ export const ProfilePageLoggedIn = () => {
     });
   }, []);
 
-  return (
-    <div
-      style={{
-        alignContent: "center",
-        marginLeft: "100px",
-        marginRight: "auto",
-      }}
-    >
-      <div style={{ marginBottom: "70px" }}>
-        <TopAppBar />
-      </div>
-      <Grid
-        container
-        sx={{
-          "--Grid-borderWidth": "1px",
-          borderLeft: "var(--Grid-borderWidth) solid",
-          borderColor: "divider",
-          "& > div": {
-            borderRight: "var(--Grid-borderWidth) solid",
-            borderBottom: "var(--Grid-borderWidth) solid",
-            borderColor: "divider",
-          },
+  if (window.screen.width > 600) {
+    return (
+      <div
+        style={{
+          alignContent: "center",
+          marginLeft: "100px",
+          marginRight: "auto",
         }}
       >
-        <Grid xs={2}>
-          <LeftTabs />
+        <div style={{ marginBottom: "70px" }}>
+          <TopAppBar />
+        </div>
+        <Grid
+          container
+          sx={{
+            "--Grid-borderWidth": "1px",
+            borderLeft: "var(--Grid-borderWidth) solid",
+            borderColor: "divider",
+            "& > div": {
+              borderRight: "var(--Grid-borderWidth) solid",
+              borderBottom: "var(--Grid-borderWidth) solid",
+              borderColor: "divider",
+            },
+          }}
+        >
+          <Grid xs={2}>
+            <LeftTabs />
+          </Grid>
+          <Grid xs={6}>
+            <Header />
+            {Object.values(messageData).map((event: any) => (
+              <ProfileCards
+                MessageID={event.MessageID}
+                UID={event.UID}
+                TypeOfMessage={event.TypeOfMessage}
+                Message={event.Message}
+                Path={event.Path}
+                Date={event.Date}
+                Likes={event.Likes}
+                Privacy={event.Privacy}
+              />
+            ))}
+          </Grid>
+          <Grid xs>
+            <Trends />
+          </Grid>
         </Grid>
-        <Grid xs={6}>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          alignContent: "center",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <div style={{ marginBottom: "70px" }}>
+          <TopAppBar />
+        </div>
+        <div>
           <Header />
           {Object.values(messageData).map((event: any) => (
             <ProfileCards
@@ -96,11 +131,8 @@ export const ProfilePageLoggedIn = () => {
               Privacy={event.Privacy}
             />
           ))}
-        </Grid>
-        <Grid xs>
-          <Trends />
-        </Grid>
-      </Grid>
-    </div>
-  );
+        </div>
+      </div>
+    );
+  }
 };

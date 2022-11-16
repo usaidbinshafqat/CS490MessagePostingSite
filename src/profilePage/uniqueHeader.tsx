@@ -19,9 +19,9 @@ interface userData {
   DateOfRegistration: any;
 }
 
-export const Header = () => {
+export const UniqueHeader = (params: any) => {
   const [UID, setUID] = useState(2);
-  const [username, setUsername] = useState("");
+  const username = params.username;
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [city, setCity] = useState("");
@@ -31,19 +31,8 @@ export const Header = () => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
-  const [currentUID, setCurrentUID] = useState();
-  const [following, setFollowing] = useState([] as any);
-  const [follower, setFollower] = useState([] as any);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users/isAuth", {
-      headers: {
-        accessToken: localStorage.getItem("accessToken"),
-      },
-    }).then((response: any) => {
-      setUsername(response.data.Username);
-    });
-
     fillUserData();
   }, [username]);
 
@@ -69,36 +58,12 @@ export const Header = () => {
     );
   };
 
-  useEffect(() => {
-    Axios.get("http://localhost:3000/users/isAuthID", {
-      headers: {
-        accessToken: localStorage.getItem("accessToken"),
-      },
-    }).then((response: any) => {
-      setCurrentUID(response.data.UID);
-    });
-
-    Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
-      setFollowing(
-        response.data
-          .filter((row: any) => row.UID === currentUID)
-          .map((row: any) => row.Following)
-      );
-      setFollower(
-        response.data
-          .filter((row: any) => row.Following === currentUID)
-          .map((row: any) => row.currentUID)
-      );
-      console.log(following);
-    });
-  }, [currentUID, following]);
-
   return (
     <Card style={{ margin: "10px" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic">
-            {username.slice(0, 1).toUpperCase()}
+            {username?.slice(0, 1).toUpperCase()}
           </Avatar>
         }
       />
@@ -142,7 +107,7 @@ export const Header = () => {
             Followers
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {follower.length}
+            {numFollowers}
           </Typography>
         </Box>
         <Box p={2} flex={"auto"}>
@@ -150,7 +115,7 @@ export const Header = () => {
             Following
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {following.length}
+            {numFollowing}
           </Typography>
         </Box>
       </Box>

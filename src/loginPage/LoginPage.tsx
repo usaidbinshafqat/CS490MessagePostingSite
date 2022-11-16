@@ -48,15 +48,11 @@ export const LoginPage = () => {
       Password: password,
     }).then((response) => {
       if (response.data.message) {
-        // alert(response.data.message);
-        console.log(response.data.error);
         setLoginStatus(false);
         setResponseMessage(response.data.message);
-        console.log(response.data.message);
         navigate("/Login");
       } else {
         localStorage.setItem("accessToken", response.data);
-        console.log(response.data);
         setLoginStatus(true);
         navigate("/Home");
       }
