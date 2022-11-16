@@ -19,9 +19,9 @@ interface userData {
   DateOfRegistration: any;
 }
 
-export const Header = () => {
+export const UniqueHeader = (params: any) => {
   const [UID, setUID] = useState(2);
-  const [username, setUsername] = useState("");
+  const username = params.username;
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [city, setCity] = useState("");
@@ -33,14 +33,6 @@ export const Header = () => {
   const [day, setDay] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/users/isAuth", {
-      headers: {
-        accessToken: localStorage.getItem("accessToken"),
-      },
-    }).then((response: any) => {
-      setUsername(response.data.Username);
-    });
-
     fillUserData();
   }, [username]);
 
