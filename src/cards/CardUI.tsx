@@ -44,6 +44,25 @@ export const CardUI = (props: MessageDataProps) => {
   const [currentUID, setCurrentUID] = useState();
   const [checkFollow, setCheckFollow] = useState(false);
   const [messageID, setMessageID] = useState(0);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setUsername(response.data.Username);
+    });
+  }, []);
+
+  const checkIfMe = () => {
+    if (name === username) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const updateLikes = (id: number) => {
     Axios.get(`http://localhost:3000/message/bymsgid/${id}`).then(
@@ -100,11 +119,11 @@ export const CardUI = (props: MessageDataProps) => {
         }}
         endIcon={
           !checkFollow ? (
+            <Person color={following?.includes(userID) ? "warning" : "error"} />
+          ) : (
             <PersonAddIcon
               color={following?.includes(userID) ? "warning" : "error"}
             />
-          ) : (
-            <Person color={following?.includes(userID) ? "warning" : "error"} />
           )
         }
       >
@@ -121,11 +140,11 @@ export const CardUI = (props: MessageDataProps) => {
         }}
       >
         {!checkFollow ? (
+          <Person color={following?.includes(userID) ? "warning" : "error"} />
+        ) : (
           <PersonAddIcon
             color={following?.includes(userID) ? "warning" : "error"}
           />
-        ) : (
-          <Person color={following?.includes(userID) ? "warning" : "error"} />
         )}
       </IconButton>
     );
@@ -168,10 +187,14 @@ export const CardUI = (props: MessageDataProps) => {
           //   .format("MMM Do YYYY, h:mm a")}
           subheader={testing}
           action={
-            window.screen.width > 600 ? (
-              <DeskButton></DeskButton>
+            !checkIfMe() ? (
+              window.screen.width > 600 ? (
+                <DeskButton></DeskButton>
+              ) : (
+                <MobileButton></MobileButton>
+              )
             ) : (
-              <MobileButton></MobileButton>
+              <></>
             )
           }
         />

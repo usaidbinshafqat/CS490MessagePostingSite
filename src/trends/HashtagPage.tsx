@@ -46,67 +46,110 @@ export const HashtagPage = () => {
     filter();
   }, [title]);
 
-  return (
-    <div
-      style={{
-        alignContent: "center",
-        marginLeft: "100px",
-        marginRight: "auto",
-      }}
-    >
-      <div style={{ marginBottom: "70px" }}>
-        <TopAppBar />
-      </div>
-      <Grid
-        container
-        sx={{
-          "--Grid-borderWidth": "1px",
-          borderLeft: "var(--Grid-borderWidth) solid",
-          borderColor: "divider",
-          "& > div": {
-            borderRight: "var(--Grid-borderWidth) solid",
-            borderBottom: "var(--Grid-borderWidth) solid",
-            borderColor: "divider",
-            gap: 1,
-          },
+  if (window.screen.width > 600) {
+    return (
+      <div
+        style={{
+          alignContent: "center",
+          marginLeft: "100px",
+          marginRight: "auto",
         }}
       >
-        <Grid item xs={2}>
-          <LeftTabs />
+        <div style={{ marginBottom: "70px" }}>
+          <TopAppBar />
+        </div>
+        <Grid
+          container
+          sx={{
+            "--Grid-borderWidth": "1px",
+            borderLeft: "var(--Grid-borderWidth) solid",
+            borderColor: "divider",
+            "& > div": {
+              borderRight: "var(--Grid-borderWidth) solid",
+              borderBottom: "var(--Grid-borderWidth) solid",
+              borderColor: "divider",
+              gap: 1,
+            },
+          }}
+        >
+          <Grid item xs={2}>
+            <LeftTabs />
+          </Grid>
+          <Grid item xs={6}>
+            <Typography
+              variant="h4"
+              align="left"
+              sx={{
+                paddingLeft: "18px",
+                paddingTop: "13px",
+                paddingBottom: "7px",
+                color: "#C197D2",
+                fontWeight: "bold",
+              }}
+            >
+              {`#${title}`}
+            </Typography>
+            <div>
+              {messageData.map((event: any) => (
+                <CardUI
+                  MessageID={event.MessageID}
+                  UID={event.UID}
+                  TypeOfMessage={event.TypeOfMessage}
+                  Message={event.Message}
+                  Path={event.Path}
+                  Date={event.Date}
+                  Likes={event.Likes}
+                  Privacy={event.Privacy}
+                />
+              ))}
+            </div>
+          </Grid>
+          <Grid item xs>
+            <Trends />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Typography
-            variant="h4"
-            align="left"
-            sx={{
-              paddingLeft: "18px",
-              paddingTop: "13px",
-              paddingBottom: "7px",
-              color: "#C197D2",
-              fontWeight: "bold",
-            }}
-          >
-            {`#${title}`}
-          </Typography>
-          <div>
-            {messageData.map((event: any) => (
-              <CardUI
-                MessageID={event.MessageID}
-                UID={event.UID}
-                TypeOfMessage={event.TypeOfMessage}
-                Message={event.Message}
-                Path={event.Path}
-                Date={event.Date}
-                Likes={event.Likes}
-                Privacy={event.Privacy}
-              />
-            ))}
-          </div>
-        </Grid>
-        <Grid item xs>
-          <Trends />
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          alignContent: "center",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <div style={{ marginBottom: "70px" }}>
+          <TopAppBar />
+        </div>
+        <Typography
+          variant="h4"
+          align="left"
+          sx={{
+            paddingLeft: "18px",
+            paddingTop: "13px",
+            paddingBottom: "7px",
+            color: "#C197D2",
+            fontWeight: "bold",
+          }}
+        >
+          {`#${title}`}
+        </Typography>
+        <div>
+          {messageData.map((event: any) => (
+            <CardUI
+              MessageID={event.MessageID}
+              UID={event.UID}
+              TypeOfMessage={event.TypeOfMessage}
+              Message={event.Message}
+              Path={event.Path}
+              Date={event.Date}
+              Likes={event.Likes}
+              Privacy={event.Privacy}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 };
