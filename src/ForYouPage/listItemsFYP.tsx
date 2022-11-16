@@ -23,7 +23,7 @@ export const ListItemsFYP = (props: any) => {
           >
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
-                <Avatar alt="#" src="/static/images/avatar/1.jpg" />
+                <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic" />
               </ListItemAvatar>
               <ListItemText
                 primary={`${value.FirstName} ${value.LastName}`}

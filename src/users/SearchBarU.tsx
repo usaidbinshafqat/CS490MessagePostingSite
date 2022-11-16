@@ -117,9 +117,7 @@ export const SearchBarU = (props: any) => {
                           <Avatar
                             sx={{ bgcolor: "#453750" }}
                             aria-label="profile pic"
-                          >
-                            U
-                          </Avatar>
+                          ></Avatar>
                         </ListItemAvatar>
                         <ListItemText
                           primary={`${user.FirstName} ${user.LastName}`}
