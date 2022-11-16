@@ -31,6 +31,9 @@ export const Header = () => {
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
+  const [currentUID, setCurrentUID] = useState();
+  const [following, setFollowing] = useState([] as any);
+  const [follower, setFollower] = useState([] as any);
 
   useEffect(() => {
     Axios.get("http://localhost:3000/users/isAuth", {
@@ -65,6 +68,30 @@ export const Header = () => {
       }
     );
   };
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuthID", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setCurrentUID(response.data.UID);
+    });
+
+    Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
+      setFollowing(
+        response.data
+          .filter((row: any) => row.UID === currentUID)
+          .map((row: any) => row.Following)
+      );
+      setFollower(
+        response.data
+          .filter((row: any) => row.Following === currentUID)
+          .map((row: any) => row.currentUID)
+      );
+      console.log(following);
+    });
+  }, [currentUID, following]);
 
   return (
     <Card style={{ margin: "10px" }}>
@@ -115,7 +142,7 @@ export const Header = () => {
             Followers
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {numFollowers}
+            {follower.length}
           </Typography>
         </Box>
         <Box p={2} flex={"auto"}>
@@ -123,7 +150,7 @@ export const Header = () => {
             Following
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {numFollowing}
+            {following.length}
           </Typography>
         </Box>
       </Box>
