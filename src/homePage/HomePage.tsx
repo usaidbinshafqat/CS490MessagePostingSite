@@ -5,6 +5,7 @@ import "./index.css";
 import { default as Axios } from "axios";
 import { DesktopPostCard } from "../postUI/DesktopPostCard";
 import { useEffect, useState } from "react";
+import { Button, Typography } from "@mui/material";
 
 export const HomePage = () => {
   const [loginStatus, setLoginStatus] = useState("");
@@ -106,10 +107,35 @@ export const HomePage = () => {
   //   );
   // });
 
+  // if (filteredData.length === 1) {
+  //   return (
+
+  //     <Typography>
+  //       Follow some users to make your life more interesting
+  //     </Typography>
+  //   );
+  // }
+
   return (
     <React.Fragment>
       <div>
         {window.screen.width < 600 ? <></> : <DesktopPostCard />}
+        {filteredData.length === 0 ? (
+          <>
+            <Typography variant="h5">
+              Follow some users to make your life more interesting
+            </Typography>
+            <Button
+              variant="contained"
+              style={{ borderRadius: 20 }}
+              href="ForYou"
+            >
+              Explore
+            </Button>
+          </>
+        ) : (
+          <></>
+        )}
         {Object.values(filteredData).map((event: any) => (
           <CardUI
             MessageID={event.MessageID}
