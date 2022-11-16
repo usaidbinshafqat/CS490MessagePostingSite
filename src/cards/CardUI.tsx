@@ -116,6 +116,9 @@ export const CardUI = (props: MessageDataProps) => {
         size="small"
         onClick={() => {
           !checkFollow && followUser();
+          setTimeout(() => {
+            refreshPage();
+          }, 1000);
         }}
         endIcon={
           !checkFollow ? (
@@ -137,6 +140,9 @@ export const CardUI = (props: MessageDataProps) => {
       <IconButton
         onClick={() => {
           !checkFollow && followUser();
+          setTimeout(() => {
+            refreshPage();
+          }, 1000);
         }}
       >
         {!checkFollow ? (
@@ -150,6 +156,9 @@ export const CardUI = (props: MessageDataProps) => {
     );
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
   const followUser = () => {
     Axios.post(
       "http://localhost:3000/userfollowing",
