@@ -1,11 +1,10 @@
 import { Paper } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BottomBar } from "../homePage/BottomBar";
 import { HomePage } from "../homePage/HomePage";
 import { NewPost } from "../postUI/NewPost";
 import { useAppSelector } from "../store/hooks";
 import { Trends } from "../trends/Trends";
-import { default as Axios } from "axios";
 import { ForYouPageMobile } from "../ForYouPage/ForYouMobile";
 
 export const MobileAppView = () => {
@@ -17,7 +16,13 @@ export const MobileAppView = () => {
   return (
     <>
       <React.Fragment>
-        {homePageState === 0 ? <HomePage /> : <ForYouPageMobile />}
+        {homePageState === "home" ? (
+          <HomePage />
+        ) : homePageState === "trends" ? (
+          <Trends />
+        ) : (
+          <ForYouPageMobile />
+        )}
         {dialogState === true ? <NewPost /> : <></>}
 
         <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}>

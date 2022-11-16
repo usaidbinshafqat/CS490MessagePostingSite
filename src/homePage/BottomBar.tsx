@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { Home, Tag } from "@mui/icons-material";
+import { Home, Tag, Diversity1 } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actions } from "../store/slice";
 
@@ -20,8 +20,13 @@ export const BottomBar = () => {
       }}
       value={currentTab}
     >
-      <BottomNavigationAction label="Home" icon={<Home />} />
-      <BottomNavigationAction label="Trends" icon={<Tag />} />
+      <BottomNavigationAction label="Home" value="home" icon={<Home />} />
+      <BottomNavigationAction label="Trends" value="trends" icon={<Tag />} />
+      <BottomNavigationAction
+        label="For You"
+        value="foryou"
+        icon={<Diversity1 />}
+      />
     </BottomNavigation>
   );
 };
