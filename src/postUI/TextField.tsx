@@ -73,29 +73,6 @@ export const InputTextField = () => {
     }
   }, [newPost]);
 
-  // useEffect(() => {
-  //   Axios.get(`http://localhost:3000/message/bypost/${newPost}`).then(
-  //     (response: any) => {
-  //       setMsgID(response.data.MessageID);
-  //       console.log(msgID);
-  //     }
-  //   );
-
-  //   Axios.get(`http://localhost:3000/hashtag/byhashtag/${currentHash}`).then(
-  //     (response: any) => {
-  //       setHashID(response.data.HashTagID);
-  //       console.log(hashID);
-  //     }
-  //   );
-
-  //   Axios.post("http://localhost:3000/messagehashtag", {
-  //     MessageID: msgID,
-  //     HashTagID: hashID,
-  //   }).then((response) => {
-  //     console.log(response);
-  //   });
-  // }, [currentHash, newPost]);
-
   function CardToggleButton() {
     const handleTooltipTitle = () => {
       if (privacy) {
@@ -189,7 +166,9 @@ export const InputTextField = () => {
           disabled={disablePostButton}
           onClick={() => {
             createPost();
-            resetCard();
+            setTimeout(() => {
+              resetCard();
+            }, 1000);
           }}
         >
           Post
