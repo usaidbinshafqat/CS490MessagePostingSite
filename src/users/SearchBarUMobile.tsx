@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListItemButton,
   Paper,
   Popover,
 } from "@mui/material";
@@ -103,22 +104,27 @@ export const SearchBarUMobile = (props: any) => {
               }}
             >
               {filteredData.map(
-                (user: { FirstName: string; LastName: string }) => {
+                (user: {
+                  FirstName: string;
+                  LastName: string;
+                  Username: string;
+                }) => {
                   return (
                     <>
-                      <ListItem alignItems="flex-start">
+                      <ListItemButton
+                        href={`/ProfilePage/${user.Username}`}
+                        alignItems="flex-start"
+                      >
                         <ListItemAvatar>
                           <Avatar
                             sx={{ bgcolor: "#453750" }}
                             aria-label="profile pic"
-                          >
-                            U
-                          </Avatar>
+                          ></Avatar>
                         </ListItemAvatar>
                         <ListItemText
                           primary={`${user.FirstName} ${user.LastName} `}
                         />
-                      </ListItem>
+                      </ListItemButton>
                       <Divider variant="inset" component="li" />
                     </>
                   );
