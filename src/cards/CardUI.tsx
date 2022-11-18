@@ -74,7 +74,7 @@ export const CardUI = (props: MessageDataProps) => {
       }
     );
 
-    Axios.post("http://localhost:3000/message", {
+    Axios.put("http://localhost:3000/message/", {
       Likes: likes,
       MessageID: messageID,
     }).then((response) => {
