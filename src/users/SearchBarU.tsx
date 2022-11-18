@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListItemButton,
   List,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -109,24 +110,33 @@ export const SearchBarU = (props: any) => {
             >
               {filteredData
                 .slice(0, 5)
-                .map((user: { FirstName: string; LastName: string }) => {
-                  return (
-                    <>
-                      <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                          <Avatar
-                            sx={{ bgcolor: "#453750" }}
-                            aria-label="profile pic"
-                          ></Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={`${user.FirstName} ${user.LastName}`}
-                        />
-                      </ListItem>
-                      <Divider variant="inset" component="li" />
-                    </>
-                  );
-                })}
+                .map(
+                  (user: {
+                    FirstName: string;
+                    LastName: string;
+                    Username: string;
+                  }) => {
+                    return (
+                      <>
+                        <ListItemButton
+                          href={`/ProfilePage/${user.Username}`}
+                          alignItems="flex-start"
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              sx={{ bgcolor: "#453750" }}
+                              aria-label="profile pic"
+                            ></Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={`${user.FirstName} ${user.LastName}`}
+                          />
+                        </ListItemButton>
+                        <Divider variant="inset" component="li" />
+                      </>
+                    );
+                  }
+                )}
             </List>
           </div>
         </div>

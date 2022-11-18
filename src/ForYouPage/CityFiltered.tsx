@@ -4,6 +4,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
+  ListItemButton,
   Divider,
 } from "@mui/material";
 
@@ -12,7 +13,7 @@ export const CityFiltered = (props: any) => {
   console.log(filteredData);
   return filteredData
     .slice(0, 20)
-    .map((user: { FirstName: string; LastName: string }) => {
+    .map((user: { FirstName: string; LastName: string; Username: string }) => {
       return (
         <List
           sx={{
@@ -22,14 +23,17 @@ export const CityFiltered = (props: any) => {
           }}
         >
           <>
-            <ListItem alignItems="flex-start">
+            <ListItemButton
+              href={`/ProfilePage/${user.Username}`}
+              alignItems="flex-start"
+            >
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic" />
               </ListItemAvatar>
               <ListItemText
                 primary={`${user.FirstName} ${user.LastName}`}
               ></ListItemText>
-            </ListItem>
+            </ListItemButton>
             <Divider variant="inset" component="li" />
           </>
         </List>

@@ -45,6 +45,7 @@ export const CardUI = (props: MessageDataProps) => {
   const [checkFollow, setCheckFollow] = useState(false);
   const [messageID, setMessageID] = useState(0);
   const [username, setUsername] = useState("");
+  const [updateThis, setUpdateThis] = useState<any[]>([]);
 
   useEffect(() => {
     Axios.get("http://localhost:3000/users/isAuth", {
@@ -65,22 +66,27 @@ export const CardUI = (props: MessageDataProps) => {
   };
 
   const updateLikes = (id: number) => {
-    Axios.get(`http://localhost:3000/message/bymsgid/${id}`).then(
-      (response) => {
-        console.log(response.data.MessageID);
-        console.log(response.data.Likes);
-        setLikes(response.data.Likes);
-        setMessageID(response.data.MessageID);
-      }
-    );
-
-    Axios.put("http://localhost:3000/message/", {
-      Likes: likes,
-      MessageID: messageID,
-    }).then((response) => {
-      console.log(response.data.error);
+    Axios.get("http://localhost:3000/message").then((response) => {
+      setUpdateThis(response.data.filter((row: any) => row.MessageID === id));
     });
   };
+
+  useEffect(() => {
+    updateThis.map((row: any) => {
+      setLikes(row.Likes + 1);
+      setMessageID(row.MessageID);
+    });
+  }, [updateThis]);
+
+  useEffect(() => {
+    const changeTable = () => {
+      Axios.post(`http://localhost:3000/message/likes/${messageID}`, {
+        Likes: likes,
+      });
+    };
+
+    changeTable();
+  }, [likes]);
 
   useEffect(() => {
     Axios.get("http://localhost:3000/users").then((response: any) => {
