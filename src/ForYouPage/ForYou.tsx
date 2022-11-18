@@ -92,7 +92,7 @@ export const ForYouPage = () => {
               onChange={handleCityFilter}
               value={wordEnteredCity}
             />
-            <Tooltip title="Click to search by age" arrow>
+            <Tooltip title="Click to search users your age" arrow>
               <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
                 {wordEnteredCity.length === 0 ? (
                   <LocationCityIcon onClick={cityClick} />
@@ -132,7 +132,7 @@ export const ForYouPage = () => {
               onChange={handleAgeFilter}
               value={wordEnteredAge}
             />
-            <Tooltip title="Click to search by city" arrow>
+            <Tooltip title="Click to search users in your city" arrow>
               <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
                 {wordEnteredAge.length === 0 ? (
                   <CakeIcon onClick={ageClick} />

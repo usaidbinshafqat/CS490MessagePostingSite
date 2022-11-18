@@ -4,6 +4,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
+  ListItemButton,
   Divider,
 } from "@mui/material";
 
@@ -11,7 +12,7 @@ export const ListItemsFYP = (props: any) => {
   const data = props.data;
   return data
     .slice(0, 20)
-    .map((value: { FirstName: string; LastName: string }) => {
+    .map((value: { FirstName: string; LastName: string; Username: string }) => {
       return (
         <>
           <List
@@ -21,14 +22,17 @@ export const ListItemsFYP = (props: any) => {
               alignItems: "center",
             }}
           >
-            <ListItem alignItems="flex-start">
+            <ListItemButton
+              href={`/ProfilePage/${value.Username}`}
+              alignItems="flex-start"
+            >
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: "#453750" }} aria-label="profile pic" />
               </ListItemAvatar>
               <ListItemText
                 primary={`${value.FirstName} ${value.LastName}`}
               ></ListItemText>
-            </ListItem>
+            </ListItemButton>
             <Divider variant="inset" component="li" />
           </List>
         </>

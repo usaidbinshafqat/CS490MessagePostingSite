@@ -40,6 +40,62 @@ export const UniqueHeader = (params: any) => {
   const [currentUID, setCurrentUID] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
   const [userID, setUserID] = useState(0);
+  const [myUsername, setMyUsername] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3000/users/isAuth", {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response: any) => {
+      setMyUsername(response.data.Username);
+    });
+  }, []);
+
+  const checkIfMe = () => {
+    if (myUsername === username) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const followUser = () => {
+    if (!isFollowing) {
+      Axios.post("http://localhost:3000/userfollowing/addFollower", {
+        Following: currentUID,
+        UID: userID,
+      });
+
+      setIsFollowing(true);
+    } else {
+      Axios.post("http://localhost:3000/userfollowing/unfollow", {
+        Following: currentUID,
+        UID: userID,
+      });
+
+      setIsFollowing(false);
+    }
+  };
+
+  useEffect(() => {
+    let length;
+    Axios.get("http://localhost:3000/userfollowing").then((response: any) => {
+      length = response.data.filter(
+        (row: any) => row.UID === userID && row.Following === currentUID
+      ).length;
+    });
+
+    if (!(length === 0)) {
+      setIsFollowing(true);
+    }
+  }, [UID, currentUID]);
+
+  // const updateLikes = (id: number) => {
+  //   Axios.get("http://localhost:3000/message").then((response) => {
+  //     setUpdateThis(response.data.filter((row: any) => row.MessageID === id));
+  //   });
+  // };
 
   const DeskButton = () => {
     return (
@@ -48,7 +104,7 @@ export const UniqueHeader = (params: any) => {
         style={{ borderRadius: 20 }}
         size="small"
         onClick={() => {
-          setIsFollowing(!isFollowing);
+          followUser();
         }}
         endIcon={
           !isFollowing ? (
@@ -58,7 +114,7 @@ export const UniqueHeader = (params: any) => {
           )
         }
       >
-        {isFollowing ? "Following" : "Follow"}
+        {isFollowing ? "Unfollow" : "Follow"}
       </Button>
     );
   };
@@ -67,7 +123,7 @@ export const UniqueHeader = (params: any) => {
     return (
       <IconButton
         onClick={() => {
-          setIsFollowing(!isFollowing);
+          followUser();
         }}
       >
         {!isFollowing ? (
@@ -170,10 +226,14 @@ export const UniqueHeader = (params: any) => {
           </Avatar>
         }
         action={
-          window.screen.width > 600 ? (
-            <DeskButton></DeskButton>
+          !checkIfMe() ? (
+            window.screen.width > 600 ? (
+              <DeskButton></DeskButton>
+            ) : (
+              <MobileButton></MobileButton>
+            )
           ) : (
-            <MobileButton></MobileButton>
+            <></>
           )
         }
       />
